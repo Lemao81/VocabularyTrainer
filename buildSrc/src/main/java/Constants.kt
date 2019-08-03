@@ -38,21 +38,20 @@ object BuildTypes {
 }
 
 object Paths {
-    const val baseFiles = "../../base/baseFiles/gradleBaseFiles/"
-    const val baseFilesBase = "../../base/baseFiles/gradleBaseFiles/base/"
+    const val fromProjectBaseFiles = "../base/baseFiles/gradleBaseFiles/"
+    const val baseProject = "${fromProjectBaseFiles}/base/base-project.gradle"
 
-    const val ktlintGr = "${baseFiles}ktlint.gradle"
-    const val ktlint = "${baseFiles}ktlint.gradle.kts"
-
-    const val baseProject = "${baseFilesBase}base-project.gradle"
-    const val baseAndroidLibrary = "${baseFilesBase}base-android-library.gradle"
-    const val baseAndroidLibraryKts = "${baseFilesBase}base-android-library.gradle.kts"
-    const val baseJavaLibrary = "${baseFilesBase}base-java-library.gradle"
-    const val baseKotlinAndroidExtension = "${baseFilesBase}base-kotlin-android-extension.gradle"
-    const val baseKapt = "${baseFilesBase}base-kapt.gradle"
-    const val baseDatabinding = "${baseFilesBase}base-databinding.gradle"
-    const val baseFlavors = "${baseFilesBase}base-flavors.gradle"
-    const val baseArchivaUpload = "${baseFilesBase}base-archivaupload.gradle"
-    const val baseArchivaUploadKts = "${baseFilesBase}base-archivaupload.gradle.kts"
-    const val baseMaven = "${baseFilesBase}base-maven.gradle"
+    const val fromModuleBaseFiles = "../../base/baseFiles/gradleBaseFiles/"
+    const val baseAndroidLibrary = "${fromModuleBaseFiles}base/base-android-library.gradle"
+    const val baseAndroidLibraryKts = "${fromModuleBaseFiles}base/base-android-library.gradle.kts"
+    const val baseJavaLibrary = "${fromModuleBaseFiles}base/base-java-library.gradle"
+    const val baseKotlinAndroidExtension = "${fromModuleBaseFiles}base/base-kotlin-android-extension.gradle"
+    const val baseKapt = "${fromModuleBaseFiles}base/base-kapt.gradle"
+    const val baseDatabinding = "${fromModuleBaseFiles}base/base-databinding.gradle"
+    const val baseFlavors = "${fromModuleBaseFiles}base/base-flavors.gradle"
+    const val baseArchivaUpload = "${fromModuleBaseFiles}base/base-archivaupload.gradle"
+    const val baseArchivaUploadKts = "${fromModuleBaseFiles}base/base-archivaupload.gradle.kts"
+    const val baseMaven = "${fromModuleBaseFiles}base/base-maven.gradle"
+    const val ktlintGr = "${fromModuleBaseFiles}ktlint.gradle"
+    const val ktlint = "${fromModuleBaseFiles}ktlint.gradle.kts"
 }
