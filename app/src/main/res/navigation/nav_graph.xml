@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+           xmlns:app="http://schemas.android.com/apk/res-auto"
+           android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.jueggs.vocabularytrainer.fragments.SplashScreenFragment"
+        android:label="SplashScreenFragment" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_nothingToLearnFragment"
+            app:destination="@id/nothingToLearnFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_learnFragment"
+            app:destination="@id/learnFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nothingToLearnFragment"
+        android:name="com.jueggs.vocabularytrainer.fragments.NothingToLearnFragment"
+        android:label="NothingToLearnFragment" >
+        <action
+            android:id="@+id/action_nothingToLearnFragment_to_addFlashCardFragment"
+            app:destination="@id/addFlashCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/learnFragment"
+        android:name="com.jueggs.vocabularytrainer.fragments.LearnFragment"
+        android:label="LearnFragment" >
+        <action
+            android:id="@+id/action_learnFragment_to_nothingToLearnFragment"
+            app:destination="@id/nothingToLearnFragment" />
+        <action
+            android:id="@+id/action_learnFragment_to_addFlashCardFragment"
+            app:destination="@id/addFlashCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFlashCardFragment"
+        android:name="com.jueggs.vocabularytrainer.fragments.AddFlashCardFragment"
+        android:label="AddFlashCardFragment" />
+</navigation>

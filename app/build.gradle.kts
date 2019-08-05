@@ -9,21 +9,17 @@ android {
     defaultConfig.applicationId = App.applicationId
     minifyRelease(this)
     optimizeBuildTime(project, this)
-
-    flavorDimensions(Dimensions.main)
-    productFlavors {
-        create(Flavors.dev) {
-            applicationIdSuffix = ".dev"
-            resConfigs("en", "xhdpi")
-        }
-        create(Flavors.prod) {
-            applicationIdSuffix = ".prod"
-        }
-    }
+    configureAppDevProdFlavors(this)
 }
 
 dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.androidxAppcompat)
     implementation(Libs.androidxConstraintLayout)
+    implementation(Libs.andutils)
+    implementation(Libs.resutils)
+    implementation(Libs.androidxNavigationFragment)
+    implementation(Libs.androidxNavigationUi)
+
+    implementation(project(Modules.common))
 }
