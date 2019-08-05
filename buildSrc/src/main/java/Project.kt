@@ -11,6 +11,7 @@ object Android {
 }
 
 object Modules {
+    const val common = ":common"
 }
 
 object Dimensions {
