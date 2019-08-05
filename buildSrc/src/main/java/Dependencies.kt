@@ -7,7 +7,7 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.109"
+    const val andutils = "1.0.110"
     const val andtestutils = "1.0.10"
     const val jutils = "1.0.26"
     const val jtestutils = "1.0.0"
@@ -85,7 +85,7 @@ object Versions {
     const val crashLytics = "2.7.1@aar"
     const val apacheValidator = "1.6"
     const val javaxInject = "1"
-    const val koin = "1.0.1"
+    const val koin = "2.0.1"
     const val room = "1.0.0"
     const val mockito = "2.22.0"
     const val mockitoKotlin = "1.5.0"
@@ -218,9 +218,12 @@ object Libs {
     const val apacheValidator = "commons-validator:commons-validator:${Versions.apacheValidator}"
     const val javaxInject = "javax.inject:javax.inject:${Versions.javaxInject}"
     const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
+    const val koinAndroidScope = "org.koin:koin-android-scope:${Versions.koin}"
     const val koinAndroidViewModel = "org.koin:koin-android-viewmodel:${Versions.koin}"
-    const val koinScope = "org.koin:koin-android-scope:${Versions.koin}"
-    const val koinTest = "org.koin:koin-test:${Versions.koin}"
+    const val koinAndroidExt = "org.koin:koin-android-ext:${Versions.koin}"
+    const val koinAndroidxScope = "org.koin:koin-androidx-scope:${Versions.koin}"
+    const val koinAndroidxViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val koinAndroidxExt = "org.koin:koin-androidx-ext:${Versions.koin}"
     const val roomRuntime = "android.arch.persistence.room:runtime:${Versions.room}"
     const val roomCompiler = "android.arch.persistence.room:compiler:${Versions.room}"
     const val roomRxJava = "android.arch.persistence.room:rxjava2:${Versions.room}"
@@ -266,6 +269,7 @@ object Libs {
     const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
     const val androidxTestCore = "androidx.test:core:${Versions.androidxTestCore}"
     const val assertJ = "org.assertj:assertj-core:${Versions.assertJ}"
+    const val koinTest = "org.koin:koin-test:${Versions.koin}"
 }
 
 object Plugins {

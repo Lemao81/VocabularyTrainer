@@ -20,6 +20,8 @@ dependencies {
     implementation(Libs.resutils)
     implementation(Libs.androidxNavigationFragment)
     implementation(Libs.androidxNavigationUi)
+    implementation(Libs.androidxLifecycleViewModel)
+    implementation(Libs.koinAndroidxViewModel)
 
     implementation(project(Modules.common))
 }
