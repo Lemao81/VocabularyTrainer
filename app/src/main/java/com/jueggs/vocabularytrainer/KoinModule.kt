@@ -1,5 +1,8 @@
 package com.jueggs.vocabularytrainer
 
+import com.jueggs.common.services.FlashCardBoxService
+import com.jueggs.database.AppDatabase
+import com.jueggs.vocabularytrainer.usecases.CheckSomethingToLearnUseCase
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -11,5 +14,9 @@ val koinModule = module {
     viewModel { AddFlashCardViewModel() }
     viewModel { LearnViewModel() }
     viewModel { NothingToLearnViewModel() }
-    viewModel { SplashScreenViewModel() }
+    viewModel { SplashScreenViewModel(get()) }
+
+    single { FlashCardBoxService() }
+    single { CheckSomethingToLearnUseCase(get(), get()) }
+    single { AppDatabase.getInstance(get()).getFlashCardStorageLayer() }
 }

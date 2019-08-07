@@ -16,4 +16,8 @@ class SplashScreenFragment : BaseFragment(isShouldSearchNavController = true) {
             navigationId?.let { navController?.navigate(it) }
         }
     }
+
+    override fun onStandby() {
+        viewModel.checkSomethingToLearn()
+    }
 }

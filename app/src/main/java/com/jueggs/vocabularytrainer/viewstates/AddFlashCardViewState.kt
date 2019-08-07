@@ -1,4 +1,5 @@
 package com.jueggs.vocabularytrainer.viewstates
 
-class AddFlashCardViewState {
-}
+data class AddFlashCardViewState(
+    val navigationId: Int? = null
+)

@@ -1,4 +1,5 @@
 package com.jueggs.vocabularytrainer.viewstates
 
-class SplashScreenViewState {
-}
+data class SplashScreenViewState(
+    val navigationId: Int? = null
+)

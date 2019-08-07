@@ -22,6 +22,8 @@ dependencies {
     implementation(Libs.androidxNavigationUi)
     implementation(Libs.androidxLifecycleViewModel)
     implementation(Libs.koinAndroidxViewModel)
+    implementation(Libs.joda)
 
     implementation(project(Modules.common))
+    implementation(project(Modules.database))
 }

@@ -1,4 +1,5 @@
 package com.jueggs.vocabularytrainer.viewstates
 
-class LearnViewState {
-}
+data class LearnViewState(
+    val navigationId: Int? = null
+)
