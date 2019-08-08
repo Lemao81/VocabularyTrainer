@@ -1,6 +1,6 @@
 package com.jueggs.common.enums
 
-enum class FlashCardBox(val id: Int, val latency: Int) {
+enum class FlashCardBox(val number: Int, val latency: Int) {
     ONE(1, 1),
     TWO(2, 2),
     THREE(3, 4),
