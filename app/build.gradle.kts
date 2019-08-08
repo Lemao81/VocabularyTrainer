@@ -2,6 +2,7 @@ plugins {
     id(PluginIds.androidApplication)
     id(PluginIds.kotlinAndroidExtensions)
     kotlin(PluginIds.android)
+    id(PluginIds.kotlinSerialization)
 }
 
 android {
@@ -23,6 +24,7 @@ dependencies {
     implementation(Libs.androidxLifecycleViewModel)
     implementation(Libs.koinAndroidxViewModel)
     implementation(Libs.joda)
+    implementation(Libs.kotlinSerialization)
 
     implementation(project(Modules.common))
     implementation(project(Modules.database))

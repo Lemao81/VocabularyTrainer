@@ -6,6 +6,7 @@ import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
+import kotlinx.serialization.ImplicitReflectionSerializer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
@@ -17,12 +18,15 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
         viewModel.viewStateStore.observe(this) {
             navigationId?.let { navController?.navigate(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
+            backSideText?.let { viewModel.backSideText.postValue(it) }
             btnReveal.visibility = if (isRevealed) View.GONE else View.VISIBLE
             btnWrong.visibility = if (isRevealed) View.VISIBLE else View.GONE
-            btnCorrect.visibility = btnWrong.visibility
+            btnCorrect.visibility = if (isRevealed) View.VISIBLE else View.GONE
+            txtBackSideText.visibility = if (isRevealed) View.VISIBLE else View.GONE
         }
     }
 
+    @ImplicitReflectionSerializer
     override fun onStandby() {
         viewModel.showNextFlashCard()
     }

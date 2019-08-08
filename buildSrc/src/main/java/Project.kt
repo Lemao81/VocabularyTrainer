@@ -12,6 +12,7 @@ object Android {
 
 object Modules {
     const val common = ":common"
+    const val database = ":database"
 }
 
 object Dimensions {

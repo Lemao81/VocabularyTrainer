@@ -4,6 +4,7 @@ object PluginIds {
     const val javaLibrary = "java-library"
     const val kotlin = "kotlin"
     const val kotlinAndroid = "kotlin-android"
+    const val kotlinSerialization = "kotlinx-serialization"
     const val android = "android"
     const val kotlinKapt = "kotlin-kapt"
     const val kapt = "kapt"

@@ -7,7 +7,7 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.110"
+    const val andutils = "1.0.112"
     const val andtestutils = "1.0.10"
     const val jutils = "1.0.26"
     const val jtestutils = "1.0.0"
@@ -25,7 +25,7 @@ object Versions {
     // libs
     const val java7 = "1.7"
     const val java8 = "1.8"
-    const val kotlin = "1.3.21"
+    const val kotlin = "1.3.41"
     const val androidxCore = "1.0.0"
     const val androidxCoreKtx = "1.0.1"
     const val androidxAppcompat = "1.1.0-rc01"
@@ -52,7 +52,8 @@ object Versions {
     const val androidxTestExtJunit = "1.0.0"
     const val androidxNavigation = "2.1.0-beta02"
     const val material = "1.0.0-rc01"
-    const val kotlinCoroutine = "1.0.0"
+    const val kotlinCoroutine = "1.3.0-RC"
+    const val kotlinSerialization = "0.11.1"
     const val anko = "0.10.6"
     const val gmsBase = "16.0.1"
     const val gmsLocation = "16.0.0"
@@ -72,7 +73,7 @@ object Versions {
     const val constraintLayout = "1.1.3"
     const val mosbyMvi = "3.1.0"
     const val dagger = "2.15"
-    const val joda = "2.10.1"
+    const val joda = "2.10.3"
     const val crystalRange = "1.1.3"
     const val imageCropper = "2.5.1"
     const val imageCompressor = "2.1.0"
@@ -113,6 +114,7 @@ object Versions {
     const val assertJ = "3.11.1"
     const val okhttp = "3.12.1"
     const val blurry = "3.0.0"
+    const val jacksonKotlin = "2.9.7"
 }
 
 object Libs {
@@ -136,6 +138,7 @@ object Libs {
     const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     const val kotlinCoroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutine}"
     const val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutine}"
+    const val kotlinSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlinSerialization}"
     const val androidxCore = "androidx.core:core:${Versions.androidxCore}"
     const val androidxCoreKtx = "androidx.core:core-ktx:${Versions.androidxCoreKtx}"
     const val androidxAppcompat = "androidx.appcompat:appcompat:${Versions.androidxAppcompat}"
@@ -253,6 +256,7 @@ object Libs {
     const val log4kAndroid = "com.log4k:log4k-android:${Versions.log4k}"
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     const val blurry = "jp.wasabeef:blurry:${Versions.blurry}"
+    const val jacksonKotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}"
 
     // testing
     const val jUnit = "junit:junit:${Versions.jUnit}"
@@ -276,6 +280,7 @@ object Plugins {
     const val custom = "com.jueggs:gradleplugins:${Versions.customPlugins}"
     const val androidBuild = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     const val gms = "com.google.gms:google-services:${Versions.gmsPlugin}"
     const val fabric = "io.fabric.tools:gradle:${Versions.fabricPlugin}"
     const val hugo = "com.jakewharton.hugo:hugo-plugin:${Versions.hugoPlugin}"

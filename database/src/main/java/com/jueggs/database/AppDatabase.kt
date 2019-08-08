@@ -9,7 +9,7 @@ import com.jueggs.database.storagelayers.FlashCardDao
 
 @Database(entities = [FlashCardEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getFlashCardStorageLayer(): FlashCardDao
+    abstract fun getFlashCardDao(): FlashCardDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
