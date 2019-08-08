@@ -2,4 +2,6 @@
     <string name="app_name">VocabularyTrainer</string>
     <string name="nothing_to_learn">Nothing to learn</string>
     <string name="reveal">Reveal</string>
+    <string name="wrong">Wrong</string>
+    <string name="correct">Correct</string>
 </resources>
