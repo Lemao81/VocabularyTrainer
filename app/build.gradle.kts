@@ -1,6 +1,6 @@
 plugins {
-    kotlin(PluginIds.android)
     id(PluginIds.androidApplication)
+    kotlin(PluginIds.android)
     id(PluginIds.kotlinAndroidExtensions)
     id(PluginIds.kotlinSerialization)
 }

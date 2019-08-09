@@ -3,6 +3,8 @@ package com.jueggs.vocabularytrainer.viewmodels
 import androidx.lifecycle.MutableLiveData
 import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
+import com.jueggs.andutils.aac.Trigger
+import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.usecases.DismissFlashCardCorrectUseCase
 import com.jueggs.vocabularytrainer.usecases.DismissFlashCardWrongUseCase
 import com.jueggs.vocabularytrainer.usecases.ShowNextFlashCardUseCase
@@ -39,4 +41,6 @@ class LearnViewModel(
             viewStateStore.dispatchAction(showNextFlashCardUseCase::invoke)
         }
     }
+
+    fun addFlashCard() = viewStateStore.dispatchAction(Trigger { copy(navigationId = R.id.action_learnFragment_to_addFlashCardFragment) })
 }

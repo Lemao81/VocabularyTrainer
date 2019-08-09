@@ -74,5 +74,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnWrong" />
+
+        <include
+            android:id="@+id/fabAddFlashCard"
+            layout="@layout/fab_add_flash_card"
+            android:onClick="@{() -> viewModel.addFlashCard()}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
