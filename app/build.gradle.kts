@@ -1,7 +1,7 @@
 plugins {
+    kotlin(PluginIds.android)
     id(PluginIds.androidApplication)
     id(PluginIds.kotlinAndroidExtensions)
-    kotlin(PluginIds.android)
     id(PluginIds.kotlinSerialization)
 }
 

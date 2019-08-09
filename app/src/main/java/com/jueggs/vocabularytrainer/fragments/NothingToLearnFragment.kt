@@ -14,6 +14,9 @@ class NothingToLearnFragment : BaseFragment(isShouldSearchNavController = true) 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
             navigationId?.let { navController?.navigate(it) }
+            if (isShouldCloseApp) {
+                activity?.finish()
+            }
         }
     }
 }
