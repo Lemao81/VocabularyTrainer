@@ -2,10 +2,7 @@ package com.jueggs.vocabularytrainer
 
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.database.AppDatabase
-import com.jueggs.vocabularytrainer.usecases.CheckSomethingToLearnUseCase
-import com.jueggs.vocabularytrainer.usecases.DismissFlashCardCorrectUseCase
-import com.jueggs.vocabularytrainer.usecases.DismissFlashCardWrongUseCase
-import com.jueggs.vocabularytrainer.usecases.ShowNextFlashCardUseCase
+import com.jueggs.vocabularytrainer.usecases.*
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -27,6 +24,7 @@ val koinModule = module {
     single { DismissFlashCardCorrectUseCase(get()) }
     single { DismissFlashCardWrongUseCase(get()) }
     single { ShowNextFlashCardUseCase(get(), get(), get(), get()) }
+    single { AddFlashCardUseCase(get(), get()) }
     single { AppDatabase.getInstance(get()).getFlashCardDao() }
     single { Json(JsonConfiguration.Stable) }
 }

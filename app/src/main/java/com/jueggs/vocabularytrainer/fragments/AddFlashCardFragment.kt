@@ -14,6 +14,9 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
             navigationId?.let { navController?.navigate(it) }
+            if (isShouldPopFragment) {
+                navController?.popBackStack()
+            }
         }
     }
 }

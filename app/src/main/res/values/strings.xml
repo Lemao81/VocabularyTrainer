@@ -5,4 +5,10 @@
     <string name="wrong">Wrong</string>
     <string name="correct">Correct</string>
     <string name="close_app">Close App</string>
+    <string name="frontside">Frontside:</string>
+    <string name="frontside_hint">Frontside</string>
+    <string name="backside">Backside:</string>
+    <string name="backside_hint">Backside</string>
+    <string name="add_card">Add Card</string>
+    <string name="cancel">Cancel</string>
 </resources>
