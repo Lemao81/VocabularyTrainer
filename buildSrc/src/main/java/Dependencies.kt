@@ -7,9 +7,9 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.112"
-    const val andtestutils = "1.0.10"
-    const val jutils = "1.0.26"
+    const val andutils = "1.0.117"
+    const val andtestutils = "1.0.11"
+    const val jutils = "1.0.30"
     const val jtestutils = "1.0.0"
     const val firebaseutils = "1.0.7"
     const val resutils = "1.0.7"
@@ -54,7 +54,7 @@ object Versions {
     const val material = "1.0.0-rc01"
     const val kotlinCoroutine = "1.3.0-RC"
     const val kotlinSerialization = "0.11.1"
-    const val anko = "0.10.6"
+    const val anko = "0.10.8"
     const val gmsBase = "16.0.1"
     const val gmsLocation = "16.0.0"
     const val firebaseCore = "16.0.4"

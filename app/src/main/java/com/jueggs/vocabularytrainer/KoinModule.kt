@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val koinModule = module {
-    viewModel { AddFlashCardViewModel() }
+    viewModel { AddFlashCardViewModel(get()) }
     viewModel { LearnViewModel(get(), get(), get()) }
     viewModel { NothingToLearnViewModel() }
     viewModel { SplashScreenViewModel(get()) }

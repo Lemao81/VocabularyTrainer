@@ -17,6 +17,7 @@ dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.androidxAppcompat)
     implementation(Libs.androidxConstraintLayout)
+    implementation(Libs.jutils)
     implementation(Libs.andutils)
     implementation(Libs.resutils)
     implementation(Libs.androidxNavigationFragment)

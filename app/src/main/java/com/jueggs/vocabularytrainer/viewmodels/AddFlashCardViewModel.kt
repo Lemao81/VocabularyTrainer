@@ -1,25 +1,39 @@
 package com.jueggs.vocabularytrainer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
+import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
 import com.jueggs.andutils.aac.Trigger
+import com.jueggs.jutils.extension.maxIndex
 import com.jueggs.vocabularytrainer.models.AddFlashCardData
 import com.jueggs.vocabularytrainer.usecases.AddFlashCardUseCase
 import com.jueggs.vocabularytrainer.viewstates.AddFlashCardViewState
-import com.log4k.v
 import kotlinx.serialization.ImplicitReflectionSerializer
 
 class AddFlashCardViewModel(
     private val addFlashCardUseCase: AddFlashCardUseCase
 ) : BaseViewModel<AddFlashCardViewState>(AddFlashCardViewState()) {
     val frontSideText = MutableLiveData<String>()
-    val backSideText = MutableLiveData<String>()
+    val backSideTexts = mutableListOf<MutableLiveData<String>>()
+
+    init {
+        repeat(5) {
+            backSideTexts.add(MutableLiveData())
+        }
+    }
 
     @ImplicitReflectionSerializer
-    fun addFlashCard() = viewStateStore.dispatchAction {
-        val data = AddFlashCardData(frontSideText.value ?: "", listOf(backSideText.value ?: ""))
+    fun addFlashCard() = viewStateStore.dispatch {
+        val data = AddFlashCardData(frontSideText.value.orEmpty(), backSideTexts.map { it.value.orEmpty() })
         addFlashCardUseCase(data)
     }
 
-    fun cancel() = viewStateStore.dispatchAction(Trigger { copy(isShouldPopFragment = true) })
+    fun showBackSideInput() = viewStateStore.dispatch(Alter { copy(backSideViewsShownUpToIndex = Math.min(backSideViewsShownUpToIndex + 1, backSideTexts.maxIndex)) })
+
+    fun hideBackSideInput() = viewStateStore.dispatch(
+        Alter { copy(backSideViewsShownUpToIndex = Math.max(backSideViewsShownUpToIndex - 1, 0)) },
+        Trigger { copy(focusedInputIndex = backSideViewsShownUpToIndex) }
+    )
+
+    fun cancel() = viewStateStore.dispatch(Trigger { copy(isShouldPopFragment = true) })
 }
