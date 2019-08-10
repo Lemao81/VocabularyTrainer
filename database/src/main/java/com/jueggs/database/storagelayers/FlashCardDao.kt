@@ -5,10 +5,10 @@ import com.jueggs.database.entities.FlashCardEntity
 
 @Dao
 interface FlashCardDao {
-    @Query("SELECT * FROM flashcardentity WHERE id = :id")
+    @Query("SELECT * FROM flash_card WHERE id = :id")
     fun readById(id: Long): FlashCardEntity
 
-    @Query("SELECT * FROM flashcardentity WHERE box_number = :boxNumber AND last_learned_date < :expiryDate")
+    @Query("SELECT * FROM flash_card WHERE box_number = :boxNumber AND last_learned_date < :expiryDate")
     fun readByBoxNumberAndExpiryDate(boxNumber: Int, expiryDate: Long): List<FlashCardEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -7,5 +7,5 @@ import com.jueggs.vocabularytrainer.viewstates.SplashScreenViewState
 class SplashScreenViewModel(
     private val checkSomethingToLearnUseCase: CheckSomethingToLearnUseCase
 ) : BaseViewModel<SplashScreenViewState>(SplashScreenViewState()) {
-    fun checkSomethingToLearn() = viewStateStore.dispatchAction(checkSomethingToLearnUseCase::invoke)
+    fun checkSomethingToLearn() = viewStateStore.dispatch(checkSomethingToLearnUseCase::invoke)
 }

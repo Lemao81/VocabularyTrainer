@@ -22,15 +22,15 @@ class LearnViewModel(
     var currentFlashCardId: Long? = null
 
     @ImplicitReflectionSerializer
-    fun showNextFlashCard() = viewStateStore.dispatchAction(showNextFlashCardUseCase::invoke)
+    fun showNextFlashCard() = viewStateStore.dispatch(showNextFlashCardUseCase::invoke)
 
-    fun revealFlashCardBackSide() = viewStateStore.dispatchAction(Alter { copy(isRevealed = true) })
+    fun revealFlashCardBackSide() = viewStateStore.dispatch(Alter { copy(isRevealed = true) })
 
     @ImplicitReflectionSerializer
     fun dismissFlashCardWrong() {
         launch {
             currentFlashCardId?.let { dismissFlashCardWrongUseCase(it) }
-            viewStateStore.dispatchAction(showNextFlashCardUseCase::invoke)
+            viewStateStore.dispatch(showNextFlashCardUseCase::invoke)
         }
     }
 
@@ -38,9 +38,9 @@ class LearnViewModel(
     fun dismissFlashCardCorrect() {
         launch {
             currentFlashCardId?.let { dismissFlashCardCorrectUseCase(it) }
-            viewStateStore.dispatchAction(showNextFlashCardUseCase::invoke)
+            viewStateStore.dispatch(showNextFlashCardUseCase::invoke)
         }
     }
 
-    fun addFlashCard() = viewStateStore.dispatchAction(Trigger { copy(navigationId = R.id.action_learnFragment_to_addFlashCardFragment) })
+    fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(navigationId = R.id.action_learnFragment_to_addFlashCardFragment) })
 }
