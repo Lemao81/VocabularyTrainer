@@ -44,7 +44,7 @@ class ShowNextFlashCardUseCase(
             Alter {
                 copy(
                     frontSideText = nextCard?.frontSideText,
-                    backSideText = backSideTexts.join(Util.lineSeparator),
+                    backSideText = backSideTexts.mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator),
                     isRevealed = false
                 )
             }

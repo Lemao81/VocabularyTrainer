@@ -1,8 +1,9 @@
 package com.jueggs.vocabularytrainer.fragments
 
-import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.andutils.extension.goneOrVisible
+import com.jueggs.andutils.extension.visibleOrGone
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
@@ -19,10 +20,10 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             navigationId?.let { navController?.navigate(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }
-            btnReveal.visibility = if (isRevealed) View.GONE else View.VISIBLE
-            btnWrong.visibility = if (isRevealed) View.VISIBLE else View.GONE
-            btnCorrect.visibility = if (isRevealed) View.VISIBLE else View.GONE
-            txtBackSideText.visibility = if (isRevealed) View.VISIBLE else View.GONE
+            btnReveal.goneOrVisible = isRevealed
+            btnWrong.visibleOrGone = isRevealed
+            btnCorrect.visibleOrGone = isRevealed
+            txtBackSideText.visibleOrGone = isRevealed
         }
     }
 
