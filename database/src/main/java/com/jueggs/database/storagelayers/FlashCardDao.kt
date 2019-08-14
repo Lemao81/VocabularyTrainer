@@ -19,4 +19,7 @@ interface FlashCardDao {
 
     @Delete
     fun delete(card: FlashCardEntity)
+
+    @Query("DELETE FROM flash_card WHERE id = :id")
+    fun deleteById(id: Long)
 }

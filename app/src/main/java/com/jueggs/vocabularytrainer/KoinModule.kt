@@ -15,7 +15,7 @@ import org.koin.dsl.module
 
 val koinModule = module {
     viewModel { AddFlashCardViewModel(get()) }
-    viewModel { LearnViewModel(get(), get(), get()) }
+    viewModel { LearnViewModel(get(), get(), get(), get()) }
     viewModel { NothingToLearnViewModel() }
     viewModel { SplashScreenViewModel(get()) }
 
@@ -25,6 +25,7 @@ val koinModule = module {
     single { DismissFlashCardWrongUseCase(get()) }
     single { ShowNextFlashCardUseCase(get(), get(), get(), get()) }
     single { AddFlashCardUseCase(get(), get()) }
+    single { RemoveFlashCardUseCase(get(), get()) }
     single { AppDatabase.getInstance(get()).getFlashCardDao() }
     single { Json(JsonConfiguration.Stable) }
 }
