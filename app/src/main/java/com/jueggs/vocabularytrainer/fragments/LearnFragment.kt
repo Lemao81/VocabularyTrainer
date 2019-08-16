@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.goneOrVisible
 import com.jueggs.andutils.extension.visibleOrGone
+import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
@@ -14,6 +15,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     val viewModel by viewModel<LearnViewModel>()
 
     override fun layout() = R.layout.fragment_learn
+    override fun bindingItems() = mapOf(BR.viewModel to viewModel)
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {

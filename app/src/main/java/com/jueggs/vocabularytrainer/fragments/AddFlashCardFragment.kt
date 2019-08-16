@@ -5,9 +5,10 @@ import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jueggs.andutils.base.BaseFragment
-import com.jueggs.andutils.extension.makeGone
+import com.jueggs.andutils.extension.makeInvisible
 import com.jueggs.andutils.extension.makeVisible
 import com.jueggs.jutils.INVALID
+import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import kotlinx.android.synthetic.main.fragment_add_flash_card.*
@@ -18,6 +19,7 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     val viewModel by viewModel<AddFlashCardViewModel>()
 
     override fun layout() = R.layout.fragment_add_flash_card
+    override fun bindingItems() = mapOf(BR.viewModel to viewModel)
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
@@ -29,13 +31,13 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
                 when {
                     index < backSideViewsShownUpToIndex -> {
                         views.first { it is EditText }.makeVisible()
-                        views.filter { it is FloatingActionButton }.forEach { it.makeGone() }
+                        views.filter { it is FloatingActionButton }.forEach { it.makeInvisible() }
                     }
                     index == backSideViewsShownUpToIndex -> {
                         views.forEach { it.makeVisible() }
                     }
                     index > backSideViewsShownUpToIndex -> {
-                        views.forEach { it.makeGone() }
+                        views.forEach { it.makeInvisible() }
                         viewModel.backSideTexts[index].postValue("")
                     }
                 }
@@ -49,8 +51,8 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun onStandby() {
         backSideViews.add(listOf(edtBackSide1, fabShowBackSideInput1))
         backSideViews.add(listOf(edtBackSide2, fabShowBackSideInput2, fabHideBackSideInput2))
-        backSideViews.add(listOf(edtBackSide3, fabShowBackSideInput3, fabHideBackSideInput2))
-        backSideViews.add(listOf(edtBackSide4, fabShowBackSideInput4, fabHideBackSideInput2))
+        backSideViews.add(listOf(edtBackSide3, fabShowBackSideInput3, fabHideBackSideInput3))
+        backSideViews.add(listOf(edtBackSide4, fabShowBackSideInput4, fabHideBackSideInput4))
         backSideViews.add(listOf(edtBackSide5, fabHideBackSideInput5))
     }
 }
