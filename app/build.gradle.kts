@@ -1,6 +1,7 @@
 plugins {
     id(PluginIds.androidApplication)
     kotlin(PluginIds.android)
+    id(PluginIds.kotlinKapt)
     id(PluginIds.kotlinAndroidExtensions)
     id(PluginIds.kotlinSerialization)
 }
@@ -11,15 +12,16 @@ android {
     minifyRelease(this)
     optimizeBuildTime(project, this)
     configureAppDevProdFlavors(this)
+    dataBinding.isEnabled = true
 }
 
 dependencies {
     implementation(Libs.kotlinStd8)
-    implementation(Libs.androidxAppcompat)
-    implementation(Libs.androidxConstraintLayout)
     implementation(Libs.jutils)
     implementation(Libs.andutils)
     implementation(Libs.resutils)
+    implementation(Libs.androidxAppcompat)
+    implementation(Libs.androidxConstraintLayout)
     implementation(Libs.androidxNavigationFragment)
     implementation(Libs.androidxNavigationUi)
     implementation(Libs.androidxLifecycleViewModel)
