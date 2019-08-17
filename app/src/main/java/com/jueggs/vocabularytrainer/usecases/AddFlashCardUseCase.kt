@@ -41,6 +41,12 @@ class AddFlashCardUseCase(
         param.addFlashCardViewModel.frontSideText.postValue("")
         param.addFlashCardViewModel.backSideTexts.forEach { it.postValue("") }
 
-        return Trigger { copy(shortMessageId = R.string.message_card_added, focusedInputIndex = INVALID) }
+        return Trigger {
+            copy(
+                shortMessageId = R.string.message_card_added,
+                focusedInputIndex = INVALID,
+                backSideViewsShownUpToIndex = 0
+            )
+        }
     }
 }

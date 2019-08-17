@@ -15,7 +15,7 @@ import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.parse
+import kotlinx.serialization.parseList
 import org.joda.time.DateTime
 
 class ShowNextFlashCardUseCase(
@@ -38,7 +38,7 @@ class ShowNextFlashCardUseCase(
 
         return if (nextCard != null) {
             param.currentFlashCardId = nextCard?.id
-            val backSideTexts = if (nextCard?.backSideTexts != null) json.parse(nextCard?.backSideTexts!!) else emptyList<String>()
+            val backSideTexts = if (nextCard?.backSideTexts != null) json.parseList(nextCard?.backSideTexts!!) else emptyList<String>()
 
             Alter {
                 copy(

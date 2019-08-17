@@ -48,8 +48,6 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             }
             if (focusedInputIndex != INVALID) {
                 backSideViews[focusedInputIndex].first { it is EditText }.requestFocus()
-            } else {
-                edtFrontSide.requestFocus()
             }
         }
     }
