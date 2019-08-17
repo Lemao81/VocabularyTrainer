@@ -14,29 +14,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidFrontSide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
         <TextView
             android:id="@+id/txtFrontSideText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@={viewModel.frontSideText}"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtBackSideText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidFrontSide"
             tools:text="to learn" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidBackSide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
 
         <TextView
             android:id="@+id/txtBackSideText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@={viewModel.backSideText}"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnReveal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtFrontSideText"
+            app:layout_constraintTop_toBottomOf="@id/guidBackSide"
             tools:text="lernen" />
 
         <Button
@@ -50,30 +61,59 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btnWrong"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabWrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:focusable="true"
             android:onClick="@{() -> viewModel.dismissFlashCardWrong()}"
-            android:text="@string/wrong"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnCorrect"
+            app:layout_constraintEnd_toStartOf="@+id/fabCorrect"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_clear_red_24dp" />
 
-        <Button
-            android:id="@+id/btnCorrect"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCorrect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:focusable="true"
             android:onClick="@{() -> viewModel.dismissFlashCardCorrect()}"
-            android:text="@string/correct"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnWrong" />
+            app:layout_constraintStart_toEndOf="@+id/fabWrong"
+            app:srcCompat="@drawable/ic_check_green_24dp" />
+
+        <!--<Button-->
+        <!--android:id="@+id/btnWrong"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="32dp"-->
+        <!--android:onClick="@{() -> viewModel.dismissFlashCardWrong()}"-->
+        <!--android:text="@string/wrong"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/btnCorrect"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintHorizontal_chainStyle="packed"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/btnCorrect"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginBottom="32dp"-->
+        <!--android:onClick="@{() -> viewModel.dismissFlashCardCorrect()}"-->
+        <!--android:text="@string/correct"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/btnWrong" />-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabRemoveFlashCard"
