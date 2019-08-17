@@ -23,7 +23,7 @@ val koinModule = module {
 
     single { FlashCardBoxService() }
     single { CheckSomethingToLearnUseCase(get(), get()) }
-    single { DismissFlashCardCorrectUseCase(get()) }
+    single { DismissFlashCardCorrectUseCase(get(), get()) }
     single { DismissFlashCardWrongUseCase(get()) }
     single { ShowNextFlashCardUseCase(get(), get(), get()) }
     single { AddFlashCardUseCase(get(), get(), get()) }
