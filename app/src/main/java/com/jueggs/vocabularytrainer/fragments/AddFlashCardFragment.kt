@@ -5,8 +5,10 @@ import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.andutils.extension.longToast
 import com.jueggs.andutils.extension.makeInvisible
 import com.jueggs.andutils.extension.makeVisible
+import com.jueggs.andutils.extension.shortToast
 import com.jueggs.jutils.INVALID
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
@@ -27,6 +29,8 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             if (isShouldPopFragment) {
                 navController?.popBackStack()
             }
+            shortMessageId?.let { shortToast(it) }
+            longMessageId?.let { longToast(it) }
             backSideViews.forEachIndexed { index, views ->
                 when {
                     index < backSideViewsShownUpToIndex -> {
@@ -44,6 +48,8 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             }
             if (focusedInputIndex != INVALID) {
                 backSideViews[focusedInputIndex].first { it is EditText }.requestFocus()
+            } else {
+                edtFrontSide.requestFocus()
             }
         }
     }

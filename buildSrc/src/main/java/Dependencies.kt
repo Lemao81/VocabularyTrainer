@@ -7,7 +7,7 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.117"
+    const val andutils = "1.0.120"
     const val andtestutils = "1.0.11"
     const val jutils = "1.0.30"
     const val jtestutils = "1.0.0"

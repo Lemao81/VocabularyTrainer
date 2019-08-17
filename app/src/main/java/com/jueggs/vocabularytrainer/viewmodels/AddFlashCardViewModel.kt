@@ -24,11 +24,18 @@ class AddFlashCardViewModel(
 
     @ImplicitReflectionSerializer
     fun addFlashCard() = viewStateStore.dispatch {
-        val data = AddFlashCardData(frontSideText.value.orEmpty(), backSideTexts.map { it.value.orEmpty() })
+        val data = AddFlashCardData(
+            frontSideText = frontSideText.value.orEmpty(),
+            backSideTexts = backSideTexts.map { it.value.orEmpty() },
+            addFlashCardViewModel = this
+        )
         addFlashCardUseCase(data)
     }
 
-    fun showBackSideInput() = viewStateStore.dispatch(Alter { copy(backSideViewsShownUpToIndex = Math.min(backSideViewsShownUpToIndex + 1, backSideTexts.maxIndex)) })
+    fun showBackSideInput() = viewStateStore.dispatch(
+        Alter { copy(backSideViewsShownUpToIndex = Math.min(backSideViewsShownUpToIndex + 1, backSideTexts.maxIndex)) },
+        Trigger { copy(focusedInputIndex = backSideViewsShownUpToIndex) }
+    )
 
     fun hideBackSideInput() = viewStateStore.dispatch(
         Alter { copy(backSideViewsShownUpToIndex = Math.max(backSideViewsShownUpToIndex - 1, 0)) },
