@@ -3,7 +3,7 @@ package com.jueggs.vocabularytrainer.usecases
 import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.StateEvent
 import com.jueggs.andutils.aac.Trigger
-import com.jueggs.andutils.usecase.ViewStateUseCase
+import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.database.entities.FlashCardEntity
@@ -21,11 +21,10 @@ import org.joda.time.DateTime
 class ShowNextFlashCardUseCase(
     private val flashCardDao: FlashCardDao,
     private val flashCardBoxService: FlashCardBoxService,
-    private val json: Json,
-    private val viewModel: LearnViewModel
-) : ViewStateUseCase<LearnViewState> {
+    private val json: Json
+) : ViewStateUseCaseWithParameter<LearnViewState, LearnViewModel> {
     @ImplicitReflectionSerializer
-    override suspend fun invoke(): StateEvent<LearnViewState> {
+    override suspend fun invoke(param: LearnViewModel): StateEvent<LearnViewState> {
         val now = DateTime.now()
         var nextCard: FlashCardEntity? = null
         FlashCardBox.values().forEach { it ->
@@ -38,7 +37,7 @@ class ShowNextFlashCardUseCase(
         }
 
         return if (nextCard != null) {
-            viewModel.currentFlashCardId = nextCard?.id
+            param.currentFlashCardId = nextCard?.id
             val backSideTexts = if (nextCard?.backSideTexts != null) json.parse(nextCard?.backSideTexts!!) else emptyList<String>()
 
             Alter {

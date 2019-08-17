@@ -24,7 +24,11 @@ class LearnViewModel(
     var currentFlashCardId: Long? = null
 
     @ImplicitReflectionSerializer
-    fun showNextFlashCard() = viewStateStore.dispatch(showNextFlashCardUseCase::invoke)
+    fun showNextFlashCard() {
+        launch {
+            viewStateStore.dispatch(showNextFlashCardUseCase(this@LearnViewModel))
+        }
+    }
 
     fun revealFlashCardBackSide() = viewStateStore.dispatch(Alter { copy(isRevealed = true) })
 
@@ -32,7 +36,7 @@ class LearnViewModel(
     fun dismissFlashCardWrong() {
         launch {
             currentFlashCardId?.let { dismissFlashCardWrongUseCase(it) }
-            viewStateStore.dispatch(showNextFlashCardUseCase::invoke)
+            viewStateStore.dispatch(showNextFlashCardUseCase(this@LearnViewModel))
         }
     }
 
@@ -40,7 +44,7 @@ class LearnViewModel(
     fun dismissFlashCardCorrect() {
         launch {
             currentFlashCardId?.let { dismissFlashCardCorrectUseCase(it) }
-            viewStateStore.dispatch(showNextFlashCardUseCase::invoke)
+            viewStateStore.dispatch(showNextFlashCardUseCase(this@LearnViewModel))
         }
     }
 
@@ -48,8 +52,10 @@ class LearnViewModel(
 
     @ImplicitReflectionSerializer
     fun removeFlashCard() {
-        currentFlashCardId?.let {
-            viewStateStore.dispatch { removeFlashCardUseCase(it) }
+        currentFlashCardId?.let { id ->
+            launch {
+                viewStateStore.dispatch(removeFlashCardUseCase(id), showNextFlashCardUseCase(this@LearnViewModel))
+            }
         }
     }
 }
