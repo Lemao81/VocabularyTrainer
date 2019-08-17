@@ -22,7 +22,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
             navigationId?.let { navController?.navigate(it) }
-            shortMessageId?.let { shortToast(R.string.message_card_removed) }
+            shortMessageId?.let { shortToast(it) }
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }

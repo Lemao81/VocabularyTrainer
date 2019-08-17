@@ -4,6 +4,7 @@ import com.jueggs.andutils.aac.StateEvent
 import com.jueggs.andutils.aac.Trigger
 import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 import kotlinx.serialization.ImplicitReflectionSerializer
 
@@ -13,6 +14,6 @@ class RemoveFlashCardUseCase(
     @ImplicitReflectionSerializer
     override suspend fun invoke(param: Long): StateEvent<LearnViewState> {
         flashCardRepository.deleteById(param)
-        return Trigger { copy() }
+        return Trigger { copy(shortMessageId = R.string.message_card_removed) }
     }
 }
