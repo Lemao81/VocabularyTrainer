@@ -2,6 +2,8 @@ package com.jueggs.vocabularytrainer
 
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.database.AppDatabase
+import com.jueggs.database.repositories.FlashCardRepositoryImpl
+import com.jueggs.database.repositories.interfaces.FlashCardRepository
 import com.jueggs.vocabularytrainer.usecases.*
 import com.jueggs.vocabularytrainer.validators.AddFlashCardInputValidator
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
@@ -27,6 +29,6 @@ val koinModule = module {
     single { AddFlashCardUseCase(get(), get(), get()) }
     single { RemoveFlashCardUseCase(get()) }
     single { AddFlashCardInputValidator() }
-    single { AppDatabase.getInstance(get()).getFlashCardDao() }
+    single { FlashCardRepositoryImpl(AppDatabase.getInstance(get()).getFlashCardDao()) as FlashCardRepository }
     single { Json(JsonConfiguration.Stable) }
 }

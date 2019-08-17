@@ -7,7 +7,7 @@ import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.database.entities.FlashCardEntity
-import com.jueggs.database.storagelayers.FlashCardDao
+import com.jueggs.database.repositories.interfaces.FlashCardRepository
 import com.jueggs.jutils.Util
 import com.jueggs.jutils.extension.join
 import com.jueggs.vocabularytrainer.R
@@ -19,7 +19,7 @@ import kotlinx.serialization.parse
 import org.joda.time.DateTime
 
 class ShowNextFlashCardUseCase(
-    private val flashCardDao: FlashCardDao,
+    private val flashCardRepository: FlashCardRepository,
     private val flashCardBoxService: FlashCardBoxService,
     private val json: Json
 ) : ViewStateUseCaseWithParameter<LearnViewState, LearnViewModel> {
@@ -28,7 +28,7 @@ class ShowNextFlashCardUseCase(
         val now = DateTime.now()
         var nextCard: FlashCardEntity? = null
         FlashCardBox.values().forEach { it ->
-            val flashCards = flashCardDao.readByBoxNumberAndExpiryDate(it.number, flashCardBoxService.getBoxExpiryDate(it, now))
+            val flashCards = flashCardRepository.readByBoxNumberAndExpiryDate(it.number, flashCardBoxService.getBoxExpiryDate(it, now))
             if (flashCards.any()) {
                 nextCard = flashCards.sortedBy { it.lastLearnedDate }.first()
 

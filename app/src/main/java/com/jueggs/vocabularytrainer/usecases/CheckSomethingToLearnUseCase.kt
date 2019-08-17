@@ -5,19 +5,19 @@ import com.jueggs.andutils.aac.Trigger
 import com.jueggs.andutils.usecase.ViewStateUseCase
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.services.FlashCardBoxService
-import com.jueggs.database.storagelayers.FlashCardDao
+import com.jueggs.database.repositories.interfaces.FlashCardRepository
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewstates.SplashScreenViewState
 import org.joda.time.DateTime
 
 class CheckSomethingToLearnUseCase(
-    private val flashCardDao: FlashCardDao,
+    private val flashCardRepository: FlashCardRepository,
     private val flashCardBoxService: FlashCardBoxService
 ) : ViewStateUseCase<SplashScreenViewState> {
     override suspend fun invoke(): StateEvent<SplashScreenViewState> {
         val now = DateTime.now()
         val isSomethingToLearn = FlashCardBox.values().any {
-            flashCardDao.readByBoxNumberAndExpiryDate(it.number, flashCardBoxService.getBoxExpiryDate(it, now)).any()
+            flashCardRepository.readByBoxNumberAndExpiryDate(it.number, flashCardBoxService.getBoxExpiryDate(it, now)).any()
         }
 
         return if (isSomethingToLearn) {

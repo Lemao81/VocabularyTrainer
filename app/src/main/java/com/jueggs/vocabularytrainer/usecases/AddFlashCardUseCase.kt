@@ -6,7 +6,7 @@ import com.jueggs.andutils.result.Invalid
 import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.database.entities.FlashCardEntity
-import com.jueggs.database.storagelayers.FlashCardDao
+import com.jueggs.database.repositories.interfaces.FlashCardRepository
 import com.jueggs.jutils.INVALID
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.models.AddFlashCardData
@@ -18,7 +18,7 @@ import kotlinx.serialization.stringify
 import org.joda.time.DateTime
 
 class AddFlashCardUseCase(
-    private val flashCardDao: FlashCardDao,
+    private val flashCardRepository: FlashCardRepository,
     private val json: Json,
     private val addFlashCardInputValidator: AddFlashCardInputValidator
 ) : ViewStateUseCaseWithParameter<AddFlashCardViewState, AddFlashCardData> {
@@ -37,7 +37,7 @@ class AddFlashCardUseCase(
             boxNumber = FlashCardBox.ONE.number,
             lastLearnedDate = DateTime.now().millis
         )
-        flashCardDao.insert(newFlashCard)
+        flashCardRepository.insert(newFlashCard)
         param.addFlashCardViewModel.frontSideText.postValue("")
         param.addFlashCardViewModel.backSideTexts.forEach { it.postValue("") }
 

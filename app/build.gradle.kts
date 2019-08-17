@@ -13,6 +13,8 @@ android {
     optimizeBuildTime(project, this)
     configureAppDevProdFlavors(this)
     dataBinding.isEnabled = true
+    productFlavors.getByName(Flavors.dev).resValue("string", "app_name", "VocabularyTrainer Dev")
+    productFlavors.getByName(Flavors.prod).resValue("string", "app_name", "VocabularyTrainer")
 }
 
 dependencies {

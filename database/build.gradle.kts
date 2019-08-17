@@ -13,6 +13,7 @@ android {
 dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.androidxRoomRuntime)
+    implementation(Libs.joda)
 
     kapt(Libs.androidxRoomCompiler)
 }

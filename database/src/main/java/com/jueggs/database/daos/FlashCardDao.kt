@@ -1,10 +1,13 @@
-package com.jueggs.database.storagelayers
+package com.jueggs.database.daos
 
 import androidx.room.*
 import com.jueggs.database.entities.FlashCardEntity
 
 @Dao
 interface FlashCardDao {
+    @Query("SELECT * FROM flash_card")
+    fun readAll(): List<FlashCardEntity>
+
     @Query("SELECT * FROM flash_card WHERE id = :id")
     fun readById(id: Long): FlashCardEntity
 
