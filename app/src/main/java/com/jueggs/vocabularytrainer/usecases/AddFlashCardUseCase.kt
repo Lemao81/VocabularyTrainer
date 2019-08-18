@@ -29,11 +29,10 @@ class AddFlashCardUseCase(
             return Trigger { copy(longMessageId = validationResult.resId) }
         }
 
-        val backSideText = json.stringify(param.backSideTexts.filterNot { it.isBlank() })
         val newFlashCard = FlashCardEntity(
             id = null,
             frontSideText = param.frontSideText,
-            backSideTexts = backSideText,
+            backSideTexts = json.stringify(param.backSideTexts.filterNot { it.isBlank() }),
             boxNumber = FlashCardBox.ONE.number,
             lastLearnedDate = DateTime.now().millis
         )
