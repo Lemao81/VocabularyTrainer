@@ -14,6 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/flashCardBoxStats"
+            layout="@layout/flashcard_box_stats"
+            app:viewModel="@{viewModel}" />
+
         <TextView
             android:id="@+id/txtNothingToLearn"
             android:layout_width="wrap_content"

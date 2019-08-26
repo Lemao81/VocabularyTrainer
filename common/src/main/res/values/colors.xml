@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="box1_background">#FFF59D</color>
+    <color name="box2_background">#90CAF9</color>
+    <color name="box3_background">#F48FB1</color>
+    <color name="box4_background">#C5E1A5</color>
+    <color name="box5_background">#9FA8DA</color>
+    <color name="box6_background">#80CBC4</color>
 </resources>

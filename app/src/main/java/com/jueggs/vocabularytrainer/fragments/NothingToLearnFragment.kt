@@ -2,6 +2,7 @@ package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -19,6 +20,16 @@ class NothingToLearnFragment : BaseFragment(isShouldSearchNavController = true) 
             if (isShouldCloseApp) {
                 activity?.finish()
             }
+            viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
+            viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())
+            viewModel.stats[FlashCardBox.THREE.index].postValue(stats3.toString())
+            viewModel.stats[FlashCardBox.FOUR.index].postValue(stats4.toString())
+            viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
+            viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
         }
+    }
+
+    override fun onStandby() {
+        viewModel.updateStats()
     }
 }

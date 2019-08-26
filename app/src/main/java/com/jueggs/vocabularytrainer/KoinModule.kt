@@ -17,7 +17,7 @@ import org.koin.dsl.module
 val koinModule = module {
     viewModel { AddFlashCardViewModel(get(), get(), get()) }
     viewModel { LearnViewModel(get(), get(), get(), get()) }
-    viewModel { NothingToLearnViewModel() }
+    viewModel { NothingToLearnViewModel(get()) }
     viewModel { SplashScreenViewModel(get(), get()) }
 
     single { FlashCardBoxService() }

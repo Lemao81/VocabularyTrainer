@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jueggs.common.interfaces.StatsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/linStatsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtStats1"
+            android:layout_width="@dimen/stats_side_length"
+            android:layout_height="@dimen/stats_side_length"
+            android:layout_weight="1"
+            android:background="@drawable/shape_stats1"
+            android:gravity="center"
+            android:text="@={viewModel.stats[0]}"
+            android:textSize="@dimen/stats_text_size"
+            tools:text="55" />
+
+        <TextView
+            android:id="@+id/txtStats2"
+            android:layout_width="@dimen/stats_side_length"
+            android:layout_height="@dimen/stats_side_length"
+            android:layout_weight="1"
+            android:background="@drawable/shape_stats2"
+            android:gravity="center"
+            android:text="@={viewModel.stats[1]}"
+            android:textSize="@dimen/stats_text_size"
+            tools:text="55" />
+
+        <TextView
+            android:id="@+id/txtStats3"
+            android:layout_width="@dimen/stats_side_length"
+            android:layout_height="@dimen/stats_side_length"
+            android:layout_weight="1"
+            android:background="@drawable/shape_stats3"
+            android:gravity="center"
+            android:text="@={viewModel.stats[2]}"
+            android:textSize="@dimen/stats_text_size"
+            tools:text="55" />
+
+        <TextView
+            android:id="@+id/txtStats4"
+            android:layout_width="@dimen/stats_side_length"
+            android:layout_height="@dimen/stats_side_length"
+            android:layout_weight="1"
+            android:background="@drawable/shape_stats4"
+            android:gravity="center"
+            android:text="@={viewModel.stats[3]}"
+            android:textSize="@dimen/stats_text_size"
+            tools:text="55" />
+
+        <TextView
+            android:id="@+id/txtStats5"
+            android:layout_width="@dimen/stats_side_length"
+            android:layout_height="@dimen/stats_side_length"
+            android:layout_weight="1"
+            android:background="@drawable/shape_stats5"
+            android:gravity="center"
+            android:text="@={viewModel.stats[4]}"
+            android:textSize="@dimen/stats_text_size"
+            tools:text="55" />
+
+        <TextView
+            android:id="@+id/txtStats6"
+            android:layout_width="@dimen/stats_side_length"
+            android:layout_height="@dimen/stats_side_length"
+            android:layout_weight="1"
+            android:background="@drawable/shape_stats6"
+            android:gravity="center"
+            android:text="@={viewModel.stats[5]}"
+            android:textSize="@dimen/stats_text_size"
+            tools:text="55" />
+    </LinearLayout>
+</layout>

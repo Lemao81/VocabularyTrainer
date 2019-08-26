@@ -6,6 +6,7 @@ import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
 import com.jueggs.andutils.aac.Trigger
 import com.jueggs.common.enums.FlashCardBox
+import com.jueggs.common.interfaces.StatsViewModel
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.database.entities.FlashCardEntity
 import com.jueggs.database.repositories.interfaces.FlashCardRepository
@@ -23,10 +24,17 @@ class LearnViewModel(
     private val flashCardBoxService: FlashCardBoxService,
     private val json: Json,
     private val context: Context
-) : BaseViewModel<LearnViewState>(LearnViewState()) {
+) : BaseViewModel<LearnViewState>(LearnViewState()), StatsViewModel {
+    override val stats: MutableList<MutableLiveData<String>> = mutableListOf()
     val frontSideText = MutableLiveData<String>()
     val backSideText = MutableLiveData<String>()
     var currentFlashCardId: Long? = null
+
+    init {
+        repeat(6) {
+            stats.add(MutableLiveData())
+        }
+    }
 
     @ImplicitReflectionSerializer
     fun showNextFlashCard() {
@@ -46,6 +54,7 @@ class LearnViewModel(
                 flashCard.lastLearnedDate = DateTime.now().millis
                 flashCardRepository.update(flashCard)
             }
+            updateStats()
             showNextFlashCardInternal()
         }
     }
@@ -65,6 +74,7 @@ class LearnViewModel(
                     flashCardRepository.update(flashCard)
                 }
             }
+            updateStats()
             showNextFlashCardInternal()
         }
     }
@@ -108,6 +118,24 @@ class LearnViewModel(
             })
         } else {
             viewStateStore.dispatch(Trigger { copy(navigationId = R.id.action_learnFragment_to_nothingToLearnFragment) })
+        }
+    }
+
+    fun updateStats() {
+        launch {
+            val flashCards = flashCardRepository.readAll()
+            val groups = flashCards.groupBy { it.boxNumber }
+
+            viewStateStore.dispatch(Alter {
+                copy(
+                    stats1 = groups[FlashCardBox.ONE.number]?.size ?: 0,
+                    stats2 = groups[FlashCardBox.TWO.number]?.size ?: 0,
+                    stats3 = groups[FlashCardBox.THREE.number]?.size ?: 0,
+                    stats4 = groups[FlashCardBox.FOUR.number]?.size ?: 0,
+                    stats5 = groups[FlashCardBox.FIVE.number]?.size ?: 0,
+                    stats6 = groups[FlashCardBox.SIX.number]?.size ?: 0
+                )
+            })
         }
     }
 }

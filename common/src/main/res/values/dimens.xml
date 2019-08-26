@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stats_side_length">32dp</dimen>
+    <dimen name="stats_border_width">2dp</dimen>
+    <dimen name="stats_text_size">16sp</dimen>
+</resources>

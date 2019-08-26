@@ -13,4 +13,5 @@ android {
 dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.joda)
+    implementation(Libs.androidxLifecycleLiveData)
 }
