@@ -23,5 +23,6 @@ val koinModule = module {
     single { FlashCardBoxService() }
     single { AddFlashCardInputValidator() }
     single { FlashCardRepositoryImpl(AppDatabase.getInstance(get()).getFlashCardDao()) as FlashCardRepository }
+    single { JsonSerializer(Json(JsonConfiguration.Stable)) as Serializer }
     single { Json(JsonConfiguration.Stable) }
 }
