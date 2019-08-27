@@ -29,6 +29,10 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             if (isShouldPopFragment) {
                 navController?.popBackStack()
             }
+            if (isShouldEmptyInputs) {
+                viewModel.frontSideText.postValue("")
+                viewModel.backSideTexts.forEach { it.postValue("") }
+            }
             shortMessageId?.let { shortToast(it) }
             longMessageId?.let { longToast(it) }
             backSideViews.forEachIndexed { index, views ->
