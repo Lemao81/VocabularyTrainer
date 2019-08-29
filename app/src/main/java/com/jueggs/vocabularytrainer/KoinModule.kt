@@ -8,7 +8,7 @@ import com.jueggs.database.AppDatabase
 import com.jueggs.database.repositories.FlashCardRepositoryImpl
 import com.jueggs.database.repositories.interfaces.FlashCardRepository
 import com.jueggs.vocabularytrainer.models.AddFlashCardData
-import com.jueggs.vocabularytrainer.usecases.AddFlashCardUseCase
+import com.jueggs.vocabularytrainer.usecases.*
 import com.jueggs.vocabularytrainer.validators.AddFlashCardInputValidator
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
@@ -23,14 +23,20 @@ import org.koin.dsl.module
 @ImplicitReflectionSerializer
 val koinModule = module {
     viewModel { AddFlashCardViewModel(get()) }
-    viewModel { LearnViewModel(get(), get(), get(), get()) }
+    viewModel { LearnViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { NothingToLearnViewModel(get()) }
     viewModel { SplashScreenViewModel(get(), get()) }
 
     single { FlashCardBoxService() }
     single { AddFlashCardInputValidator() as Validator<AddFlashCardData> }
-    single { AddFlashCardUseCase(get(), get(), get()) }
     single { FlashCardRepositoryImpl(AppDatabase.getInstance(get()).getFlashCardDao()) as FlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Stable)) as Serializer }
     single { Json(JsonConfiguration.Stable) }
+
+    single { AddFlashCardUseCase(get(), get(), get()) }
+    single { DismissCorrectFlashCardUseCase(get()) }
+    single { DismissWrongFlashCardUseCase(get()) }
+    single { RemoveFlashCardUseCase(get()) }
+    single { ShowNextFlashCardUseCase(get(), get(), get()) }
+    single { UpdateLearnViewStatsUseCase(get()) }
 }

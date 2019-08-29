@@ -27,6 +27,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }
+            viewModel.currentFlashCardId = currentFlashCardId
             btnReveal.invisibleOrVisible = isRevealed
             fabWrong.visibleOrInvisible = isRevealed
             fabCorrect.visibleOrInvisible = isRevealed
