@@ -25,13 +25,12 @@ val koinModule = module {
     viewModel { AddFlashCardViewModel(get()) }
     viewModel { LearnViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { NothingToLearnViewModel(get()) }
-    viewModel { SplashScreenViewModel(get(), get()) }
+    viewModel { SplashScreenViewModel(get()) }
 
     single { FlashCardBoxService() }
     single { AddFlashCardInputValidator() as Validator<AddFlashCardData> }
     single { FlashCardRepositoryImpl(AppDatabase.getInstance(get()).getFlashCardDao()) as FlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Stable)) as Serializer }
-    single { Json(JsonConfiguration.Stable) }
 
     single { AddFlashCardUseCase(get(), get(), get()) }
     single { DismissCorrectFlashCardUseCase(get()) }
@@ -40,4 +39,5 @@ val koinModule = module {
     single { ShowNextFlashCardUseCase(get(), get(), get()) }
     single { UpdateLearnViewStatsUseCase(get()) }
     single { UpdateNothingToLearnViewStatsUseCase(get()) }
+    single { CheckSomethingToLearnUseCase(get(), get()) }
 }
