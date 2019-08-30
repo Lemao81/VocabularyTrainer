@@ -39,4 +39,5 @@ val koinModule = module {
     single { RemoveFlashCardUseCase(get()) }
     single { ShowNextFlashCardUseCase(get(), get(), get()) }
     single { UpdateLearnViewStatsUseCase(get()) }
+    single { UpdateNothingToLearnViewStatsUseCase(get()) }
 }
