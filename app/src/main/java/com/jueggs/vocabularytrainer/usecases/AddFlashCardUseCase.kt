@@ -3,7 +3,7 @@ package com.jueggs.vocabularytrainer.usecases
 import com.jueggs.andutils.aac.StateEvent
 import com.jueggs.andutils.aac.Trigger
 import com.jueggs.andutils.result.Invalid
-import com.jueggs.andutils.usecase.Validator
+import com.jueggs.andutils.usecase.IValidator
 import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.interfaces.ISerializer
@@ -17,7 +17,7 @@ import org.joda.time.DateTime
 
 class AddFlashCardUseCase(
     private val flashCardRepository: IFlashCardRepository,
-    private val inputValidator: Validator<AddFlashCardData>,
+    private val inputValidator: IValidator<AddFlashCardData>,
     private val serializer: ISerializer
 ) : ViewStateUseCaseWithParameter<AddFlashCardViewState, AddFlashCardData> {
 

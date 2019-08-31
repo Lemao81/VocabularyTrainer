@@ -1,6 +1,6 @@
 package com.jueggs.vocabularytrainer
 
-import com.jueggs.andutils.usecase.Validator
+import com.jueggs.andutils.usecase.IValidator
 import com.jueggs.common.interfaces.ISerializer
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.common.services.JsonSerializer
@@ -30,7 +30,7 @@ val koinModule = module {
     viewModel { SplashScreenViewModel(get()) }
 
     single { FlashCardBoxService() }
-    single { AddFlashCardInputValidator() as Validator<AddFlashCardData> }
+    single { AddFlashCardInputValidator() as IValidator<AddFlashCardData> }
     single { FlashCardRepository(AppDatabase.getInstance(get()).getFlashCardDao(), get()) as IFlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Stable)) as ISerializer }
     single { FlashCardMapper() as IFlashCardMapper }

@@ -23,5 +23,5 @@ class NothingToLearnViewModel(
 
     fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(navigationId = R.id.action_nothingToLearnFragment_to_addFlashCardFragment) })
 
-    fun updateStats() = viewStateStore.dispatchChannel(updateNothingToLearnViewStatsUseCase())
+    fun updateStats() = viewStateStore.dispatch(updateNothingToLearnViewStatsUseCase())
 }
