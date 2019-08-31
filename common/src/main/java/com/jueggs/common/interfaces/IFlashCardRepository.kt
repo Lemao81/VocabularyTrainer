@@ -2,7 +2,7 @@ package com.jueggs.common.interfaces
 
 import com.jueggs.common.models.FlashCard
 
-interface FlashCardRepository {
+interface IFlashCardRepository {
     suspend fun readAll(): List<FlashCard>
     suspend fun readById(id: Long): FlashCard
     suspend fun readByBoxNumberAndExpiryDate(boxNumber: Int, expiryDate: Long): List<FlashCard>

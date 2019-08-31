@@ -2,14 +2,14 @@ package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.vocabularytrainer.models.DismissCorrectFlashCardData
 import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 import org.joda.time.DateTime
 
 class DismissCorrectFlashCardUseCase(
-    private val flashCardRepository: FlashCardRepository,
+    private val flashCardRepository: IFlashCardRepository,
     private val flashCardBoxService: FlashCardBoxService
 ) : MultipleViewStatesUseCaseWithParameter<LearnViewState, DismissCorrectFlashCardData>() {
 

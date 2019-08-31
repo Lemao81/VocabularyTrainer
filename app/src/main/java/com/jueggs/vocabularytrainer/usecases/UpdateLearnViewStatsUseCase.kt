@@ -2,11 +2,11 @@ package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 
 class UpdateLearnViewStatsUseCase(
-    private val flashCardRepository: FlashCardRepository
+    private val flashCardRepository: IFlashCardRepository
 ) : MultipleViewStatesUseCase<LearnViewState>() {
 
     override suspend fun execute() {

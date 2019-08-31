@@ -4,7 +4,7 @@ import androidx.room.*
 import com.jueggs.database.entities.FlashCardEntity
 
 @Dao
-interface FlashCardDao {
+interface IFlashCardDao {
     @Query("SELECT * FROM flash_card")
     fun readAll(): List<FlashCardEntity>
 

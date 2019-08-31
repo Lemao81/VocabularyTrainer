@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.jueggs.common.interfaces.StatsViewModel" />
+            type="com.jueggs.common.interfaces.IStatsViewModel" />
     </data>
 
     <LinearLayout

@@ -2,6 +2,6 @@ package com.jueggs.common.interfaces
 
 import androidx.lifecycle.MutableLiveData
 
-interface StatsViewModel {
+interface IStatsViewModel {
     val stats: MutableList<MutableLiveData<String>>
 }

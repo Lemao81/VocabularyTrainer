@@ -3,13 +3,13 @@ package com.jueggs.vocabularytrainer.usecases
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.services.FlashCardBoxService
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewstates.SplashScreenViewState
 import org.joda.time.DateTime
 
 class CheckSomethingToLearnUseCase(
-    private val flashCardRepository: FlashCardRepository,
+    private val flashCardRepository: IFlashCardRepository,
     private val flashCardBoxService: FlashCardBoxService
 ) : MultipleViewStatesUseCase<SplashScreenViewState>() {
 

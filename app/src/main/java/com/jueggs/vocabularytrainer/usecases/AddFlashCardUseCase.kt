@@ -6,8 +6,8 @@ import com.jueggs.andutils.result.Invalid
 import com.jueggs.andutils.usecase.Validator
 import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
-import com.jueggs.common.interfaces.Serializer
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.ISerializer
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.common.models.FlashCard
 import com.jueggs.jutils.INVALID
 import com.jueggs.vocabularytrainer.R
@@ -16,9 +16,9 @@ import com.jueggs.vocabularytrainer.viewstates.AddFlashCardViewState
 import org.joda.time.DateTime
 
 class AddFlashCardUseCase(
-    private val flashCardRepository: FlashCardRepository,
+    private val flashCardRepository: IFlashCardRepository,
     private val inputValidator: Validator<AddFlashCardData>,
-    private val serializer: Serializer
+    private val serializer: ISerializer
 ) : ViewStateUseCaseWithParameter<AddFlashCardViewState, AddFlashCardData> {
 
     override suspend fun invoke(param: AddFlashCardData): StateEvent<AddFlashCardViewState> {

@@ -2,9 +2,9 @@ package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
-import com.jueggs.common.interfaces.Serializer
+import com.jueggs.common.interfaces.ISerializer
 import com.jueggs.common.services.FlashCardBoxService
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.common.models.FlashCard
 import com.jueggs.jutils.Util
 import com.jueggs.jutils.extension.join
@@ -13,9 +13,9 @@ import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 import org.joda.time.DateTime
 
 class ShowNextFlashCardUseCase(
-    private val flashCardRepository: FlashCardRepository,
+    private val flashCardRepository: IFlashCardRepository,
     private val flashCardBoxService: FlashCardBoxService,
-    private val serializer: Serializer
+    private val serializer: ISerializer
 ) : MultipleViewStatesUseCase<LearnViewState>() {
 
     override suspend fun execute() {

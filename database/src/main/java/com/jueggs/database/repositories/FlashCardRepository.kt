@@ -1,16 +1,16 @@
 package com.jueggs.database.repositories
 
-import com.jueggs.database.daos.FlashCardDao
+import com.jueggs.database.daos.IFlashCardDao
 import com.jueggs.database.entities.FlashCardEntity
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.common.models.FlashCard
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import org.joda.time.DateTime
 
-class FlashCardRepositoryImpl(
-    private val flashCardDao: FlashCardDao,
+class FlashCardRepository(
+    private val flashCardDao: IFlashCardDao,
     private val flashCardMapper: IFlashCardMapper
-) : FlashCardRepository {
+) : IFlashCardRepository {
     override suspend fun readAll() = flashCardDao.readAll().map(flashCardMapper::mapEntityToFlashCard)
 
     override suspend fun readById(id: Long) = flashCardMapper.mapEntityToFlashCard(flashCardDao.readById(id))

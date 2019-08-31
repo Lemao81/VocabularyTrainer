@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
 import com.jueggs.andutils.aac.Trigger
-import com.jueggs.common.interfaces.StatsViewModel
+import com.jueggs.common.interfaces.IStatsViewModel
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.models.DismissCorrectFlashCardData
 import com.jueggs.vocabularytrainer.usecases.*
@@ -18,7 +18,7 @@ class LearnViewModel(
     private val removeFlashCardUseCase: RemoveFlashCardUseCase,
     private val updateLearnViewStatsUseCase: UpdateLearnViewStatsUseCase,
     private val context: Context
-) : BaseViewModel<LearnViewState>(LearnViewState()), StatsViewModel {
+) : BaseViewModel<LearnViewState>(LearnViewState()), IStatsViewModel {
     override val stats: MutableList<MutableLiveData<String>> = mutableListOf()
     val frontSideText = MutableLiveData<String>()
     val backSideText = MutableLiveData<String>()

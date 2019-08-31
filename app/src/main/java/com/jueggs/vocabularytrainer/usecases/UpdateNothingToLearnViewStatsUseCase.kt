@@ -2,11 +2,11 @@ package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
-import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.vocabularytrainer.viewstates.NothingToLearnViewState
 
 class UpdateNothingToLearnViewStatsUseCase(
-    private val flashCardRepository: FlashCardRepository
+    private val flashCardRepository: IFlashCardRepository
 ) : MultipleViewStatesUseCase<NothingToLearnViewState>() {
     override suspend fun execute() {
         val flashCards = flashCardRepository.readAll()
