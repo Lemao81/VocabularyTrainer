@@ -54,6 +54,7 @@ class ShowNextFlashCardUseCase(
                     frontSideText = card.frontSideText,
                     backSideText = backSideText,
                     currentFlashCardId = card.id,
+                    boxNumber = card.box.number,
                     isRevealed = false,
                     cardBackgroundColorId = cardBackgroundColorId
                 )

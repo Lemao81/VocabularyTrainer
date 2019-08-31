@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidFrontSide"
+                    android:id="@+id/guidFlashCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -43,7 +43,7 @@
                     android:text="@string/frontside"
                     android:textSize="24sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/guidFrontSide" />
+                    app:layout_constraintTop_toTopOf="@id/guidFlashCard" />
 
                 <EditText
                     android:id="@+id/edtFrontSide"

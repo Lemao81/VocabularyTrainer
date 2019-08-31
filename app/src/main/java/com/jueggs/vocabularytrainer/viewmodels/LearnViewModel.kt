@@ -22,6 +22,7 @@ class LearnViewModel(
     override val stats: MutableList<MutableLiveData<String>> = mutableListOf()
     val frontSideText = MutableLiveData<String>()
     val backSideText = MutableLiveData<String>()
+    val boxNumber = MutableLiveData<String>()
     var currentFlashCardId: Long? = null
 
     init {

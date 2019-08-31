@@ -23,13 +23,14 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }
+            boxNumber?.let { viewModel.boxNumber.postValue(it.toString()) }
             viewModel.currentFlashCardId = currentFlashCardId
             fabWrong.visibleOrInvisible = isRevealed
             fabCorrect.visibleOrInvisible = isRevealed
             txtFrontSideText.invisibleOrVisible = isRevealed
             txtBackSideText.visibleOrInvisible = isRevealed
-            cardFrontSide.isClickable = !isRevealed
-            context?.let { cardFrontSide.setCardBackgroundColor(it.colorResToInt(cardBackgroundColorId ?: R.color.box1_background)) }
+            cardFlashCard.isClickable = !isRevealed
+            context?.let { cardFlashCard.setCardBackgroundColor(it.colorResToInt(cardBackgroundColorId ?: R.color.box1_background)) }
             if (isShouldShowRemoveFlashCardConfirmation) {
                 showConfirmDialog(R.string.dialog_remove_flashcard_title, R.string.dialog_remove_flashcard_message, viewModel::removeFlashCard, viewModel::cancelFlashCardRemoval)
             }

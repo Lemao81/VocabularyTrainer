@@ -8,6 +8,7 @@ data class LearnViewState(
     val backSideText: String? = null,
     val isRevealed: Boolean = false,
     val currentFlashCardId: Long? = null,
+    val boxNumber: Int? = null,
     val cardBackgroundColorId: Int? = null,
     val isShouldShowRemoveFlashCardConfirmation: Boolean = false,
     val stats1: Int = 0,
