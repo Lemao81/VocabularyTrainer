@@ -7,8 +7,8 @@ import com.jueggs.andutils.usecase.Validator
 import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.interfaces.Serializer
-import com.jueggs.database.entities.FlashCardEntity
-import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.models.FlashCard
 import com.jueggs.jutils.INVALID
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.models.AddFlashCardData
@@ -25,12 +25,12 @@ class AddFlashCardUseCase(
         when (val validationResult = inputValidator(param)) {
             is Invalid -> return Trigger { copy(longMessageId = validationResult.resId) }
             else -> {
-                val newFlashCard = FlashCardEntity(
+                val newFlashCard = FlashCard(
                     id = null,
                     frontSideText = param.frontSideText,
                     backSideTexts = serializer.stringify(param.backSideTexts.filterNot { it.isBlank() }, String::class),
-                    boxNumber = FlashCardBox.ONE.number,
-                    lastLearnedDate = DateTime.now().millis
+                    box = FlashCardBox.ONE,
+                    lastLearnedDate = DateTime.now()
                 )
                 flashCardRepository.insert(newFlashCard)
 

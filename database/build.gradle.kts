@@ -15,5 +15,7 @@ dependencies {
     implementation(Libs.androidxRoomRuntime)
     implementation(Libs.joda)
 
+    implementation(project(Modules.common))
+
     kapt(Libs.androidxRoomCompiler)
 }

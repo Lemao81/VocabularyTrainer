@@ -4,8 +4,8 @@ import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.interfaces.Serializer
 import com.jueggs.common.services.FlashCardBoxService
-import com.jueggs.database.entities.FlashCardEntity
-import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.common.models.FlashCard
 import com.jueggs.jutils.Util
 import com.jueggs.jutils.extension.join
 import com.jueggs.vocabularytrainer.R
@@ -20,9 +20,9 @@ class ShowNextFlashCardUseCase(
 
     override suspend fun execute() {
         val now = DateTime.now()
-        var nextCard: FlashCardEntity? = null
-        FlashCardBox.values().forEach { it ->
-            val dueFlashCards = flashCardRepository.readByBoxNumberAndExpiryDate(it.number, flashCardBoxService.getBoxExpiryDate(it, now))
+        var nextCard: FlashCard? = null
+        FlashCardBox.values().forEach { box ->
+            val dueFlashCards = flashCardRepository.readByBoxNumberAndExpiryDate(box.number, flashCardBoxService.getBoxExpiryDate(box, now))
             if (dueFlashCards.any()) {
                 nextCard = dueFlashCards.minBy { it.lastLearnedDate }
 
@@ -30,32 +30,31 @@ class ShowNextFlashCardUseCase(
             }
         }
 
-        if (nextCard != null) {
-            val backSideTexts = if (nextCard?.backSideTexts != null) {
-                serializer.parseList(nextCard?.backSideTexts!!, String::class)
-            } else {
-                emptyList()
-            }
-            val cardBackgroundColor = when (nextCard?.boxNumber) {
-                FlashCardBox.TWO.number -> R.color.box2_background
-                FlashCardBox.THREE.number -> R.color.box3_background
-                FlashCardBox.FOUR.number -> R.color.box4_background
-                FlashCardBox.FIVE.number -> R.color.box5_background
-                FlashCardBox.SIX.number -> R.color.box6_background
+        if (nextCard == null) {
+            triggerViewState { copy(navigationId = R.id.action_learnFragment_to_nothingToLearnFragment) }
+        }
+        nextCard?.let { card ->
+            val backSideText = serializer
+                .parseList(card.backSideTexts, String::class)
+                .mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator)
+            val cardBackgroundColorId = when (card.box) {
+                FlashCardBox.TWO -> R.color.box2_background
+                FlashCardBox.THREE -> R.color.box3_background
+                FlashCardBox.FOUR -> R.color.box4_background
+                FlashCardBox.FIVE -> R.color.box5_background
+                FlashCardBox.SIX -> R.color.box6_background
                 else -> R.color.box1_background
             }
 
             alterViewState {
                 copy(
-                    frontSideText = nextCard?.frontSideText,
-                    backSideText = backSideTexts.mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator),
-                    currentFlashCardId = nextCard?.id,
+                    frontSideText = card.frontSideText,
+                    backSideText = backSideText,
+                    currentFlashCardId = card.id,
                     isRevealed = false,
-                    cardBackgroundColorId = cardBackgroundColor
+                    cardBackgroundColorId = cardBackgroundColorId
                 )
             }
-        } else {
-            triggerViewState { copy(navigationId = R.id.action_learnFragment_to_nothingToLearnFragment) }
         }
     }
 }

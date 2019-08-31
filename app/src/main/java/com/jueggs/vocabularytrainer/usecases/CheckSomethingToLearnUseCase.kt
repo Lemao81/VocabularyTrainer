@@ -3,7 +3,7 @@ package com.jueggs.vocabularytrainer.usecases
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.services.FlashCardBoxService
-import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.FlashCardRepository
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewstates.SplashScreenViewState
 import org.joda.time.DateTime
@@ -18,7 +18,6 @@ class CheckSomethingToLearnUseCase(
         val isSomethingToLearn = FlashCardBox.values().any {
             flashCardRepository.readByBoxNumberAndExpiryDate(it.number, flashCardBoxService.getBoxExpiryDate(it, now)).any()
         }
-
         val navigationId = if (isSomethingToLearn) {
             R.id.action_splashScreenFragment_to_learnFragment
         } else {

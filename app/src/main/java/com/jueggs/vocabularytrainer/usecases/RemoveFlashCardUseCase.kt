@@ -1,7 +1,7 @@
 package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCaseWithParameter
-import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.FlashCardRepository
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 

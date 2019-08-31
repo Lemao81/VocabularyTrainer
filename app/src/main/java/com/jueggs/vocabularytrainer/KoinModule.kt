@@ -6,7 +6,9 @@ import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.common.services.JsonSerializer
 import com.jueggs.database.AppDatabase
 import com.jueggs.database.repositories.FlashCardRepositoryImpl
-import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.common.interfaces.FlashCardRepository
+import com.jueggs.database.mapper.FlashCardMapper
+import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import com.jueggs.vocabularytrainer.models.AddFlashCardData
 import com.jueggs.vocabularytrainer.usecases.*
 import com.jueggs.vocabularytrainer.validators.AddFlashCardInputValidator
@@ -29,11 +31,12 @@ val koinModule = module {
 
     single { FlashCardBoxService() }
     single { AddFlashCardInputValidator() as Validator<AddFlashCardData> }
-    single { FlashCardRepositoryImpl(AppDatabase.getInstance(get()).getFlashCardDao()) as FlashCardRepository }
+    single { FlashCardRepositoryImpl(AppDatabase.getInstance(get()).getFlashCardDao(), get()) as FlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Stable)) as Serializer }
+    single { FlashCardMapper() as IFlashCardMapper }
 
     single { AddFlashCardUseCase(get(), get(), get()) }
-    single { DismissCorrectFlashCardUseCase(get()) }
+    single { DismissCorrectFlashCardUseCase(get(), get()) }
     single { DismissWrongFlashCardUseCase(get()) }
     single { RemoveFlashCardUseCase(get()) }
     single { ShowNextFlashCardUseCase(get(), get(), get()) }

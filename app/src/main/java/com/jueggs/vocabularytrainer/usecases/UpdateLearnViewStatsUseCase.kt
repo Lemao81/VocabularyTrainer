@@ -1,7 +1,8 @@
 package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
-import com.jueggs.database.repositories.interfaces.FlashCardRepository
+import com.jueggs.common.enums.FlashCardBox
+import com.jueggs.common.interfaces.FlashCardRepository
 import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 
 class UpdateLearnViewStatsUseCase(
@@ -10,16 +11,16 @@ class UpdateLearnViewStatsUseCase(
 
     override suspend fun execute() {
         val flashCards = flashCardRepository.readAll()
-        val groups = flashCards.groupBy { it.boxNumber }
+        val groups = flashCards.groupBy { it.box }
 
         alterViewState {
             copy(
-                stats1 = groups[com.jueggs.common.enums.FlashCardBox.ONE.number]?.size ?: 0,
-                stats2 = groups[com.jueggs.common.enums.FlashCardBox.TWO.number]?.size ?: 0,
-                stats3 = groups[com.jueggs.common.enums.FlashCardBox.THREE.number]?.size ?: 0,
-                stats4 = groups[com.jueggs.common.enums.FlashCardBox.FOUR.number]?.size ?: 0,
-                stats5 = groups[com.jueggs.common.enums.FlashCardBox.FIVE.number]?.size ?: 0,
-                stats6 = groups[com.jueggs.common.enums.FlashCardBox.SIX.number]?.size ?: 0
+                stats1 = groups[FlashCardBox.ONE]?.size ?: 0,
+                stats2 = groups[FlashCardBox.TWO]?.size ?: 0,
+                stats3 = groups[FlashCardBox.THREE]?.size ?: 0,
+                stats4 = groups[FlashCardBox.FOUR]?.size ?: 0,
+                stats5 = groups[FlashCardBox.FIVE]?.size ?: 0,
+                stats6 = groups[FlashCardBox.SIX]?.size ?: 0
             )
         }
     }
