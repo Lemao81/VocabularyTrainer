@@ -36,13 +36,22 @@ class ShowNextFlashCardUseCase(
             } else {
                 emptyList()
             }
+            val cardBackgroundColor = when (nextCard?.boxNumber) {
+                FlashCardBox.TWO.number -> R.color.box2_background
+                FlashCardBox.THREE.number -> R.color.box3_background
+                FlashCardBox.FOUR.number -> R.color.box4_background
+                FlashCardBox.FIVE.number -> R.color.box5_background
+                FlashCardBox.SIX.number -> R.color.box6_background
+                else -> R.color.box1_background
+            }
 
             alterViewState {
                 copy(
                     frontSideText = nextCard?.frontSideText,
                     backSideText = backSideTexts.mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator),
                     currentFlashCardId = nextCard?.id,
-                    isRevealed = false
+                    isRevealed = false,
+                    cardBackgroundColorId = cardBackgroundColor
                 )
             }
         } else {

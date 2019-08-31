@@ -24,61 +24,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2" />
+            app:layout_constraintGuide_percent="0.25" />
 
-        <TextView
-            android:id="@+id/txtFrontSideText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@={viewModel.frontSideText}"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guidFrontSide"
-            tools:text="to learn" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidBackSide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
-
-        <TextView
-            android:id="@+id/txtBackSideText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@={viewModel.backSideText}"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guidBackSide"
-            tools:text="lernen" />
-
-        <Button
-            android:id="@+id/btnReveal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFrontSide"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:onClick="@{() -> viewModel.revealFlashCardBackSide()}"
-            android:text="@string/reveal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardBackgroundColor="@color/box1_background"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidFrontSide"
+            app:layout_constraintWidth_percent="0.7">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/txtFrontSideText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@={viewModel.frontSideText}"
+                    android:textSize="20sp"
+                    tools:text="to learn" />
+
+                <TextView
+                    android:id="@+id/txtBackSideText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@={viewModel.backSideText}"
+                    android:textSize="20sp"
+                    tools:text="lernen" />
+            </FrameLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabCorrect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="48dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> viewModel.dismissCorrectFlashCard()}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fabWrong"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardFrontSide"
             app:srcCompat="@drawable/ic_check_green_24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -86,13 +85,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginBottom="32dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> viewModel.dismissWrongFlashCard()}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fabCorrect"
+            app:layout_constraintTop_toTopOf="@id/fabCorrect"
             app:srcCompat="@drawable/ic_clear_red_24dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

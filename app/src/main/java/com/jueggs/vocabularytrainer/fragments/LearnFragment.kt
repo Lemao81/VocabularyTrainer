@@ -2,16 +2,12 @@ package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
-import com.jueggs.andutils.extension.invisibleOrVisible
-import com.jueggs.andutils.extension.longToast
-import com.jueggs.andutils.extension.shortToast
-import com.jueggs.andutils.extension.visibleOrInvisible
+import com.jueggs.andutils.extension.*
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
-import kotlinx.serialization.ImplicitReflectionSerializer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
@@ -28,10 +24,12 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }
             viewModel.currentFlashCardId = currentFlashCardId
-            btnReveal.invisibleOrVisible = isRevealed
             fabWrong.visibleOrInvisible = isRevealed
             fabCorrect.visibleOrInvisible = isRevealed
+            txtFrontSideText.invisibleOrVisible = isRevealed
             txtBackSideText.visibleOrInvisible = isRevealed
+            cardFrontSide.isClickable = !isRevealed
+            context?.let { cardFrontSide.setCardBackgroundColor(it.colorResToInt(cardBackgroundColorId ?: R.color.box1_background)) }
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
             viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())
             viewModel.stats[FlashCardBox.THREE.index].postValue(stats3.toString())
@@ -41,7 +39,6 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
         }
     }
 
-    @ImplicitReflectionSerializer
     override fun onStandby() {
         viewModel.showNextFlashCard()
         viewModel.updateStats()
