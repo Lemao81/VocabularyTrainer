@@ -17,6 +17,12 @@
         <include
             android:id="@+id/flashCardBoxStats"
             layout="@layout/flashcard_box_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:viewModel="@{viewModel}" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -52,7 +58,7 @@
                     android:background="@drawable/shape_flashcard_boxnumber"
                     android:gravity="center"
                     android:text="@={viewModel.boxNumber}"
-                    android:textSize="@dimen/stats_text_size"
+                    android:textSize="12sp"
                     tools:text="2" />
 
                 <TextView

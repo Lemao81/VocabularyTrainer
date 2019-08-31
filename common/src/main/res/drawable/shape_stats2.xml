@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/box2_background" />
-    <stroke
-        android:width="@dimen/stats_border_width"
-        android:color="@android:color/black" />
-</shape>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@dimen/stats_border_width_negative"
+    android:insetTop="@dimen/stats_border_width_negative"
+    android:insetBottom="@dimen/stats_border_width_negative">
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="@color/box2_background" />
+        <stroke
+            android:width="@dimen/stats_border_width"
+            android:color="@android:color/black" />
+    </shape>
+</inset>
