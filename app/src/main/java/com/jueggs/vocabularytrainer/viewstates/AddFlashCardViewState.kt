@@ -8,6 +8,7 @@ data class AddFlashCardViewState(
     val longMessageId: Int? = null,
     val isShouldPopFragment: Boolean = false,
     val isShouldEmptyInputs: Boolean = false,
+    val isShouldFocusFrontSideEdit: Boolean = false,
     val backSideViewsShownUpToIndex: Int = 0,
     val focusedInputIndex: Int = INVALID
 )

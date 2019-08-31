@@ -1,10 +1,8 @@
 package com.jueggs.vocabularytrainer.usecases
 
-import com.jueggs.andutils.aac.StateEvent
-import com.jueggs.andutils.aac.Trigger
 import com.jueggs.andutils.result.Invalid
 import com.jueggs.andutils.usecase.IValidator
-import com.jueggs.andutils.usecase.ViewStateUseCaseWithParameter
+import com.jueggs.andutils.usecase.MultipleViewStatesUseCaseWithParameter
 import com.jueggs.common.enums.FlashCardBox
 import com.jueggs.common.interfaces.ISerializer
 import com.jueggs.common.interfaces.IFlashCardRepository
@@ -19,11 +17,11 @@ class AddFlashCardUseCase(
     private val flashCardRepository: IFlashCardRepository,
     private val inputValidator: IValidator<AddFlashCardData>,
     private val serializer: ISerializer
-) : ViewStateUseCaseWithParameter<AddFlashCardViewState, AddFlashCardData> {
+) : MultipleViewStatesUseCaseWithParameter<AddFlashCardViewState, AddFlashCardData>() {
 
-    override suspend fun invoke(param: AddFlashCardData): StateEvent<AddFlashCardViewState> {
+    override suspend fun execute(param: AddFlashCardData) {
         when (val validationResult = inputValidator(param)) {
-            is Invalid -> return Trigger { copy(longMessageId = validationResult.resId) }
+            is Invalid -> triggerViewState { copy(longMessageId = validationResult.resId) }
             else -> {
                 val newFlashCard = FlashCard(
                     id = null,
@@ -33,14 +31,11 @@ class AddFlashCardUseCase(
                     lastLearnedDate = DateTime.now()
                 )
                 flashCardRepository.insert(newFlashCard)
-
-                return Trigger {
-                    copy(
-                        shortMessageId = R.string.message_card_added,
-                        focusedInputIndex = INVALID,
-                        backSideViewsShownUpToIndex = 0,
-                        isShouldEmptyInputs = true
-                    )
+                alterViewState {
+                    copy(focusedInputIndex = INVALID, backSideViewsShownUpToIndex = 0)
+                }
+                triggerViewState {
+                    copy(shortMessageId = R.string.message_card_added, isShouldEmptyInputs = true, isShouldFocusFrontSideEdit = true)
                 }
             }
         }

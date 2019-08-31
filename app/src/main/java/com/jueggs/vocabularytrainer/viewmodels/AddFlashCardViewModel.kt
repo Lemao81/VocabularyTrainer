@@ -21,9 +21,11 @@ class AddFlashCardViewModel(
         }
     }
 
+    fun focusFrontSideEdit() = viewStateStore.dispatch(Trigger { copy(isShouldFocusFrontSideEdit = true) })
+
     fun addFlashCard() {
         val data = AddFlashCardData(frontSideText.value.orEmpty(), backSideTexts.map { it.value.orEmpty() })
-        viewStateStore.dispatch({ addFlashCardUseCase(data) })
+        viewStateStore.dispatch(addFlashCardUseCase(data))
     }
 
     fun showBackSideInput() = viewStateStore.dispatch(
@@ -32,9 +34,8 @@ class AddFlashCardViewModel(
     )
 
     fun hideBackSideInput() = viewStateStore.dispatch(
-        Alter { copy(backSideViewsShownUpToIndex = Math.max(backSideViewsShownUpToIndex - 1, 0)) },
-        Trigger { copy(focusedInputIndex = backSideViewsShownUpToIndex) }
-    )
+        Trigger { copy(focusedInputIndex = Math.max(backSideViewsShownUpToIndex - 1, 0)) },
+        Alter { copy(backSideViewsShownUpToIndex = Math.max(backSideViewsShownUpToIndex - 1, 0)) })
 
     fun cancel() = viewStateStore.dispatch(Trigger { copy(isShouldPopFragment = true) })
 }

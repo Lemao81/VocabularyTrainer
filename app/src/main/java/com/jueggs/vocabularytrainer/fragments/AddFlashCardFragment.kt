@@ -5,10 +5,7 @@ import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jueggs.andutils.base.BaseFragment
-import com.jueggs.andutils.extension.longToast
-import com.jueggs.andutils.extension.makeInvisible
-import com.jueggs.andutils.extension.makeVisible
-import com.jueggs.andutils.extension.shortToast
+import com.jueggs.andutils.extension.*
 import com.jueggs.jutils.INVALID
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
@@ -32,6 +29,10 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             if (isShouldEmptyInputs) {
                 viewModel.frontSideText.postValue("")
                 viewModel.backSideTexts.forEach { it.postValue("") }
+            }
+            if (isShouldFocusFrontSideEdit) {
+                edtFrontSide.requestFocus()
+                showKeyboard()
             }
             shortMessageId?.let { shortToast(it) }
             longMessageId?.let { longToast(it) }
@@ -57,6 +58,7 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     }
 
     override fun onStandby() {
+        viewModel.focusFrontSideEdit()
         backSideViews.add(listOf(edtBackSide1, fabShowBackSideInput1))
         backSideViews.add(listOf(edtBackSide2, fabShowBackSideInput2, fabHideBackSideInput2))
         backSideViews.add(listOf(edtBackSide3, fabShowBackSideInput3, fabHideBackSideInput3))
