@@ -34,9 +34,12 @@ class ShowNextFlashCardUseCase(
             triggerViewState { copy(navigationId = R.id.action_learnFragment_to_nothingToLearnFragment) }
         }
         nextCard?.let { card ->
-            val backSideText = serializer
-                .parseList(card.backSideTexts, String::class)
-                .mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator)
+            val backSideTextList = serializer.parseList(card.backSideTexts, String::class)
+            val backSideText = if (backSideTextList.size == 1) {
+                backSideTextList.first()
+            } else {
+                backSideTextList.mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator)
+            }
             val cardBackgroundColorId = when (card.box) {
                 FlashCardBox.TWO -> R.color.box2_background
                 FlashCardBox.THREE -> R.color.box3_background

@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@={viewModel.frontSideText}"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:text="to learn" />
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@={viewModel.backSideText}"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     tools:text="lernen" />
             </FrameLayout>
 
