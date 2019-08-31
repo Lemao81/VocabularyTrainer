@@ -15,4 +15,6 @@
     <string name="message_card_added">Card added</string>
     <string name="message_card_removed">Card removed</string>
     <string name="message_card_learned">You successfully learned \'%s\'! Card removed</string>
+    <string name="dialog_remove_flashcard_title">Remove card</string>
+    <string name="dialog_remove_flashcard_message">Do you want to remove this card?</string>
 </resources>

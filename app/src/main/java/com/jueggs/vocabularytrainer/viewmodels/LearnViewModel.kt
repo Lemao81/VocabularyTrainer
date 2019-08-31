@@ -30,20 +30,26 @@ class LearnViewModel(
         }
     }
 
-    fun showNextFlashCard() = viewStateStore.dispatchChannel(showNextFlashCardUseCase())
+    fun showNextFlashCard() = viewStateStore.dispatch(showNextFlashCardUseCase())
 
     fun revealFlashCardBackSide() = viewStateStore.dispatch(Alter { copy(isRevealed = true) })
 
-    fun dismissWrongFlashCard() = viewStateStore.dispatchChannel(dismissWrongFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
+    fun dismissWrongFlashCard() = viewStateStore.dispatch(dismissWrongFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
 
     fun dismissCorrectFlashCard() {
         val data = DismissCorrectFlashCardData(currentFlashCardId, context.getString(R.string.message_card_learned))
-        viewStateStore.dispatchChannel(dismissCorrectFlashCardUseCase(data), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
+        viewStateStore.dispatch(dismissCorrectFlashCardUseCase(data), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
     }
 
     fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(navigationId = R.id.action_learnFragment_to_addFlashCardFragment) })
 
-    fun removeFlashCard() = viewStateStore.dispatchChannel(removeFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
+    fun showRemoveFlashCardConfirmation() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = true) })
 
-    fun updateStats() = viewStateStore.dispatchChannel(updateLearnViewStatsUseCase())
+    fun removeFlashCard() {
+        viewStateStore.dispatch(removeFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
+    }
+
+    fun cancelFlashCardRemoval() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = false) })
+
+    fun updateStats() = viewStateStore.dispatch(updateLearnViewStatsUseCase())
 }

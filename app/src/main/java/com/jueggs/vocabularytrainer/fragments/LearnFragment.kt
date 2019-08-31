@@ -30,6 +30,9 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             txtBackSideText.visibleOrInvisible = isRevealed
             cardFrontSide.isClickable = !isRevealed
             context?.let { cardFrontSide.setCardBackgroundColor(it.colorResToInt(cardBackgroundColorId ?: R.color.box1_background)) }
+            if (isShouldShowRemoveFlashCardConfirmation) {
+                showConfirmDialog(R.string.dialog_remove_flashcard_title, R.string.dialog_remove_flashcard_message, viewModel::removeFlashCard, viewModel::cancelFlashCardRemoval)
+            }
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
             viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())
             viewModel.stats[FlashCardBox.THREE.index].postValue(stats3.toString())

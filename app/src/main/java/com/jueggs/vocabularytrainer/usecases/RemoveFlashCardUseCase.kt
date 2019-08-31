@@ -12,6 +12,7 @@ class RemoveFlashCardUseCase(
     override suspend fun execute(param: Long?) {
         param?.let {
             flashCardRepository.deleteById(it)
+            alterViewState { copy(isShouldShowRemoveFlashCardConfirmation = false) }
             triggerViewState { copy(shortMessageId = R.string.message_card_removed) }
         }
     }

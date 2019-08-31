@@ -101,7 +101,7 @@
             android:layout_marginBottom="8dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> viewModel.removeFlashCard()}"
+            android:onClick="@{() -> viewModel.showRemoveFlashCardConfirmation()}"
             app:layout_constraintBottom_toTopOf="@id/fabAddFlashCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_remove_white_24dp" />
