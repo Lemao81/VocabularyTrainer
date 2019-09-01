@@ -50,7 +50,7 @@ object Versions {
     const val androidxTestEspressoCore = "3.1.0"
     const val androidxTestEspressoIntents = "3.1.0"
     const val androidxTestExtJunit = "1.0.0"
-    const val androidxNavigation = "2.1.0-beta02"
+    const val androidxNavigation = "2.1.0-rc01"
     const val material = "1.0.0-rc01"
     const val kotlinCoroutine = "1.3.0-RC"
     const val kotlinSerialization = "0.11.1"
@@ -242,7 +242,6 @@ object Libs {
     const val okLog = "com.github.simonpercic:oklog3:${Versions.okLog}"
     const val archNavigationFragment = "android.arch.navigation:navigation-fragment-ktx:${Versions.archNavigation}"
     const val archNavigationUi = "android.arch.navigation:navigation-ui-ktx:${Versions.archNavigation}"
-    const val archNavigationSafeArgs = "android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.archNavigation}"
     const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     const val leakCanaryNoop = "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakCanary}"
     const val leakCanarySupport = "com.squareup.leakcanary:leakcanary-support-fragment:${Versions.leakCanary}"
@@ -286,5 +285,5 @@ object Plugins {
     const val hugo = "com.jakewharton.hugo:hugo-plugin:${Versions.hugoPlugin}"
     const val frodo = "com.fernandocejas.frodo:frodo-plugin:${Versions.frodo}"
     const val buildTimeTracker = "net.rdrei.android.buildtimetracker:gradle-plugin:${Versions.buildTimeTracker}"
-    const val safeargs = "android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.archNavigation}"
+    const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.androidxNavigation}"
 }

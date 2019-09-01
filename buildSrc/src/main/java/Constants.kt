@@ -12,7 +12,7 @@ object PluginIds {
     const val gms = "com.google.gms.google-services"
     const val archivaUpload = "custom-archivaupload"
     const val maven = "maven"
-    const val safeargs = "androidx.navigation.safeargs"
+    const val safeargs = "androidx.navigation.safeargs.kotlin"
 }
 
 object Urls {
@@ -24,9 +24,24 @@ object Urls {
     const val autoDsl = "https://dl.bintray.com/juanchosaravia/autodsl"
 }
 
-object Const {
+object Constants {
     const val androidTestRunner = "android.support.test.runner.AndroidJUnitRunner"
     const val androidxTestRunner = "androidx.test.runner.AndroidJUnitRunner"
+}
+
+object ResValueConstants {
+    object Type {
+        const val STRING = "string"
+    }
+
+    object Name {
+        const val APP_NAME = "app_name"
+    }
+}
+
+object ResConfigConstants {
+    const val EN = "en"
+    const val XHDPI = "xhdpi"
 }
 
 object Extensions {
@@ -40,7 +55,7 @@ object BuildTypes {
 
 object Paths {
     const val fromProjectBaseFiles = "../base/baseFiles/gradleBaseFiles/"
-    const val baseProject = "${fromProjectBaseFiles}/base/base-project.gradle"
+    const val baseProject = "$fromProjectBaseFiles/base/base-project.gradle"
 
     const val fromModuleBaseFiles = "../../base/baseFiles/gradleBaseFiles/"
     const val baseAndroidLibrary = "${fromModuleBaseFiles}base/base-android-library.gradle"

@@ -1,6 +1,74 @@
-import org.gradle.api.Project
 import com.android.build.gradle.BaseExtension
+import org.gradle.api.Project
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
+import org.gradle.kotlin.dsl.withType
+
+fun configureAndroidAppExtension(android: BaseAppModuleExtension, isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
+    configureAndroidExtension(android)
+    if (isShouldConfigureDevProdFlavors) {
+        configureDevProdFlavors(android, isWithMinifiedConfig)
+
+        val devFlavor = android.productFlavors.getByName(Flavors.dev)
+        devFlavor.applicationIdSuffix = ".dev"
+        devFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.devName)
+        val prodFlavor = android.productFlavors.getByName(Flavors.prod);
+        prodFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.prodName)
+    }
+    android.defaultConfig.applicationId = App.applicationId
+}
+
+fun configureAndroidLibraryExtension(android: BaseExtension, isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
+    configureAndroidExtension(android)
+    if (isShouldConfigureDevProdFlavors) {
+        configureDevProdFlavors(android, isWithMinifiedConfig)
+    }
+}
+
+fun configureAndroidExtension(android: BaseExtension) {
+    android.compileSdkVersion(Android.compileSdkVersion)
+    android.defaultConfig {
+        versionCode = App.versionCode
+        versionName = App.versionName
+        minSdkVersion(Android.minSdkVersion)
+        targetSdkVersion(Android.targetSdkVersion)
+
+        multiDexEnabled = true
+        testInstrumentationRunner = Constants.androidTestRunner
+        javaCompileOptions { annotationProcessorOptions.includeCompileClasspath = true }
+    }
+
+    android.dexOptions.preDexLibraries = true
+    android.packagingOptions.pickFirst("protobuf.meta")
+
+    android.compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+fun configureDevProdFlavors(android: BaseExtension, isWithMinifiedConfig: Boolean = true) {
+    android.flavorDimensions(Dimensions.main)
+    android.productFlavors {
+        create(Flavors.dev) {
+            if (isWithMinifiedConfig) {
+                resConfigs(ResConfigConstants.EN, ResConfigConstants.XHDPI)
+            }
+        }
+        create(Flavors.prod)
+    }
+}
+
+fun configureKotlinCompileTasks(project: Project) {
+    project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
+        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+        targetCompatibility = JavaVersion.VERSION_1_8.toString()
+
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+}
 
 fun disableLintTasks(project: Project) {
     project.tasks.whenTaskAdded {
@@ -21,28 +89,6 @@ fun ignoreReleaseBuild(project: Project) {
     }
 }
 
-fun configureAndroidExtension(android: BaseExtension) {
-    android.compileSdkVersion(Android.compileSdkVersion)
-    android.defaultConfig {
-        versionCode = App.versionCode
-        versionName = App.versionName
-        minSdkVersion(Android.minSdkVersion)
-        targetSdkVersion(Android.targetSdkVersion)
-
-        multiDexEnabled = true
-        testInstrumentationRunner = Const.androidTestRunner
-        javaCompileOptions { annotationProcessorOptions.includeCompileClasspath = true }
-    }
-
-    android.dexOptions.preDexLibraries = true
-    android.packagingOptions.pickFirst("protobuf.meta")
-
-    android.compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-}
-
 fun minifyRelease(android: BaseExtension) {
     android.buildTypes {
         getByName(BuildTypes.release) {
@@ -59,22 +105,5 @@ fun optimizeBuildTime(project: Project, android: BaseExtension) {
             density.isEnable = false
         }
         android.aaptOptions.cruncherEnabled = false
-    }
-}
-
-fun configureAppDevProdFlavors(android: BaseExtension, isWithMinifiedConfig: Boolean = true) {
-    configureLibraryDevProdFlavors(android, isWithMinifiedConfig)
-    android.productFlavors.getByName(Flavors.dev).applicationIdSuffix = ".dev"
-}
-
-fun configureLibraryDevProdFlavors(android: BaseExtension, isWithMinifiedConfig: Boolean = true) {
-    android.flavorDimensions(Dimensions.main)
-    android.productFlavors {
-        create(Flavors.dev) {
-            if (isWithMinifiedConfig) {
-                resConfigs("en", "xhdpi")
-            }
-        }
-        create(Flavors.prod)
     }
 }

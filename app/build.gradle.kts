@@ -4,18 +4,18 @@ plugins {
     id(PluginIds.kotlinKapt)
     id(PluginIds.kotlinAndroidExtensions)
     id(PluginIds.kotlinSerialization)
+    id(PluginIds.safeargs)
 }
 
 android {
-    configureAndroidExtension(this)
-    defaultConfig.applicationId = App.applicationId
+    configureAndroidAppExtension(this)
     minifyRelease(this)
     optimizeBuildTime(project, this)
-    configureAppDevProdFlavors(this)
+
     dataBinding.isEnabled = true
-    productFlavors.getByName(Flavors.dev).resValue("string", "app_name", "VocabularyTrainer Dev")
-    productFlavors.getByName(Flavors.prod).resValue("string", "app_name", "VocabularyTrainer")
 }
+
+configureKotlinCompileTasks(this)
 
 dependencies {
     implementation(Libs.kotlinStd8)

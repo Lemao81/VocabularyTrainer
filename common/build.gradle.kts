@@ -6,9 +6,8 @@ plugins {
 }
 
 android {
-    configureAndroidExtension(this)
+    configureAndroidLibraryExtension(this)
     minifyRelease(this)
-    configureLibraryDevProdFlavors(this)
 }
 
 dependencies {
