@@ -2,7 +2,6 @@ package com.jueggs.vocabularytrainer.usecases
 
 import com.jueggs.andutils.usecase.MultipleViewStatesUseCase
 import com.jueggs.common.enums.FlashCardBox
-import com.jueggs.common.interfaces.ISerializer
 import com.jueggs.common.services.FlashCardBoxService
 import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.common.models.FlashCard
@@ -14,8 +13,7 @@ import org.joda.time.DateTime
 
 class ShowNextFlashCardUseCase(
     private val flashCardRepository: IFlashCardRepository,
-    private val flashCardBoxService: FlashCardBoxService,
-    private val serializer: ISerializer
+    private val flashCardBoxService: FlashCardBoxService
 ) : MultipleViewStatesUseCase<LearnViewState>() {
 
     override suspend fun execute() {
@@ -34,11 +32,10 @@ class ShowNextFlashCardUseCase(
             triggerViewState { copy(navigationId = R.id.action_learnFragment_to_nothingToLearnFragment) }
         }
         nextCard?.let { card ->
-            val backSideTextList = serializer.parseList(card.backSideTexts, String::class)
-            val backSideText = if (backSideTextList.size == 1) {
-                backSideTextList.first()
+            val backSideText = if (card.backSideTexts.size == 1) {
+                card.backSideTexts.first()
             } else {
-                backSideTextList.mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator)
+                card.backSideTexts.mapIndexed { index, t -> "${index + 1}.  $t" }.join(Util.lineSeparator)
             }
             val cardBackgroundColorId = when (card.box) {
                 FlashCardBox.TWO -> R.color.box2_background

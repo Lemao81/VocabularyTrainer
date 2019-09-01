@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 class FlashCard(
     var id: Long? = null,
     var frontSideText: String,
-    var backSideTexts: String,
+    var backSideTexts: List<String>,
     var lastLearnedDate: DateTime,
     var box: FlashCardBox
 )
