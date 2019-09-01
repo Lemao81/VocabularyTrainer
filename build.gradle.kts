@@ -20,6 +20,7 @@ allprojects {
         maven(Urls.mavenLocalInternal)
     }
 
+    configureKotlinCompileTasks(this)
     disableLintTasks(this)
     ignoreReleaseBuild(this)
 }

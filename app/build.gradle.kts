@@ -15,8 +15,6 @@ android {
     dataBinding.isEnabled = true
 }
 
-configureKotlinCompileTasks(this)
-
 dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.jutils)
