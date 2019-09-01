@@ -46,9 +46,9 @@ class LearnViewModel(
 
     fun showRemoveFlashCardConfirmation() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = true) })
 
-    fun removeFlashCard() {
-        viewStateStore.dispatch(removeFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
-    }
+    fun removeFlashCard() = viewStateStore.dispatch(removeFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
+
+    fun editFlashCard() = viewStateStore.dispatch(Trigger { copy(isShouldNavigateToFlashCardEditing = true) })
 
     fun cancelFlashCardRemoval() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = false) })
 

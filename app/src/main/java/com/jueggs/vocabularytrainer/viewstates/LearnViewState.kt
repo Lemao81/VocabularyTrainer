@@ -11,6 +11,7 @@ data class LearnViewState(
     val boxNumber: Int? = null,
     val cardBackgroundColorId: Int? = null,
     val isShouldShowRemoveFlashCardConfirmation: Boolean = false,
+    val isShouldNavigateToFlashCardEditing: Boolean = false,
     val stats1: Int = 0,
     val stats2: Int = 0,
     val stats3: Int = 0,

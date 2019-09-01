@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.*
 import com.jueggs.common.enums.FlashCardBox
+import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
@@ -19,6 +20,10 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
             navigationId?.let { navController?.navigate(it) }
+            if (isShouldNavigateToFlashCardEditing) {
+                val navDirection = LearnFragmentDirections.actionLearnFragmentToAddFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
+                navController?.navigate(navDirection)
+            }
             shortMessageId?.let { shortToast(it) }
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }

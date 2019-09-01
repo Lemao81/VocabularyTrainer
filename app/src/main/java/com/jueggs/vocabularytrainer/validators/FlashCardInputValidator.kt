@@ -5,10 +5,10 @@ import com.jueggs.andutils.result.Valid
 import com.jueggs.andutils.result.ValidationResult
 import com.jueggs.andutils.usecase.IValidator
 import com.jueggs.vocabularytrainer.R
-import com.jueggs.vocabularytrainer.models.AddFlashCardData
+import com.jueggs.vocabularytrainer.models.FlashCardInputData
 
-class AddFlashCardInputValidator : IValidator<AddFlashCardData> {
-    override suspend fun invoke(data: AddFlashCardData): ValidationResult {
+class FlashCardInputValidator : IValidator<FlashCardInputData> {
+    override suspend fun invoke(data: FlashCardInputData): ValidationResult {
         return when {
             data.frontSideText.isBlank() -> Invalid(R.string.message_enter_front_side)
             data.backSideTexts.all { it.isBlank() } -> Invalid(R.string.message_enter_back_side)

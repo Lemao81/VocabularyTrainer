@@ -9,9 +9,9 @@ import com.jueggs.database.repositories.FlashCardRepository
 import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.database.mapper.FlashCardMapper
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
-import com.jueggs.vocabularytrainer.models.AddFlashCardData
+import com.jueggs.vocabularytrainer.models.FlashCardInputData
 import com.jueggs.vocabularytrainer.usecases.*
-import com.jueggs.vocabularytrainer.validators.AddFlashCardInputValidator
+import com.jueggs.vocabularytrainer.validators.FlashCardInputValidator
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -24,23 +24,25 @@ import org.koin.dsl.module
 
 @ImplicitReflectionSerializer
 val koinModule = module {
-    viewModel { AddFlashCardViewModel(get()) }
+    viewModel { AddFlashCardViewModel(get(), get(), get()) }
     viewModel { LearnViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { NothingToLearnViewModel(get()) }
     viewModel { SplashScreenViewModel(get()) }
 
     single { FlashCardBoxService() }
-    single { AddFlashCardInputValidator() as IValidator<AddFlashCardData> }
+    single { FlashCardInputValidator() as IValidator<FlashCardInputData> }
     single { FlashCardRepository(AppDatabase.getInstance(get()).getFlashCardDao(), get()) as IFlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Stable)) as ISerializer }
-    single { FlashCardMapper() as IFlashCardMapper }
+    single { FlashCardMapper(get()) as IFlashCardMapper }
 
-    single { AddFlashCardUseCase(get(), get(), get()) }
+    single { AddFlashCardUseCase(get(), get()) }
     single { DismissCorrectFlashCardUseCase(get(), get()) }
     single { DismissWrongFlashCardUseCase(get()) }
     single { RemoveFlashCardUseCase(get()) }
-    single { ShowNextFlashCardUseCase(get(), get(), get()) }
+    single { ShowNextFlashCardUseCase(get(), get()) }
     single { UpdateLearnViewStatsUseCase(get()) }
     single { UpdateNothingToLearnViewStatsUseCase(get()) }
     single { CheckSomethingToLearnUseCase(get(), get()) }
+    single { LoadFlashCardForEditingUseCase(get()) }
+    single { UpdateFlashCardUseCase(get(), get()) }
 }

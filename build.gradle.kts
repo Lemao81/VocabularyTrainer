@@ -9,6 +9,7 @@ buildscript {
         classpath(Plugins.androidBuild)
         classpath(Plugins.kotlin)
         classpath(Plugins.kotlinSerialization)
+        classpath(Plugins.safeArgs)
     }
 }
 
