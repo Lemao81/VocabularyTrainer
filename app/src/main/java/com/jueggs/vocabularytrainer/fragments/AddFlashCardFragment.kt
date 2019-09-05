@@ -59,6 +59,7 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             }
             btnAddCard.invisibleOrVisible = isEditing
             btnSaveCard.visibleOrInvisible = isEditing
+            swtKeepAdding.invisibleOrVisible = isEditing
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText1?.let { viewModel.backSideTexts[0].postValue(it) }
             backSideText2?.let { viewModel.backSideTexts[1].postValue(it) }

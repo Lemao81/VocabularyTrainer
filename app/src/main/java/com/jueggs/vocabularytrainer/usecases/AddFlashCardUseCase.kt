@@ -8,6 +8,7 @@ import com.jueggs.common.interfaces.IFlashCardRepository
 import com.jueggs.common.models.FlashCard
 import com.jueggs.jutils.INVALID
 import com.jueggs.vocabularytrainer.R
+import com.jueggs.vocabularytrainer.models.AddFlashCardData
 import com.jueggs.vocabularytrainer.models.FlashCardInputData
 import com.jueggs.vocabularytrainer.viewstates.AddFlashCardViewState
 import org.joda.time.DateTime
@@ -15,25 +16,30 @@ import org.joda.time.DateTime
 class AddFlashCardUseCase(
     private val flashCardRepository: IFlashCardRepository,
     private val inputValidator: IValidator<FlashCardInputData>
-) : MultipleViewStatesUseCaseWithParameter<AddFlashCardViewState, FlashCardInputData>() {
+) : MultipleViewStatesUseCaseWithParameter<AddFlashCardViewState, AddFlashCardData>() {
 
-    override suspend fun execute(param: FlashCardInputData) {
-        when (val validationResult = inputValidator(param)) {
+    override suspend fun execute(param: AddFlashCardData) {
+        when (val validationResult = inputValidator(param.inputData)) {
             is Invalid -> triggerViewState { copy(longMessageId = validationResult.resId) }
             else -> {
                 val newFlashCard = FlashCard(
                     id = null,
-                    frontSideText = param.frontSideText,
-                    backSideTexts = param.backSideTexts,
+                    frontSideText = param.inputData.frontSideText,
+                    backSideTexts = param.inputData.backSideTexts,
                     box = FlashCardBox.ONE,
                     lastLearnedDate = DateTime.now()
                 )
                 flashCardRepository.insert(newFlashCard)
-                alterViewState {
-                    copy(focusedInputIndex = INVALID, backSideViewsShownUpToIndex = 0)
-                }
-                triggerViewState {
-                    copy(shortMessageId = R.string.message_card_added, isShouldEmptyInputs = true, isShouldFocusFrontSideEdit = true)
+                triggerViewState { copy(shortMessageId = R.string.message_card_added) }
+                if (param.isKeepAdding == true) {
+                    alterViewState {
+                        copy(focusedInputIndex = INVALID, backSideViewsShownUpToIndex = 0)
+                    }
+                    triggerViewState {
+                        copy(isShouldEmptyInputs = true, isShouldFocusFrontSideEdit = true)
+                    }
+                } else {
+                    triggerViewState { copy(isShouldPopFragment = true) }
                 }
             }
         }

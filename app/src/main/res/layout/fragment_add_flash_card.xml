@@ -20,7 +20,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@+id/btnAddCard"
+            app:layout_constraintBottom_toTopOf="@id/swtKeepAdding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/frontside"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/guidFlashCard" />
 
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/backside"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/guidBackSide" />
 
@@ -274,9 +274,21 @@
                     app:srcCompat="@drawable/ic_remove_white_24dp"
                     tools:visibility="visible" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <Switch
+            android:id="@+id/swtKeepAdding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:checked="@={viewModel.isKeepAdding}"
+            android:switchPadding="8dp"
+            android:text="@string/keep_adding"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/btnAddCard"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnAddCard"

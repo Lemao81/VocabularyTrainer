@@ -5,6 +5,7 @@ import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
 import com.jueggs.andutils.aac.Trigger
 import com.jueggs.jutils.extension.maxIndex
+import com.jueggs.vocabularytrainer.models.AddFlashCardData
 import com.jueggs.vocabularytrainer.models.EditFlashCardData
 import com.jueggs.vocabularytrainer.models.FlashCardInputData
 import com.jueggs.vocabularytrainer.usecases.AddFlashCardUseCase
@@ -19,6 +20,7 @@ class AddFlashCardViewModel(
 ) : BaseViewModel<AddFlashCardViewState>(AddFlashCardViewState()) {
     val frontSideText = MutableLiveData<String>()
     val backSideTexts = mutableListOf<MutableLiveData<String>>()
+    val isKeepAdding = MutableLiveData<Boolean>()
     private var flashCardInEditingId: Long? = null
 
     init {
@@ -29,7 +31,10 @@ class AddFlashCardViewModel(
 
     fun focusFrontSideEdit() = viewStateStore.dispatch(Trigger { copy(isShouldFocusFrontSideEdit = true) })
 
-    fun addFlashCard() = viewStateStore.dispatch(addFlashCardUseCase(getInputData()))
+    fun addFlashCard() {
+        val data = AddFlashCardData(isKeepAdding.value, getInputData())
+        viewStateStore.dispatch(addFlashCardUseCase(data))
+    }
 
     fun updateFlashCard() {
         val data = EditFlashCardData(flashCardInEditingId, getInputData())
