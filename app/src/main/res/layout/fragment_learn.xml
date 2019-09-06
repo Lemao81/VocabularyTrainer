@@ -38,7 +38,7 @@
             android:layout_height="0dp"
             android:onClick="@{() -> viewModel.revealFlashCardBackSide()}"
             app:cardBackgroundColor="@color/box1_background"
-            app:cardElevation="8dp"
+            app:cardElevation="@dimen/flashcard_elevation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toStartOf="parent"

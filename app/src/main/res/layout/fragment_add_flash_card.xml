@@ -27,252 +27,276 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidFlashCard"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.1" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
 
                 <TextView
                     android:id="@+id/txtFrontSideLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/frontside"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/guidFlashCard" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/edtFrontSide"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardFrontSide"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginTop="8dp"
-                    android:ems="10"
-                    android:hint="@string/frontside_hint"
-                    android:inputType="textPersonName"
-                    android:text="@={viewModel.frontSideText}"
+                    android:layout_marginEnd="16dp"
+                    android:elevation="@dimen/flashcard_elevation"
+                    app:cardBackgroundColor="@color/box1_background"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintDimensionRatio="1.0:0.55"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/txtFrontSideLabel"
-                    app:layout_constraintTop_toBottomOf="@id/txtFrontSideLabel" />
+                    app:layout_constraintTop_toBottomOf="@id/txtFrontSideLabel">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guidBackSide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.35" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="32dp">
+
+                        <EditText
+                            android:id="@+id/edtFrontSide"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:padding="@dimen/add_flashcard_edit_padding"
+                            android:text="@={viewModel.frontSideText}"
+                            android:textCursorDrawable="@drawable/shape_edit_cursor" />
+                    </FrameLayout>
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/txtBackSideLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
                     android:text="@string/backside"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/guidBackSide" />
+                    app:layout_constraintStart_toStartOf="@id/txtFrontSideLabel"
+                    app:layout_constraintTop_toBottomOf="@id/cardFrontSide" />
 
-                <EditText
-                    android:id="@+id/edtBackSide1"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardBackSide"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="@string/backside_hint"
-                    android:inputType="text"
-                    android:text="@={viewModel.backSideTexts[0]}"
-                    app:layout_constraintEnd_toStartOf="@id/fabHideBackSideInput2"
+                    android:elevation="@dimen/flashcard_elevation"
+                    app:cardBackgroundColor="@color/box1_background"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="@id/cardFrontSide"
+                    app:layout_constraintHeight_percent="0.2"
                     app:layout_constraintStart_toStartOf="@id/txtBackSideLabel"
-                    app:layout_constraintTop_toBottomOf="@id/txtBackSideLabel" />
+                    app:layout_constraintTop_toBottomOf="@id/txtBackSideLabel">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabShowBackSideInput1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.showBackSideInput()}"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide1"
-                    app:srcCompat="@drawable/ic_add_white_24dp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:padding="8dp">
 
-                <EditText
-                    android:id="@+id/edtBackSide2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="@string/backside_hint"
-                    android:inputType="text"
-                    android:text="@={viewModel.backSideTexts[1]}"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@id/fabHideBackSideInput2"
-                    app:layout_constraintStart_toStartOf="@id/txtBackSideLabel"
-                    app:layout_constraintTop_toBottomOf="@id/edtBackSide1"
-                    tools:visibility="visible" />
+                        <EditText
+                            android:id="@+id/edtBackSide1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:padding="@dimen/add_flashcard_edit_padding"
+                            android:text="@={viewModel.backSideTexts[0]}"
+                            android:textCursorDrawable="@drawable/shape_edit_cursor"
+                            app:layout_constraintEnd_toStartOf="@id/fabHideBackSideInput2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabHideBackSideInput2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.hideBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide2"
-                    app:layout_constraintEnd_toStartOf="@id/fabShowBackSideInput2"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide2"
-                    app:srcCompat="@drawable/ic_remove_white_24dp"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabShowBackSideInput1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.showBackSideInput()}"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide1"
+                            app:srcCompat="@drawable/ic_add_white_24dp" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabShowBackSideInput2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.showBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide2"
-                    app:layout_constraintEnd_toEndOf="@id/fabShowBackSideInput1"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide2"
-                    app:srcCompat="@drawable/ic_add_white_24dp"
-                    tools:visibility="visible" />
+                        <EditText
+                            android:id="@+id/edtBackSide2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:padding="6dp"
+                            android:text="@={viewModel.backSideTexts[1]}"
+                            android:textCursorDrawable="@drawable/shape_edit_cursor"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@id/edtBackSide1"
+                            app:layout_constraintStart_toStartOf="@id/edtBackSide1"
+                            app:layout_constraintTop_toBottomOf="@id/edtBackSide1"
+                            tools:visibility="visible" />
 
-                <EditText
-                    android:id="@+id/edtBackSide3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="@string/backside_hint"
-                    android:inputType="text"
-                    android:text="@={viewModel.backSideTexts[2]}"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@id/fabHideBackSideInput3"
-                    app:layout_constraintStart_toStartOf="@id/txtBackSideLabel"
-                    app:layout_constraintTop_toBottomOf="@id/edtBackSide2"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabHideBackSideInput2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.hideBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide2"
+                            app:layout_constraintEnd_toStartOf="@id/fabShowBackSideInput2"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide2"
+                            app:srcCompat="@drawable/ic_remove_white_24dp"
+                            tools:visibility="visible" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabHideBackSideInput3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.hideBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide3"
-                    app:layout_constraintEnd_toStartOf="@id/fabShowBackSideInput3"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide3"
-                    app:srcCompat="@drawable/ic_remove_white_24dp"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabShowBackSideInput2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.showBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide2"
+                            app:layout_constraintEnd_toEndOf="@id/fabShowBackSideInput1"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide2"
+                            app:srcCompat="@drawable/ic_add_white_24dp"
+                            tools:visibility="visible" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabShowBackSideInput3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.showBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide3"
-                    app:layout_constraintEnd_toEndOf="@id/fabShowBackSideInput1"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide3"
-                    app:srcCompat="@drawable/ic_add_white_24dp"
-                    tools:visibility="visible" />
+                        <EditText
+                            android:id="@+id/edtBackSide3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:padding="6dp"
+                            android:text="@={viewModel.backSideTexts[2]}"
+                            android:textCursorDrawable="@drawable/shape_edit_cursor"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@id/edtBackSide1"
+                            app:layout_constraintStart_toStartOf="@id/edtBackSide1"
+                            app:layout_constraintTop_toBottomOf="@id/edtBackSide2"
+                            tools:visibility="visible" />
 
-                <EditText
-                    android:id="@+id/edtBackSide4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="@string/backside_hint"
-                    android:inputType="text"
-                    android:text="@={viewModel.backSideTexts[3]}"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@id/fabHideBackSideInput4"
-                    app:layout_constraintStart_toStartOf="@id/txtBackSideLabel"
-                    app:layout_constraintTop_toBottomOf="@id/edtBackSide3"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabHideBackSideInput3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.hideBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide3"
+                            app:layout_constraintStart_toStartOf="@id/fabHideBackSideInput2"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide3"
+                            app:srcCompat="@drawable/ic_remove_white_24dp"
+                            tools:visibility="visible" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabHideBackSideInput4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.hideBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide4"
-                    app:layout_constraintEnd_toStartOf="@id/fabShowBackSideInput4"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide4"
-                    app:srcCompat="@drawable/ic_remove_white_24dp"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabShowBackSideInput3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.showBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide3"
+                            app:layout_constraintEnd_toEndOf="@id/fabShowBackSideInput1"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide3"
+                            app:srcCompat="@drawable/ic_add_white_24dp"
+                            tools:visibility="visible" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabShowBackSideInput4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.showBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide4"
-                    app:layout_constraintEnd_toEndOf="@id/fabShowBackSideInput1"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide4"
-                    app:srcCompat="@drawable/ic_add_white_24dp"
-                    tools:visibility="visible" />
+                        <EditText
+                            android:id="@+id/edtBackSide4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:padding="6dp"
+                            android:text="@={viewModel.backSideTexts[3]}"
+                            android:textCursorDrawable="@drawable/shape_edit_cursor"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@id/edtBackSide1"
+                            app:layout_constraintStart_toStartOf="@id/edtBackSide1"
+                            app:layout_constraintTop_toBottomOf="@id/edtBackSide3"
+                            tools:visibility="visible" />
 
-                <EditText
-                    android:id="@+id/edtBackSide5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:ems="10"
-                    android:hint="@string/backside_hint"
-                    android:inputType="text"
-                    android:text="@={viewModel.backSideTexts[4]}"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toStartOf="@id/fabHideBackSideInput5"
-                    app:layout_constraintStart_toStartOf="@id/txtBackSideLabel"
-                    app:layout_constraintTop_toBottomOf="@id/edtBackSide4"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabHideBackSideInput4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.hideBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide4"
+                            app:layout_constraintStart_toStartOf="@id/fabHideBackSideInput2"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide4"
+                            app:srcCompat="@drawable/ic_remove_white_24dp"
+                            tools:visibility="visible" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabHideBackSideInput5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{() -> viewModel.hideBackSideInput()}"
-                    android:visibility="invisible"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@id/edtBackSide5"
-                    app:layout_constraintEnd_toStartOf="@id/fabShowBackSideInput4"
-                    app:layout_constraintTop_toTopOf="@id/edtBackSide5"
-                    app:srcCompat="@drawable/ic_remove_white_24dp"
-                    tools:visibility="visible" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabShowBackSideInput4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.showBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide4"
+                            app:layout_constraintEnd_toEndOf="@id/fabShowBackSideInput1"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide4"
+                            app:srcCompat="@drawable/ic_add_white_24dp"
+                            tools:visibility="visible" />
+
+                        <EditText
+                            android:id="@+id/edtBackSide5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:padding="6dp"
+                            android:text="@={viewModel.backSideTexts[4]}"
+                            android:textCursorDrawable="@drawable/shape_edit_cursor"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@id/edtBackSide1"
+                            app:layout_constraintStart_toStartOf="@id/edtBackSide1"
+                            app:layout_constraintTop_toBottomOf="@id/edtBackSide4"
+                            tools:visibility="visible" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fabHideBackSideInput5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> viewModel.hideBackSideInput()}"
+                            android:visibility="invisible"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="@id/edtBackSide5"
+                            app:layout_constraintStart_toStartOf="@id/fabHideBackSideInput2"
+                            app:layout_constraintTop_toTopOf="@id/edtBackSide5"
+                            app:srcCompat="@drawable/ic_remove_white_24dp"
+                            tools:visibility="visible" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
