@@ -37,6 +37,9 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
                 edtFrontSide.requestFocus()
                 showKeyboard()
             }
+            if (isShouldClearFocus) {
+                conRoot.requestFocus()
+            }
             shortMessageId?.let { shortToast(it) }
             longMessageId?.let { longToast(it) }
             backSideViews.forEachIndexed { index, views ->
@@ -59,7 +62,7 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             }
             btnAddCard.invisibleOrVisible = isEditing
             btnSaveCard.visibleOrInvisible = isEditing
-            swtKeepAdding.invisibleOrVisible = isEditing
+            swtKeepAdding.goneOrVisible = isEditing
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText1?.let { viewModel.backSideTexts[0].postValue(it) }
             backSideText2?.let { viewModel.backSideTexts[1].postValue(it) }
