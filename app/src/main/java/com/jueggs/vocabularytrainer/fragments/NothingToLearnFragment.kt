@@ -2,7 +2,7 @@ package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
-import com.jueggs.common.enums.FlashCardBox
+import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -16,9 +16,9 @@ class NothingToLearnFragment : BaseFragment(isShouldSearchNavController = true) 
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
-            navigationId?.let { navController?.navigate(it) }
-            if (isShouldCloseApp) {
-                activity?.finish()
+            when {
+                isShouldNavigateToAddFlashCard -> navController?.navigate(R.id.action_nothingToLearnFragment_to_addFlashCardFragment)
+                isShouldCloseApp -> activity?.finish()
             }
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
             viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())

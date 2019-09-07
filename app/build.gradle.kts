@@ -30,5 +30,6 @@ dependencies {
     implementation(Libs.kotlinSerialization)
 
     implementation(project(Modules.common))
+    implementation(project(Modules.domain))
     implementation(project(Modules.database))
 }

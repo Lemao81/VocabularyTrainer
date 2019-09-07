@@ -2,14 +2,18 @@ package com.jueggs.vocabularytrainer.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
-import com.jueggs.andutils.aac.Trigger
 import com.jueggs.common.interfaces.IStatsViewModel
+import com.jueggs.domain.models.DismissCorrectFlashCardData
+import com.jueggs.domain.usecases.DismissCorrectFlashCardUseCase
+import com.jueggs.domain.usecases.DismissWrongFlashCardUseCase
+import com.jueggs.domain.usecases.RemoveFlashCardUseCase
+import com.jueggs.domain.usecases.ShowNextFlashCardUseCase
+import com.jueggs.domain.usecases.UpdateLearnViewStatsUseCase
+import com.jueggs.domain.viewstates.LearnViewState
+import com.jueggs.jutils.usecase.Alter
+import com.jueggs.jutils.usecase.Trigger
 import com.jueggs.vocabularytrainer.R
-import com.jueggs.vocabularytrainer.models.DismissCorrectFlashCardData
-import com.jueggs.vocabularytrainer.usecases.*
-import com.jueggs.vocabularytrainer.viewstates.LearnViewState
 
 class LearnViewModel(
     private val showNextFlashCardUseCase: ShowNextFlashCardUseCase,
@@ -42,13 +46,13 @@ class LearnViewModel(
         viewStateStore.dispatch(dismissCorrectFlashCardUseCase(data), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
     }
 
-    fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(navigationId = R.id.action_learnFragment_to_addFlashCardFragment) })
+    fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(isShouldNavigateToAddFlashCard = true) })
 
     fun showRemoveFlashCardConfirmation() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = true) })
 
     fun removeFlashCard() = viewStateStore.dispatch(removeFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
 
-    fun editFlashCard() = viewStateStore.dispatch(Trigger { copy(isShouldNavigateToFlashCardEditing = true) })
+    fun editFlashCard() = viewStateStore.dispatch(Trigger { copy(isShouldNavigateToEditFlashCard = true) })
 
     fun cancelFlashCardRemoval() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = false) })
 

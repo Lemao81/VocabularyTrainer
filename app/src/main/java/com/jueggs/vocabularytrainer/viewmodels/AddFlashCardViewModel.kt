@@ -1,17 +1,17 @@
 package com.jueggs.vocabularytrainer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import com.jueggs.andutils.aac.Alter
 import com.jueggs.andutils.aac.BaseViewModel
-import com.jueggs.andutils.aac.Trigger
 import com.jueggs.jutils.extension.maxIndex
-import com.jueggs.vocabularytrainer.models.AddFlashCardData
-import com.jueggs.vocabularytrainer.models.EditFlashCardData
-import com.jueggs.vocabularytrainer.models.FlashCardInputData
-import com.jueggs.vocabularytrainer.usecases.AddFlashCardUseCase
-import com.jueggs.vocabularytrainer.usecases.LoadFlashCardForEditingUseCase
-import com.jueggs.vocabularytrainer.usecases.UpdateFlashCardUseCase
-import com.jueggs.vocabularytrainer.viewstates.AddFlashCardViewState
+import com.jueggs.domain.models.AddFlashCardData
+import com.jueggs.domain.models.EditFlashCardData
+import com.jueggs.domain.models.FlashCardInputData
+import com.jueggs.domain.usecases.AddFlashCardUseCase
+import com.jueggs.domain.usecases.LoadFlashCardForEditingUseCase
+import com.jueggs.domain.usecases.UpdateFlashCardUseCase
+import com.jueggs.domain.viewstates.AddFlashCardViewState
+import com.jueggs.jutils.usecase.Alter
+import com.jueggs.jutils.usecase.Trigger
 
 class AddFlashCardViewModel(
     private val addFlashCardUseCase: AddFlashCardUseCase,

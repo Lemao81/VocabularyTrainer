@@ -2,11 +2,10 @@ package com.jueggs.vocabularytrainer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import com.jueggs.andutils.aac.BaseViewModel
-import com.jueggs.andutils.aac.Trigger
 import com.jueggs.common.interfaces.IStatsViewModel
-import com.jueggs.vocabularytrainer.R
-import com.jueggs.vocabularytrainer.usecases.UpdateNothingToLearnViewStatsUseCase
-import com.jueggs.vocabularytrainer.viewstates.NothingToLearnViewState
+import com.jueggs.domain.usecases.UpdateNothingToLearnViewStatsUseCase
+import com.jueggs.domain.viewstates.NothingToLearnViewState
+import com.jueggs.jutils.usecase.Trigger
 
 class NothingToLearnViewModel(
     private val updateNothingToLearnViewStatsUseCase: UpdateNothingToLearnViewStatsUseCase
@@ -21,7 +20,7 @@ class NothingToLearnViewModel(
 
     fun closeApp() = viewStateStore.dispatch(Trigger { copy(isShouldCloseApp = true) })
 
-    fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(navigationId = R.id.action_nothingToLearnFragment_to_addFlashCardFragment) })
+    fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(isShouldNavigateToAddFlashCard = true) })
 
     fun updateStats() = viewStateStore.dispatch(updateNothingToLearnViewStatsUseCase())
 }

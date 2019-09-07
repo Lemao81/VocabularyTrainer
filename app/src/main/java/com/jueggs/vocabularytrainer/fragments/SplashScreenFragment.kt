@@ -15,7 +15,10 @@ class SplashScreenFragment : BaseFragment(isShouldSearchNavController = true) {
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
-            navigationId?.let { navController?.navigate(it) }
+            when {
+                isShouldNavigateToLearnFragment -> navController?.navigate(R.id.action_splashScreenFragment_to_learnFragment)
+                isShouldNavigateToNothingToLearnFragment -> navController?.navigate(R.id.action_splashScreenFragment_to_nothingToLearnFragment)
+            }
         }
     }
 

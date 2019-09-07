@@ -2,8 +2,8 @@ package com.jueggs.database.repositories
 
 import com.jueggs.database.daos.IFlashCardDao
 import com.jueggs.database.entities.FlashCardEntity
-import com.jueggs.common.interfaces.IFlashCardRepository
-import com.jueggs.common.models.FlashCard
+import com.jueggs.domain.interfaces.IFlashCardRepository
+import com.jueggs.domain.models.FlashCard
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import org.joda.time.DateTime
 

@@ -1,6 +1,6 @@
 package com.jueggs.database.mapper.interfaces
 
-import com.jueggs.common.models.FlashCard
+import com.jueggs.domain.models.FlashCard
 import com.jueggs.database.entities.FlashCardEntity
 
 interface IFlashCardMapper {

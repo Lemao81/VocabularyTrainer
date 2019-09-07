@@ -14,6 +14,7 @@ object Android {
 
 object Modules {
     const val common = ":common"
+    const val domain = ":domain"
     const val database = ":database"
 }
 
