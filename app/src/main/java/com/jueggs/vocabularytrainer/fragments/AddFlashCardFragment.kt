@@ -1,19 +1,13 @@
 package com.jueggs.vocabularytrainer.fragments
 
-import android.view.View
-import android.widget.EditText
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.goneOrVisible
 import com.jueggs.andutils.extension.invisibleOrVisible
-import com.jueggs.andutils.extension.makeInvisible
-import com.jueggs.andutils.extension.makeVisible
 import com.jueggs.andutils.extension.shortToast
 import com.jueggs.andutils.extension.showKeyboard
 import com.jueggs.andutils.extension.visibleOrInvisible
-import com.jueggs.jutils.INVALID
 import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
@@ -22,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_add_flash_card.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
-    private val backSideViews = mutableListOf<List<View>>()
     val viewModel by viewModel<AddFlashCardViewModel>()
     val navArgs: AddFlashCardFragmentArgs by navArgs()
 
@@ -44,22 +37,6 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
                 isShouldClearFocus -> conRoot.requestFocus()
                 isShouldMessageCardAdded -> shortToast(R.string.message_card_added)
                 isShouldMessageCardUpdated -> shortToast(R.string.message_card_updated)
-                focusedInputIndex != INVALID -> backSideViews[focusedInputIndex].first { it is EditText }.requestFocus()
-            }
-            backSideViews.forEachIndexed { index, views ->
-                when {
-                    index < backSideViewsShownUpToIndex -> {
-                        views.first { it is EditText }.makeVisible()
-                        views.filter { it is FloatingActionButton }.forEach { it.makeInvisible() }
-                    }
-                    index == backSideViewsShownUpToIndex -> {
-                        views.forEach { it.makeVisible() }
-                    }
-                    index > backSideViewsShownUpToIndex -> {
-                        views.forEach { it.makeInvisible() }
-                        viewModel.backSideTexts[index].postValue("")
-                    }
-                }
             }
             btnAddCard.invisibleOrVisible = isEditing
             btnSaveCard.visibleOrInvisible = isEditing
@@ -69,7 +46,6 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             backSideText2?.let { viewModel.backSideTexts[1].postValue(it) }
             backSideText3?.let { viewModel.backSideTexts[2].postValue(it) }
             backSideText4?.let { viewModel.backSideTexts[3].postValue(it) }
-            backSideText5?.let { viewModel.backSideTexts[4].postValue(it) }
         }
     }
 
@@ -79,10 +55,5 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
         } else {
             viewModel.focusFrontSideEdit()
         }
-        backSideViews.add(listOf(edtBackSide1, fabShowBackSideInput1))
-        backSideViews.add(listOf(edtBackSide2, fabShowBackSideInput2, fabHideBackSideInput2))
-        backSideViews.add(listOf(edtBackSide3, fabShowBackSideInput3, fabHideBackSideInput3))
-        backSideViews.add(listOf(edtBackSide4, fabShowBackSideInput4, fabHideBackSideInput4))
-        backSideViews.add(listOf(edtBackSide5, fabHideBackSideInput5))
     }
 }

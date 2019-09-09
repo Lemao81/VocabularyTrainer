@@ -8,7 +8,6 @@ import com.jueggs.domain.models.FlashCardInputData
 import com.jueggs.domain.models.FlashCardInputValidationResult
 import com.jueggs.domain.models.Valid
 import com.jueggs.domain.viewstates.AddFlashCardViewState
-import com.jueggs.jutils.INVALID
 import com.jueggs.jutils.usecase.MultipleViewStatesUseCaseWithParameter
 import com.jueggs.jutils.validation.IValidator
 import org.joda.time.DateTime
@@ -31,7 +30,6 @@ class AddFlashCardUseCase(
                 flashCardRepository.insert(newFlashCard)
                 triggerViewState { copy(isShouldMessageCardAdded = true) }
                 if (param.isKeepAdding == true) {
-                    alterViewState { copy(focusedInputIndex = INVALID, backSideViewsShownUpToIndex = 0) }
                     triggerViewState { copy(isShouldEmptyInputs = true, isShouldFocusFrontSideEdit = true) }
                 } else {
                     triggerViewState { copy(isShouldPopFragment = true) }
