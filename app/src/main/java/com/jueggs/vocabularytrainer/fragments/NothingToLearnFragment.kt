@@ -16,9 +16,11 @@ class NothingToLearnFragment : BaseFragment(isShouldSearchNavController = true) 
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
-            when {
-                isShouldNavigateToAddFlashCard -> navController?.navigate(R.id.action_nothingToLearnFragment_to_addFlashCardFragment)
-                isShouldCloseApp -> activity?.finish()
+            if (isShouldNavigateToAddFlashCard) {
+                navController?.navigate(R.id.action_nothingToLearnFragment_to_addFlashCardFragment)
+            }
+            if (isShouldCloseApp) {
+                activity?.finish()
             }
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
             viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())

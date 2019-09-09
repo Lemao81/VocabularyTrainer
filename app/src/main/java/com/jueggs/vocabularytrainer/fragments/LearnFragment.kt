@@ -25,17 +25,21 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
-            when {
-                isShouldNavigateToNothingToLearn -> navController?.navigate(R.id.action_learnFragment_to_nothingToLearnFragment)
-                isShouldNavigateToAddFlashCard -> navController?.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
-                isShouldNavigateToEditFlashCard -> {
-                    val navDirection = LearnFragmentDirections.actionLearnFragmentToAddFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
-                    navController?.navigate(navDirection)
-                }
-                isShouldMessageCardRemoved -> shortToast(R.string.message_card_removed)
-                isShouldShowRemoveFlashCardConfirmation -> {
-                    showConfirmDialog(R.string.dialog_remove_flashcard_title, R.string.dialog_remove_flashcard_message, viewModel::removeFlashCard, viewModel::cancelFlashCardRemoval)
-                }
+            if (isShouldNavigateToNothingToLearn) {
+                navController?.navigate(R.id.action_learnFragment_to_nothingToLearnFragment)
+            }
+            if (isShouldNavigateToAddFlashCard) {
+                navController?.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
+            }
+            if (isShouldNavigateToEditFlashCard) {
+                val navDirection = LearnFragmentDirections.actionLearnFragmentToAddFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
+                navController?.navigate(navDirection)
+            }
+            if (isShouldMessageCardRemoved) {
+                shortToast(R.string.message_card_removed)
+            }
+            if (isShouldShowRemoveFlashCardConfirmation) {
+                showConfirmDialog(R.string.dialog_remove_flashcard_title, R.string.dialog_remove_flashcard_message, viewModel::removeFlashCard, viewModel::cancelFlashCardRemoval)
             }
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }

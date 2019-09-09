@@ -24,19 +24,25 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
 
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(this) {
-            when {
-                isShouldPopFragment -> navController?.popBackStack()
-                isShouldEmptyInputs -> {
-                    viewModel.frontSideText.postValue("")
-                    viewModel.backSideTexts.forEach { it.postValue("") }
-                }
-                isShouldFocusFrontSideEdit -> {
-                    edtFrontSide.requestFocus()
-                    showKeyboard()
-                }
-                isShouldClearFocus -> conRoot.requestFocus()
-                isShouldMessageCardAdded -> shortToast(R.string.message_card_added)
-                isShouldMessageCardUpdated -> shortToast(R.string.message_card_updated)
+            if (isShouldPopFragment) {
+                navController?.popBackStack()
+            }
+            if (isShouldEmptyInputs) {
+                viewModel.frontSideText.postValue("")
+                viewModel.backSideTexts.forEach { it.postValue("") }
+            }
+            if (isShouldFocusFrontSideEdit) {
+                edtFrontSide.requestFocus()
+                showKeyboard()
+            }
+            if (isShouldClearFocus) {
+                conRoot.requestFocus()
+            }
+            if (isShouldMessageCardAdded) {
+                shortToast(R.string.message_card_added)
+            }
+            if (isShouldMessageCardUpdated) {
+                shortToast(R.string.message_card_updated)
             }
             btnAddCard.invisibleOrVisible = isEditing
             btnSaveCard.visibleOrInvisible = isEditing
