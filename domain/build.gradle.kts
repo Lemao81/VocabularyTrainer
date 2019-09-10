@@ -15,4 +15,10 @@ dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.joda)
     implementation(Libs.kotlinSerialization)
+
+    testImplementation(Libs.jUnit5Api)
+    testImplementation(Libs.mockk)
+    testImplementation(Libs.kotlinCoroutine)
+    testImplementation(Libs.assertJ)
+    testRuntimeOnly(Libs.jUnit5Engine)
 }

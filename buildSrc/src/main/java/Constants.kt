@@ -13,6 +13,7 @@ object PluginIds {
     const val archivaUpload = "custom-archivaupload"
     const val maven = "maven"
     const val safeargs = "androidx.navigation.safeargs.kotlin"
+    const val androidJUnit5 = "de.mannodermaus.android-junit5"
 }
 
 object Urls {

@@ -43,9 +43,9 @@ object Versions {
     const val androidxLifecycleRuntime = "2.0.0-rc01"
     const val androidxLifecycleViewModel = "2.0.0-rc01"
     const val androidxRoom = "2.1.0"
-    const val androidxTestRunner = "1.1.0"
-    const val androidxTestRules = "1.1.0"
-    const val androidxTestMonitor = "1.1.0"
+    const val androidxTestRunner = "1.2.0"
+    const val androidxTestRules = "1.2.0"
+    const val androidxTestMonitor = "1.2.0"
     const val androidxTestUiAutomator = "2.2.0"
     const val androidxTestEspressoCore = "3.1.0"
     const val androidxTestEspressoIntents = "3.1.0"
@@ -80,7 +80,8 @@ object Versions {
     const val circleIndicator = "1.2.2@aar"
     const val circleImageView = "2.2.0"
     const val keyboardVisibility = "2.1.0"
-    const val jUnit = "4.12"
+    const val jUnit4 = "4.12"
+    const val jUnit5 = "5.5.1"
     const val supportTest = "1.0.1"
     const val espresso = "3.0.2"
     const val crashLytics = "2.7.1@aar"
@@ -88,10 +89,10 @@ object Versions {
     const val javaxInject = "1"
     const val koin = "2.0.1"
     const val room = "1.0.0"
-    const val mockito = "2.22.0"
-    const val mockitoKotlin = "1.5.0"
+    const val mockito = "3.0.7"
+    const val mockitoKotlin = "2.2.0"
     const val powermock = "1.6.5"
-    const val mockk = "1.8.12.kotlin13"
+    const val mockk = "1.9.3"
     const val frodo = "0.8.3"
     const val retrofit2 = "2.5.0"
     const val retrofit2CoroutineAdapter = "1.0.0"
@@ -115,6 +116,7 @@ object Versions {
     const val okhttp = "3.12.1"
     const val blurry = "3.0.0"
     const val jacksonKotlin = "2.9.7"
+    const val androidJUnit5Plugin = "1.5.1.0"
 }
 
 object Libs {
@@ -258,7 +260,11 @@ object Libs {
     const val jacksonKotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}"
 
     // testing
-    const val jUnit = "junit:junit:${Versions.jUnit}"
+    const val jUnit4 = "junit:junit:${Versions.jUnit4}"
+    const val jUnit5Api = "org.junit.jupiter:junit-jupiter-api:${Versions.jUnit5}"
+    const val jUnit5Engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.jUnit5}"
+    const val jUnit5EngineVintage = "org.junit.vintage:junit-vintage-engine:${Versions.jUnit5}"
+    const val jUnit5Params = "org.junit.jupiter:junit-jupiter-params:${Versions.jUnit5}"
     const val testRunner = "com.android.support.test:runner:${Versions.supportTest}"
     const val testRules = "com.android.support.test:rules:${Versions.supportTest}"
     const val espressoCore = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
@@ -286,4 +292,5 @@ object Plugins {
     const val frodo = "com.fernandocejas.frodo:frodo-plugin:${Versions.frodo}"
     const val buildTimeTracker = "net.rdrei.android.buildtimetracker:gradle-plugin:${Versions.buildTimeTracker}"
     const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.androidxNavigation}"
+    const val androidJUnit5 = "de.mannodermaus.gradle.plugins:android-junit5:${Versions.androidJUnit5Plugin}"
 }
