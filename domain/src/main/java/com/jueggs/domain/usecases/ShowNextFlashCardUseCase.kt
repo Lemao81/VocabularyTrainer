@@ -18,16 +18,20 @@ class ShowNextFlashCardUseCase(
     override suspend fun execute() {
         val now = DateTime.now()
         var nextCard: FlashCard? = null
-        FlashCardBox.values().forEach { box ->
-            val dueFlashCards = flashCardRepository.readByBoxNumberAndExpiryDate(box.number, flashCardBoxService.getBoxExpiryDate(box, now))
-            if (dueFlashCards.any()) {
-                nextCard = dueFlashCards.minBy { it.lastLearnedDate }
+        run loop@{
+            FlashCardBox.values().forEach { box ->
+                val dueFlashCards = flashCardRepository.readByBoxAndExpiryDate(box, flashCardBoxService.getBoxExpiryDate(box, now))
+                if (dueFlashCards.any()) {
+                    nextCard = dueFlashCards.minBy { it.lastLearnedDate }
 
-                return@forEach
+                    return@loop
+                }
             }
         }
         if (nextCard == null) {
             triggerViewState { copy(isShouldNavigateToNothingToLearn = true) }
+
+            return
         }
         nextCard?.let { card ->
             val backSideText = if (card.backSideTexts.size == 1) {

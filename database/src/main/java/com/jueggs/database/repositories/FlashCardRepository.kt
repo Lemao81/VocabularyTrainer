@@ -2,9 +2,10 @@ package com.jueggs.database.repositories
 
 import com.jueggs.database.daos.IFlashCardDao
 import com.jueggs.database.entities.FlashCardEntity
+import com.jueggs.database.mapper.interfaces.IFlashCardMapper
+import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.interfaces.IFlashCardRepository
 import com.jueggs.domain.models.FlashCard
-import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import org.joda.time.DateTime
 
 class FlashCardRepository(
@@ -15,7 +16,8 @@ class FlashCardRepository(
 
     override suspend fun readById(id: Long) = flashCardMapper.mapEntityToFlashCard(flashCardDao.readById(id))
 
-    override suspend fun readByBoxNumberAndExpiryDate(boxNumber: Int, expiryDate: Long) = flashCardDao.readByBoxNumberAndExpiryDate(boxNumber, expiryDate).map(flashCardMapper::mapEntityToFlashCard)
+    override suspend fun readByBoxAndExpiryDate(box: FlashCardBox, expiryDate: Long) =
+        flashCardDao.readByBoxNumberAndExpiryDate(box.number, expiryDate).map(flashCardMapper::mapEntityToFlashCard)
 
     override suspend fun insert(flashCard: FlashCard) {
         val entity = flashCardMapper.mapFlashCardToEntity(flashCard)
