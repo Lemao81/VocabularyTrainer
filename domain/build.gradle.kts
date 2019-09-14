@@ -17,6 +17,7 @@ dependencies {
     implementation(Libs.kotlinSerialization)
 
     testImplementation(Libs.jUnit5Api)
+    testImplementation(Libs.jUnit5Params)
     testImplementation(Libs.mockk)
     testImplementation(Libs.kotlinCoroutine)
     testImplementation(Libs.assertJ)
