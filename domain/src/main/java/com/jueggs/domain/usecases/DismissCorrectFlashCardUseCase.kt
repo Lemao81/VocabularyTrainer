@@ -1,8 +1,8 @@
 package com.jueggs.domain.usecases
 
 import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.interfaces.IFlashCardBoxService
-import com.jueggs.domain.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IFlashCardBoxService
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.domain.models.DismissCorrectFlashCardData
 import com.jueggs.domain.viewstates.LearnViewState
 import com.jueggs.jutils.usecase.MultipleViewStatesUseCaseWithParameter

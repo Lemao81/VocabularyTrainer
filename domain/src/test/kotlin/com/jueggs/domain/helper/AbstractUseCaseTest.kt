@@ -1,7 +1,7 @@
 package com.jueggs.domain.helper
 
-import com.jueggs.domain.interfaces.IFlashCardBoxService
-import com.jueggs.domain.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IFlashCardBoxService
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.jutils.usecase.StateEvent
 import io.mockk.coEvery
 import io.mockk.mockk

@@ -1,7 +1,7 @@
 package com.jueggs.domain.services
 
 import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.interfaces.IFlashCardBoxService
+import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import org.joda.time.DateTime
 
 class DevFlashCardBoxService : IFlashCardBoxService {

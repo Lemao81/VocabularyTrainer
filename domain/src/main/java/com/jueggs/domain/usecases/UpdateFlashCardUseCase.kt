@@ -1,6 +1,6 @@
 package com.jueggs.domain.usecases
 
-import com.jueggs.domain.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.domain.models.EditFlashCardData
 import com.jueggs.domain.models.FlashCardInputData
 import com.jueggs.domain.models.FlashCardInputValidationResult

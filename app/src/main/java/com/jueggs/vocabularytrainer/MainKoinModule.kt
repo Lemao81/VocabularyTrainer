@@ -4,11 +4,11 @@ import com.jueggs.database.AppDatabase
 import com.jueggs.database.mapper.FlashCardMapper
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import com.jueggs.database.repositories.FlashCardRepository
-import com.jueggs.domain.interfaces.IFlashCardRepository
-import com.jueggs.domain.interfaces.ISerializer
 import com.jueggs.domain.models.FlashCardInputData
 import com.jueggs.domain.models.FlashCardInputValidationResult
 import com.jueggs.domain.services.JsonSerializer
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.ISerializer
 import com.jueggs.domain.usecases.AddFlashCardUseCase
 import com.jueggs.domain.usecases.CheckSomethingToLearnUseCase
 import com.jueggs.domain.usecases.DismissCorrectFlashCardUseCase

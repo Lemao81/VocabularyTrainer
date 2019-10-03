@@ -4,7 +4,7 @@ import com.jueggs.database.daos.IFlashCardDao
 import com.jueggs.database.entities.FlashCardEntity
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.domain.models.FlashCard
 import org.joda.time.DateTime
 

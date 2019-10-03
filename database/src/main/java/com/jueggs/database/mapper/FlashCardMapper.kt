@@ -1,7 +1,7 @@
 package com.jueggs.database.mapper
 
 import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.interfaces.ISerializer
+import com.jueggs.domain.services.interfaces.ISerializer
 import com.jueggs.domain.models.FlashCard
 import com.jueggs.database.entities.FlashCardEntity
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper

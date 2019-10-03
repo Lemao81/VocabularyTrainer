@@ -1,7 +1,7 @@
 package com.jueggs.domain.usecases
 
 import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.domain.models.AddFlashCardData
 import com.jueggs.domain.models.FlashCard
 import com.jueggs.domain.models.FlashCardInputData
