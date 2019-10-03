@@ -28,6 +28,7 @@ dependencies {
     implementation(Libs.koinAndroidxViewModel)
     implementation(Libs.joda)
     implementation(Libs.kotlinSerialization)
+    implementation(Libs.ankoCommons)
 
     implementation(project(Modules.common))
     implementation(project(Modules.domain))

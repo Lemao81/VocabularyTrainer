@@ -7,7 +7,7 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.128"
+    const val andutils = "1.0.131"
     const val andtestutils = "1.0.11"
     const val jutils = "1.0.31"
     const val jtestutils = "1.0.0"
@@ -89,7 +89,7 @@ object Versions {
     const val javaxInject = "1"
     const val koin = "2.0.1"
     const val room = "1.0.0"
-    const val mockito = "3.0.7"
+    const val mockito = "3.1.0"
     const val mockitoKotlin = "2.2.0"
     const val powermock = "1.6.5"
     const val mockk = "1.9.3"
@@ -117,6 +117,7 @@ object Versions {
     const val blurry = "3.0.0"
     const val jacksonKotlin = "2.9.7"
     const val androidJUnit5Plugin = "1.5.1.0"
+    const val workManager = "2.2.0"
 }
 
 object Libs {
@@ -170,6 +171,7 @@ object Libs {
     const val androidxTestExtJunit = "androidx.test.ext:junit:${Versions.androidxTestExtJunit}"
     const val androidxNavigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.androidxNavigation}"
     const val androidxNavigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.androidxNavigation}"
+    const val workManagerKtx = "androidx.work:work-runtime-ktx:${Versions.workManager}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val supportV4 = "com.android.support:support-v4:${Versions.support}"
     const val supportAppcompat = "com.android.support:appcompat-v7:${Versions.support}"
@@ -202,8 +204,8 @@ object Libs {
     const val gmsLocation = "com.google.android.gms:play-services-location:${Versions.gmsLocation}"
     const val mosbyMvi = "com.hannesdorfmann.mosby3:mvi:${Versions.mosbyMvi}"
     const val anko = "org.jetbrains.anko:anko:${Versions.anko}"
-    const val ankoDesign = "org.jetbrains.anko:anko-design:${Versions.anko}"
     const val ankoCommons = "org.jetbrains.anko:anko-commons:${Versions.anko}"
+    const val ankoDesign = "org.jetbrains.anko:anko-design:${Versions.anko}"
     const val dagger = "com.google.dagger:dagger-android:${Versions.dagger}"
     const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
     const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
@@ -272,7 +274,7 @@ object Libs {
     const val uiAutomator = "com.android.support.test.uiautomator:uiautomator-v18:${Versions.uiAutomator}"
     const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
     const val powermock = "org.powermock:powermock:${Versions.powermock}"
-    const val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Versions.mockitoKotlin}"
+    const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
     const val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     const val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"

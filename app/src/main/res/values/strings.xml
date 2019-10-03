@@ -20,4 +20,8 @@
     <string name="dialog_remove_flashcard_message">Do you want to remove this card?</string>
     <string name="save">Save</string>
     <string name="keep_adding">Keep adding</string>
+    <string name="daily_learn_check_notification_title">Vocabulary learning</string>
+    <string name="daily_learn_check_notification_text">Some flashcards need attention</string>
+    <string name="action_disable_daily_notification">Disable notifications</string>
+    <string name="daily_notification_channel_name">Daily learning reminder</string>
 </resources>
