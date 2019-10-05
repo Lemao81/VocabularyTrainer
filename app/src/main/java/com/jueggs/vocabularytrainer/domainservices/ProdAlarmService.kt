@@ -1,4 +1,4 @@
-package com.jueggs.vocabularytrainer.services
+package com.jueggs.vocabularytrainer.domainservices
 
 import android.app.AlarmManager.INTERVAL_DAY
 import android.app.AlarmManager.RTC
@@ -7,7 +7,7 @@ import android.content.Context
 import com.jueggs.andutils.extension.pendingBroadcastIntentFor
 import com.jueggs.vocabularytrainer.Constants
 import com.jueggs.vocabularytrainer.broadcastreceivers.DailyLearnNotificationReceiver
-import com.jueggs.vocabularytrainer.services.interfaces.IAlarmService
+import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
 import org.jetbrains.anko.alarmManager
 import org.joda.time.DateTime
 

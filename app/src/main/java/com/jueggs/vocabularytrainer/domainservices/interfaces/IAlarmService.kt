@@ -1,4 +1,4 @@
-package com.jueggs.vocabularytrainer.services.interfaces
+package com.jueggs.vocabularytrainer.domainservices.interfaces
 
 import android.content.Context
 
