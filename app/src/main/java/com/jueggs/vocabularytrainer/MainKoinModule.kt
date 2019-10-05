@@ -1,5 +1,7 @@
 package com.jueggs.vocabularytrainer
 
+import com.jueggs.common.logging.ILogManager
+import com.jueggs.common.logging.LogManager
 import com.jueggs.database.AppDatabase
 import com.jueggs.database.mapper.FlashCardMapper
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
@@ -21,6 +23,7 @@ import com.jueggs.domain.usecases.UpdateLearnViewStatsUseCase
 import com.jueggs.domain.usecases.UpdateNothingToLearnViewStatsUseCase
 import com.jueggs.domain.validators.FlashCardInputValidator
 import com.jueggs.jutils.validation.IValidator
+import com.jueggs.vocabularytrainer.logging.LogcatLogTarget
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -40,8 +43,9 @@ val mainKoinModule = module {
 
     single { FlashCardInputValidator() as IValidator<FlashCardInputData, FlashCardInputValidationResult> }
     single { FlashCardRepository(AppDatabase.getInstance(get()).getFlashCardDao(), get()) as IFlashCardRepository }
-    single { JsonSerializer(Json(JsonConfiguration.Stable)) as ISerializer }
+    single { JsonSerializer(Json(JsonConfiguration.Default)) as ISerializer }
     single { FlashCardMapper(get()) as IFlashCardMapper }
+    single { LogManager(listOf(LogcatLogTarget(get()))) as ILogManager }
 
     single { AddFlashCardUseCase(get(), get()) }
     single { DismissCorrectFlashCardUseCase(get(), get()) }

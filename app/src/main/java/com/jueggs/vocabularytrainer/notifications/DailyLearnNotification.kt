@@ -4,11 +4,9 @@ import android.app.Notification.DEFAULT_ALL
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import androidx.core.app.NotificationCompat
-import com.jueggs.andutils.d
 import com.jueggs.andutils.extension.createSettingsIntent
 import com.jueggs.andutils.extension.pendingActivityIntent
 import com.jueggs.andutils.extension.pendingActivityIntentFor
-import com.jueggs.andutils.logging.Log
 import com.jueggs.common.isEclairOrAbove
 import com.jueggs.vocabularytrainer.MainActivity
 import com.jueggs.vocabularytrainer.R
@@ -19,7 +17,6 @@ object DailyLearnNotification {
     const val CHANNEL_ID = "DailyLearnNotificationChannel"
 
     fun notify(context: Context) {
-        d(Log.METHOD)
         val title = context.getString(R.string.daily_learn_check_notification_title)
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)

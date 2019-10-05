@@ -3,8 +3,6 @@ package com.jueggs.vocabularytrainer.broadcastreceivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.jueggs.andutils.d
-import com.jueggs.andutils.logging.Log
 import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
@@ -20,7 +18,6 @@ class DailyLearnNotificationReceiver : BroadcastReceiver(), KoinComponent {
     val flashCardBoxService by inject<IFlashCardBoxService>()
 
     override fun onReceive(context: Context, intent: Intent) {
-        d(Log.METHOD)
         val now = DateTime.now()
         GlobalScope.launch {
             val isSomethingToLearn = FlashCardBox.values().any {
