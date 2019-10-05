@@ -12,6 +12,7 @@ android {
 
 dependencies {
     implementation(Libs.kotlinStd8)
+    implementation(Libs.kotlinCoroutine)
     implementation(Libs.joda)
     implementation(Libs.androidxLifecycleLiveData)
     implementation(Libs.kotlinSerialization)
