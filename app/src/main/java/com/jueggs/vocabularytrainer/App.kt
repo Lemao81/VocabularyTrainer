@@ -5,7 +5,7 @@ import android.app.NotificationManager
 import com.jueggs.andutils.base.BaseApplication
 import com.jueggs.common.isOreoOrAbove
 import com.jueggs.vocabularytrainer.notifications.DailyLearnNotification
-import com.jueggs.vocabularytrainer.services.interfaces.IAlarmService
+import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
 import kotlinx.serialization.ImplicitReflectionSerializer
 import org.jetbrains.anko.notificationManager
 import org.koin.android.ext.android.inject
