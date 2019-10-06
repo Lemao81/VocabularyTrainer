@@ -22,13 +22,13 @@ class LogcatLogTarget(private val serializer: ISerializer) : ILogTarget {
         if (!entry.valueMap.isNullOrEmpty()) {
             entry.valueMap?.let { messageParts.add("Values: ${stringifyValues(it)}") }
         }
-        val message = messageParts.join(" | ")
+        val message = messageParts.join("  |  ")
         when (entry.logLevel) {
             LogLevel.DEBUG -> Log.d(entry.category, message, entry.exception)
             LogLevel.INFO -> Log.i(entry.category, message, entry.exception)
             LogLevel.WARNING -> Log.w(entry.category, message, entry.exception)
             LogLevel.ERROR -> Log.e(entry.category, message, entry.exception)
-            LogLevel.CRITICAL -> Log.e(entry.category, message, entry.exception)
+            LogLevel.FATAL -> Log.e(entry.category, message, entry.exception)
         }
     }
 

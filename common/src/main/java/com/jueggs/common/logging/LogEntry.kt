@@ -64,9 +64,9 @@ class LogEntry(
 
         override suspend fun logErrorAsync() = executeLogAsyncAction(LogLevel.ERROR)
 
-        override fun logCritical() = executeLogAction(LogLevel.CRITICAL)
+        override fun logFatal() = executeLogAction(LogLevel.FATAL)
 
-        override suspend fun logCriticalAsync() = executeLogAsyncAction(LogLevel.CRITICAL)
+        override suspend fun logFatalAsync() = executeLogAsyncAction(LogLevel.FATAL)
 
         private fun executeLogAction(logLevel: LogLevel) {
             this.logLevel = logLevel

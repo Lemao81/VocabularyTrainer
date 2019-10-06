@@ -4,8 +4,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import com.jueggs.andutils.base.BaseApplication
 import com.jueggs.common.isOreoOrAbove
-import com.jueggs.vocabularytrainer.notifications.DailyLearnNotification
+import com.jueggs.common.logging.LogCategory
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
+import com.jueggs.vocabularytrainer.logging.Logger
+import com.jueggs.vocabularytrainer.notifications.DailyLearnNotification
 import kotlinx.serialization.ImplicitReflectionSerializer
 import org.jetbrains.anko.notificationManager
 import org.koin.android.ext.android.inject
@@ -22,5 +24,9 @@ class App : BaseApplication(isDebug = BuildConfig.DEBUG) {
             notificationManager.createNotificationChannel(notificationChannel)
         }
         alarmService.scheduleDailyLearnAlarm(this)
+    }
+
+    override fun onUncaughtException(th: Throwable) {
+        Logger.newEntry().withCategory(LogCategory.UNHANDLEDEXCEPTION).withException(th).logFatal()
     }
 }

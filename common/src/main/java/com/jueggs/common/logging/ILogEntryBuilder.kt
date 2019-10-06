@@ -25,7 +25,7 @@ interface ILogEntryBuilder {
 
     suspend fun logErrorAsync()
 
-    fun logCritical()
+    fun logFatal()
 
-    suspend fun logCriticalAsync()
+    suspend fun logFatalAsync()
 }
