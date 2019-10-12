@@ -1,7 +1,7 @@
 package com.jueggs.vocabularytrainer.logging
 
-import com.jueggs.common.logging.ILogEntry
-import com.jueggs.common.logging.ILogTarget
+import com.jueggs.commonj.logging.ILogEntry
+import com.jueggs.commonj.logging.ILogTarget
 
 class RoomLogTarget : ILogTarget {
     override fun log(entry: ILogEntry) {

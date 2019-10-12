@@ -1,9 +1,9 @@
 package com.jueggs.vocabularytrainer.logging
 
 import android.util.Log
-import com.jueggs.common.logging.ILogEntry
-import com.jueggs.common.logging.ILogTarget
-import com.jueggs.common.logging.LogLevel
+import com.jueggs.commonj.logging.ILogEntry
+import com.jueggs.commonj.logging.ILogTarget
+import com.jueggs.commonj.logging.LogLevel
 import com.jueggs.domain.services.interfaces.ISerializer
 import com.jueggs.jutils.extension.join
 import kotlinx.coroutines.GlobalScope
@@ -36,5 +36,5 @@ class LogcatLogTarget(private val serializer: ISerializer) : ILogTarget {
         GlobalScope.launch { log(entry) }
     }
 
-    private fun stringifyValues(valueMap: Map<String, Any>): String = serializer.toJson(valueMap, String::class).toString()
+    private fun stringifyValues(valueMap: Map<String, Any?>): String = serializer.toJson(valueMap, String::class).toString()
 }
