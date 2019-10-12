@@ -1,7 +1,5 @@
-package com.jueggs.vocabularytrainer.logging
+package com.jueggs.commonj.logging
 
-import com.jueggs.common.logging.ILogEntryBuilder
-import com.jueggs.common.logging.ILogManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

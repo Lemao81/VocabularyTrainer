@@ -1,4 +1,4 @@
-package com.jueggs.common.logging
+package com.jueggs.commonj.logging
 
 import org.joda.time.DateTime
 
@@ -8,7 +8,7 @@ interface ILogEntry {
     val method: String
     val logLevel: LogLevel
     val category: String
-    val valueMap: Map<String, Any>?
+    val valueMap: Map<String, Any?>?
     val exception: Throwable?
 }
 

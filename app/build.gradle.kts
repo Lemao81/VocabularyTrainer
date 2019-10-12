@@ -29,8 +29,12 @@ dependencies {
     implementation(Libs.joda)
     implementation(Libs.kotlinSerialization)
     implementation(Libs.ankoCommons)
+    implementation(Libs.firestore)
 
     implementation(project(Modules.common))
+    implementation(project(Modules.commonj))
     implementation(project(Modules.domain))
     implementation(project(Modules.database))
 }
+
+apply(plugin = PluginIds.gms)

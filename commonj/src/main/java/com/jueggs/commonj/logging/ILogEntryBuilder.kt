@@ -1,7 +1,7 @@
-package com.jueggs.common.logging
+package com.jueggs.commonj.logging
 
 interface ILogEntryBuilder {
-    fun addValue(name: String, obj: Any): ILogEntryBuilder
+    fun addValue(name: String, obj: Any?): ILogEntryBuilder
 
     fun withCategory(category: String): ILogEntryBuilder
 

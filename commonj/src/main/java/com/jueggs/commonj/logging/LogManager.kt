@@ -1,4 +1,4 @@
-package com.jueggs.common.logging
+package com.jueggs.commonj.logging
 
 class LogManager(override val targets: List<ILogTarget>) : ILogManager {
 

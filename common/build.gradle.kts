@@ -16,4 +16,6 @@ dependencies {
     implementation(Libs.joda)
     implementation(Libs.androidxLifecycleLiveData)
     implementation(Libs.kotlinSerialization)
+
+    implementation(project(Modules.commonj))
 }

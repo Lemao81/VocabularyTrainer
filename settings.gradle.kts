@@ -15,4 +15,4 @@ pluginManagement {
     }
 }
 
-include(":app", ":database", ":domain", ":common")
+include(":app", ":database", ":domain", ":common", ":commonj")

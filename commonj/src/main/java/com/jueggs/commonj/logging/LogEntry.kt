@@ -1,4 +1,4 @@
-package com.jueggs.common.logging
+package com.jueggs.commonj.logging
 
 import org.joda.time.DateTime
 
@@ -9,7 +9,7 @@ class LogEntry(
     override val timestamp: DateTime,
     override val method: String,
     override val exception: Throwable?,
-    override val valueMap: Map<String, Any>?
+    override val valueMap: Map<String, Any?>?
 ) : ILogEntry {
     class Builder(
         private var message: String,
@@ -19,9 +19,9 @@ class LogEntry(
         private var category: String = "MYDEBUG"
         private var logLevel: LogLevel = LogLevel.DEBUG
         private var exception: Throwable? = null
-        private var valueMap: MutableMap<String, Any>? = null
+        private var valueMap: MutableMap<String, Any?>? = null
 
-        override fun addValue(name: String, obj: Any): ILogEntryBuilder {
+        override fun addValue(name: String, obj: Any?): ILogEntryBuilder {
             if (valueMap == null) {
                 valueMap = mutableMapOf()
             }
