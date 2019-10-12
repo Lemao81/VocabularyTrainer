@@ -16,6 +16,6 @@ class JsonSerializer(private val json: Json) : ISerializer {
 
     override fun <T : Any> parseList(objects: String, klass: KClass<T>): List<T> = json.parse(json.context.getContextualOrDefault(klass).list, objects)
 
-    override fun <T : Any> toJson(map: Map<T, Any>, klass: KClass<T>): JsonElement =
+    override fun <T : Any> toJson(map: Map<T, Any?>, klass: KClass<T>): JsonElement =
         json.toJson((json.context.getContextualOrDefault(klass) to StringSerializer).map, map.mapValues { it.value.toString() })
 }
