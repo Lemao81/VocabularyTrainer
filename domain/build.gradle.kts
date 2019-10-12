@@ -15,6 +15,9 @@ dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.joda)
     implementation(Libs.kotlinSerialization)
+    implementation(Libs.koinCore)
+
+    implementation(project(Modules.commonj))
 
     testImplementation(Libs.jUnit5Api)
     testImplementation(Libs.jUnit5Params)

@@ -10,6 +10,7 @@ buildscript {
         classpath(Plugins.kotlin)
         classpath(Plugins.kotlinSerialization)
         classpath(Plugins.safeArgs)
+        classpath(Plugins.gms)
     }
 }
 

@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "697475362296",
+    "firebase_url": "https://logging-via-firebase.firebaseio.com",
+    "project_id": "logging-via-firebase",
+    "storage_bucket": "logging-via-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697475362296:android:d5fa105679a5789dd2ba0d",
+        "android_client_info": {
+          "package_name": "com.jueggs.vocabularytrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697475362296-js4fd4oog3inmcbv2ic655mc9ijjm8v6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jueggs.vocabularytrainer",
+            "certificate_hash": "e53b243aae6d612ad87082c742d56123be9d5bd7"
+          }
+        },
+        {
+          "client_id": "697475362296-rg6cuo4j5gpq80cc9320i40bkp6ljqvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYjW7p6WNwGQZvQ3wjY-KkmfylulZISAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697475362296-rg6cuo4j5gpq80cc9320i40bkp6ljqvp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697475362296:android:b8335e38d6ee1d38d2ba0d",
+        "android_client_info": {
+          "package_name": "com.jueggs.vocabularytrainer.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697475362296-of76kuac7tm3dol1sbmi2kc8vhik5bbs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jueggs.vocabularytrainer.dev",
+            "certificate_hash": "e53b243aae6d612ad87082c742d56123be9d5bd7"
+          }
+        },
+        {
+          "client_id": "697475362296-rg6cuo4j5gpq80cc9320i40bkp6ljqvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYjW7p6WNwGQZvQ3wjY-KkmfylulZISAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697475362296-rg6cuo4j5gpq80cc9320i40bkp6ljqvp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
