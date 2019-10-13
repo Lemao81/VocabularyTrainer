@@ -8,9 +8,10 @@ plugins {
 }
 
 android {
-    configureAndroidAppExtension(this)
-    minifyRelease(this)
-    optimizeBuildTime(project, this)
+    configureAndroidAppExtension()
+    minifyRelease()
+    optimizeBuildTime(project)
+    addDebugBuildConfigField("ENABLE_NOTIFICATION", false)
 
     dataBinding.isEnabled = true
 }
@@ -20,6 +21,7 @@ dependencies {
     implementation(Libs.jutils)
     implementation(Libs.andutils)
     implementation(Libs.resutils)
+    implementation(Libs.firebaseutils)
     implementation(Libs.androidxAppcompat)
     implementation(Libs.androidxConstraintLayout)
     implementation(Libs.androidxNavigationFragment)
@@ -29,7 +31,6 @@ dependencies {
     implementation(Libs.joda)
     implementation(Libs.kotlinSerialization)
     implementation(Libs.ankoCommons)
-    implementation(Libs.firestore)
 
     implementation(project(Modules.common))
     implementation(project(Modules.commonj))

@@ -1,33 +1,33 @@
 import com.android.build.gradle.BaseExtension
-import org.gradle.api.Project
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
+import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 
-fun configureAndroidAppExtension(android: BaseAppModuleExtension, isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
-    configureAndroidExtension(android)
+fun BaseAppModuleExtension.configureAndroidAppExtension(isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
+    configureAndroidExtension()
     if (isShouldConfigureDevProdFlavors) {
-        configureDevProdFlavors(android, isWithMinifiedConfig)
+        configureDevProdFlavors(isWithMinifiedConfig)
 
-        val devFlavor = android.productFlavors.getByName(Flavors.dev)
+        val devFlavor = this.productFlavors.getByName(Flavors.dev)
         devFlavor.applicationIdSuffix = ".dev"
         devFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.devName)
-        val prodFlavor = android.productFlavors.getByName(Flavors.prod);
+        val prodFlavor = this.productFlavors.getByName(Flavors.prod);
         prodFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.prodName)
     }
-    android.defaultConfig.applicationId = App.applicationId
+    this.defaultConfig.applicationId = App.applicationId
 }
 
-fun configureAndroidLibraryExtension(android: BaseExtension, isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
-    configureAndroidExtension(android)
+fun BaseExtension.configureAndroidLibraryExtension(isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
+    configureAndroidExtension()
     if (isShouldConfigureDevProdFlavors) {
-        configureDevProdFlavors(android, isWithMinifiedConfig)
+        configureDevProdFlavors(isWithMinifiedConfig)
     }
 }
 
-fun configureAndroidExtension(android: BaseExtension) {
-    android.compileSdkVersion(Android.compileSdkVersion)
-    android.defaultConfig {
+fun BaseExtension.configureAndroidExtension() {
+    this.compileSdkVersion(Android.compileSdkVersion)
+    this.defaultConfig {
         versionCode = App.versionCode
         versionName = App.versionName
         minSdkVersion(Android.minSdkVersion)
@@ -38,18 +38,18 @@ fun configureAndroidExtension(android: BaseExtension) {
         javaCompileOptions { annotationProcessorOptions.includeCompileClasspath = true }
     }
 
-    android.dexOptions.preDexLibraries = true
-    android.packagingOptions.pickFirst("protobuf.meta")
+    this.dexOptions.preDexLibraries = true
+    this.packagingOptions.pickFirst("protobuf.meta")
 
-    android.compileOptions {
+    this.compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
-fun configureDevProdFlavors(android: BaseExtension, isWithMinifiedConfig: Boolean = true) {
-    android.flavorDimensions(Dimensions.main)
-    android.productFlavors {
+fun BaseExtension.configureDevProdFlavors(isWithMinifiedConfig: Boolean = true) {
+    this.flavorDimensions(Dimensions.main)
+    this.productFlavors {
         create(Flavors.dev) {
             if (isWithMinifiedConfig) {
                 resConfigs(ResConfigConstants.EN, ResConfigConstants.XHDPI)
@@ -89,21 +89,25 @@ fun ignoreReleaseBuild(project: Project) {
     }
 }
 
-fun minifyRelease(android: BaseExtension) {
-    android.buildTypes {
+fun BaseExtension.minifyRelease() {
+    this.buildTypes {
         getByName(BuildTypes.release) {
             isMinifyEnabled = true
-            proguardFiles(android.getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(this@minifyRelease.getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
 }
 
-fun optimizeBuildTime(project: Project, android: BaseExtension) {
+fun BaseExtension.optimizeBuildTime(project: Project) {
     if (project.hasProperty("devBuild")) {
-        android.splits {
+        this.splits {
             abi.isEnable = false
             density.isEnable = false
         }
-        android.aaptOptions.cruncherEnabled = false
+        this.aaptOptions.cruncherEnabled = false
     }
+}
+
+inline fun <reified T> BaseExtension.addDebugBuildConfigField(name: String, value: T) {
+    this.buildTypes.findByName(BuildTypes.debug)?.buildConfigField(T::class.simpleName, name, value.toString())
 }
