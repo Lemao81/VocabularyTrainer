@@ -58,7 +58,7 @@ object Versions {
     const val gmsBase = "16.0.1"
     const val gmsLocation = "16.0.0"
     const val firestore = "21.1.1"
-    const val firebaseCore = "19.1.0"
+    const val firebaseCore = "17.2.0"
     const val firebaseCommon = "19.1.0"
     const val firebaseDatabase = "19.1.0"
     const val firebaseAuth = "19.1.0"

@@ -17,7 +17,7 @@ class FirestoreLogTarget(private val serializer: ISerializer, val context: Conte
 
     override fun log(entry: ILogEntry) {
         val packageName = context.packageName
-        val map = hashMapOf(
+        val entries = hashMapOf(
             "packagename" to packageName,
             "category" to entry.category,
             "exception" to entry.exception?.toString(),
@@ -28,8 +28,9 @@ class FirestoreLogTarget(private val serializer: ISerializer, val context: Conte
             "values" to entry.valueMap?.let { stringifyValues(it) }
         )
 
-        val appName = packageName.substring(packageName.lastIndexOf('.'))
-        FirebaseFirestore.getInstance().collection("logEntries").document("${appName}_${entry.timestamp}").set(map)
+        val appNamePrefix = packageName.substring(packageName.indexOf('.', packageName.indexOf('.') + 1) + 1).take(6)
+        val documentId = "${appNamePrefix}_${entry.timestamp.toString("yyyyMMdd-HHmmss.SSS")}"
+        FirebaseFirestore.getInstance().collection("logEntries").document(documentId).set(entries)
     }
 
     override suspend fun logAsync(entry: ILogEntry) {
