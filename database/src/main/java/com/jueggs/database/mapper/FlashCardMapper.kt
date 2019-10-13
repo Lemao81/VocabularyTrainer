@@ -1,10 +1,10 @@
 package com.jueggs.database.mapper
 
-import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.services.interfaces.ISerializer
-import com.jueggs.domain.models.FlashCard
 import com.jueggs.database.entities.FlashCardEntity
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
+import com.jueggs.domain.enums.FlashCardBox
+import com.jueggs.domain.models.FlashCard
+import com.jueggs.jutils.service.ISerializer
 import org.joda.time.DateTime
 
 class FlashCardMapper(

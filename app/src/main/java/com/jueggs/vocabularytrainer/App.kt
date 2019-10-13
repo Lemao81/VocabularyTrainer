@@ -4,8 +4,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import com.jueggs.andutils.base.BaseApplication
 import com.jueggs.common.isOreoOrAbove
-import com.jueggs.commonj.logging.LogCategory.UNHANDLEDEXCEPTION
-import com.jueggs.commonj.logging.Logger
+import com.jueggs.jutils.logging.LogCategory
+import com.jueggs.jutils.logging.Logger
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
 import com.jueggs.vocabularytrainer.notifications.DailyLearnNotification
 import kotlinx.serialization.ImplicitReflectionSerializer
@@ -27,6 +27,6 @@ class App : BaseApplication(isDebug = BuildConfig.DEBUG) {
     }
 
     override fun onUncaughtException(exception: Throwable) {
-        Logger.newEntry().withCategory(UNHANDLEDEXCEPTION).withException(exception).logFatal()
+        Logger.newEntry().withCategory(LogCategory.UNHANDLEDEXCEPTION).withException(exception).logFatal()
     }
 }

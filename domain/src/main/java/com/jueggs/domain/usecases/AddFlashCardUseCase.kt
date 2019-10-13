@@ -1,12 +1,12 @@
 package com.jueggs.domain.usecases
 
 import com.jueggs.domain.enums.FlashCardBox
-import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.domain.models.AddFlashCardData
 import com.jueggs.domain.models.FlashCard
 import com.jueggs.domain.models.FlashCardInputData
 import com.jueggs.domain.models.FlashCardInputValidationResult
 import com.jueggs.domain.models.Valid
+import com.jueggs.domain.services.interfaces.IFlashCardRepository
 import com.jueggs.domain.viewstates.AddFlashCardViewState
 import com.jueggs.jutils.usecase.MultipleViewStatesUseCaseWithParameter
 import com.jueggs.jutils.validation.IValidator

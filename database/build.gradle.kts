@@ -5,14 +5,15 @@ plugins {
 }
 
 android {
-    configureAndroidLibraryExtension(this)
-    minifyRelease(this)
+    configureAndroidLibraryExtension()
+    minifyRelease()
 }
 
 dependencies {
     implementation(Libs.kotlinStd8)
     implementation(Libs.androidxRoomRuntime)
     implementation(Libs.joda)
+    implementation(Libs.andutils)
 
     implementation(project(Modules.common))
     implementation(project(Modules.commonj))

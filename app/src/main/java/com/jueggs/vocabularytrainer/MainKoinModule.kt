@@ -1,16 +1,15 @@
 package com.jueggs.vocabularytrainer
 
-import com.jueggs.commonj.logging.ILogManager
-import com.jueggs.commonj.logging.LogManager
+import com.jueggs.andutils.logging.AndroidLogManager
+import com.jueggs.andutils.logging.LogcatLogTarget
+import com.jueggs.andutils.logging.RoomLogTarget
 import com.jueggs.database.AppDatabase
 import com.jueggs.database.mapper.FlashCardMapper
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import com.jueggs.database.repositories.FlashCardRepository
 import com.jueggs.domain.models.FlashCardInputData
 import com.jueggs.domain.models.FlashCardInputValidationResult
-import com.jueggs.domain.services.JsonSerializer
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
-import com.jueggs.domain.services.interfaces.ISerializer
 import com.jueggs.domain.usecases.AddFlashCardUseCase
 import com.jueggs.domain.usecases.CheckSomethingToLearnUseCase
 import com.jueggs.domain.usecases.DismissCorrectFlashCardUseCase
@@ -22,10 +21,11 @@ import com.jueggs.domain.usecases.UpdateFlashCardUseCase
 import com.jueggs.domain.usecases.UpdateLearnViewStatsUseCase
 import com.jueggs.domain.usecases.UpdateNothingToLearnViewStatsUseCase
 import com.jueggs.domain.validators.FlashCardInputValidator
+import com.jueggs.firebaseutils.logging.FirestoreLogTarget
+import com.jueggs.jutils.logging.ILogManager
+import com.jueggs.jutils.service.ISerializer
+import com.jueggs.jutils.service.JsonSerializer
 import com.jueggs.jutils.validation.IValidator
-import com.jueggs.vocabularytrainer.logging.FirestoreLogTarget
-import com.jueggs.vocabularytrainer.logging.LogcatLogTarget
-import com.jueggs.vocabularytrainer.logging.RoomLogTarget
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -47,7 +47,11 @@ val mainKoinModule = module {
     single { FlashCardRepository(AppDatabase.getInstance(get()).getFlashCardDao(), get()) as IFlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Default)) as ISerializer }
     single { FlashCardMapper(get()) as IFlashCardMapper }
-    single { LogManager(listOf(LogcatLogTarget(get()), FirestoreLogTarget(get(), get()), RoomLogTarget(get(), get()))) as ILogManager }
+    single { AndroidLogManager(
+        listOf(LogcatLogTarget(), FirestoreLogTarget(get()), RoomLogTarget(AppDatabase.getInstance(get()).getLogDao())),
+        BuildConfig.DEBUG,
+        BuildConfig.FLAVOR
+    ) as ILogManager }
 
     single { AddFlashCardUseCase(get(), get()) }
     single { DismissCorrectFlashCardUseCase(get(), get()) }

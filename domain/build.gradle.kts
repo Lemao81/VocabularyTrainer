@@ -2,7 +2,6 @@ plugins {
     java
     `java-library`
     id(PluginIds.kotlin)
-    id(PluginIds.kotlinSerialization)
 }
 
 java {
@@ -11,10 +10,9 @@ java {
 }
 
 dependencies {
-    implementation(Libs.jutils)
     implementation(Libs.kotlinStd8)
+    implementation(Libs.jutils)
     implementation(Libs.joda)
-    implementation(Libs.kotlinSerialization)
     implementation(Libs.koinCore)
 
     implementation(project(Modules.commonj))
