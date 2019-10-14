@@ -1,5 +1,5 @@
 package com.jueggs.domain
 
 object Constant {
-    const val BACKSIDEINPUT_COUNT = 4
+    const val BACKSIDEINPUT_COUNT = 3
 }
