@@ -3,6 +3,7 @@ package com.jueggs.vocabularytrainer.broadcastreceivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.jueggs.andutils.extension.isInForeground
 import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
@@ -23,7 +24,7 @@ class DailyLearnNotificationReceiver : BroadcastReceiver(), KoinComponent {
             val isSomethingToLearn = FlashCardBox.values().any {
                 flashCardRepository.readByBoxAndExpiryDate(it, flashCardBoxService.getBoxExpiryDate(it, now)).any()
             }
-            if (isSomethingToLearn) {
+            if (isSomethingToLearn && !context.isInForeground) {
                 DailyLearnNotification.notify(context)
             }
         }
