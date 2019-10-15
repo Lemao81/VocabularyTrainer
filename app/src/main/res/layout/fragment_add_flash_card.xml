@@ -177,9 +177,11 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.addFlashCard()}"
             android:text="@string/add_card"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnCancel"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/btnSaveCard"
@@ -187,9 +189,11 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.updateFlashCard()}"
             android:text="@string/save"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnCancel"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/btnCancel"
