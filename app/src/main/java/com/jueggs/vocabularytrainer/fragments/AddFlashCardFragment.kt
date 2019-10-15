@@ -1,13 +1,12 @@
 package com.jueggs.vocabularytrainer.fragments
 
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.navArgs
 import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.goneOrVisible
 import com.jueggs.andutils.extension.hideKeyboard
 import com.jueggs.andutils.extension.invisibleOrVisible
+import com.jueggs.andutils.extension.onEditDone
 import com.jueggs.andutils.extension.shortToast
 import com.jueggs.andutils.extension.showKeyboard
 import com.jueggs.andutils.extension.visibleOrInvisible
@@ -16,13 +15,7 @@ import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import kotlinx.android.synthetic.main.fragment_add_flash_card.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.coroutines.CoroutineContext
 
 class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     val viewModel by viewModel<AddFlashCardViewModel>()
@@ -73,23 +66,5 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
         viewModel.loadFlashCardForEditing(navArgs.flashCardId)
     } else {
         viewModel.focusFrontSideEdit()
-    }
-}
-
-// TODO lib
-fun TextView.onEditDone(
-    context: CoroutineContext = Dispatchers.Main,
-    handler: suspend CoroutineScope.() -> Unit
-) {
-    setOnEditorActionListener { view, actionId, event ->
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            GlobalScope.launch(context, CoroutineStart.DEFAULT) {
-                handler()
-            }
-
-            return@setOnEditorActionListener true
-        }
-
-        return@setOnEditorActionListener false
     }
 }

@@ -33,9 +33,8 @@ class LearnViewModel(
         repeat(6) {
             stats.add(MutableLiveData())
         }
+        viewStateStore.dispatch(showNextFlashCardUseCase())
     }
-
-    fun showNextFlashCard() = viewStateStore.dispatch(showNextFlashCardUseCase())
 
     fun revealFlashCardBackSide() = viewStateStore.dispatch(Alter { copy(isRevealed = true) })
 

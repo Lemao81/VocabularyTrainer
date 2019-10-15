@@ -20,7 +20,7 @@ class NothingToLearnFragment : BaseFragment(isShouldSearchNavController = true) 
                 navController?.navigate(R.id.action_nothingToLearnFragment_to_addFlashCardFragment)
             }
             if (isShouldCloseApp) {
-                activity?.finish()
+                activity?.finishAndRemoveTask()
             }
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
             viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())

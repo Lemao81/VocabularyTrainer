@@ -64,7 +64,6 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     }
 
     override fun onStandby() {
-        viewModel.showNextFlashCard()
         viewModel.updateStats()
     }
 
