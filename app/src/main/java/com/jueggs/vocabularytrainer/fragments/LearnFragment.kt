@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.colorResToInt
-import com.jueggs.andutils.extension.invisibleOrVisible
 import com.jueggs.andutils.extension.longToast
 import com.jueggs.andutils.extension.shortToast
 import com.jueggs.andutils.extension.showConfirmDialog
@@ -13,8 +12,10 @@ import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
+import com.jueggs.vocabularytrainer.helper.FlipFlashCardAnimation
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
+import kotlinx.android.synthetic.main.include_card_flashcard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
@@ -41,6 +42,14 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             if (isShouldShowRemoveFlashCardConfirmation) {
                 showConfirmDialog(R.string.dialog_remove_flashcard_title, R.string.dialog_remove_flashcard_message, viewModel::removeFlashCard, viewModel::cancelFlashCardRemoval)
             }
+            if (!isRevealing) {
+                cardFlashCard.rotationX = if (isRevealed) 180f else 0f
+            }
+            cardFlashCard.isClickable = !isRevealed
+            frameFrontSide.alpha = if (isRevealed) 0f else 1f
+            frameBackSide.alpha = if (isRevealed) 1f else 0f
+            fabWrong.visibleOrInvisible = isRevealing || isRevealed
+            fabCorrect.visibleOrInvisible = isRevealing || isRevealed
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }
@@ -49,17 +58,15 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
                 context?.let { cardFlashCard.setCardBackgroundColor(mapFlashCardBoxToColorInt(box, it)) }
             }
             viewModel.currentFlashCardId = currentFlashCardId
-            fabWrong.visibleOrInvisible = isRevealed
-            fabCorrect.visibleOrInvisible = isRevealed
-            txtFrontSideText.invisibleOrVisible = isRevealed
-            txtBackSideText.visibleOrInvisible = isRevealed
-            cardFlashCard.isClickable = !isRevealed
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
             viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())
             viewModel.stats[FlashCardBox.THREE.index].postValue(stats3.toString())
             viewModel.stats[FlashCardBox.FOUR.index].postValue(stats4.toString())
             viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
             viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
+            if (isShouldAnimateCardFlip) {
+                view?.let { FlipFlashCardAnimation.animate(it, viewModel) }
+            }
         }
     }
 

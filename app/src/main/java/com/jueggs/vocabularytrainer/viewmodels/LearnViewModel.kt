@@ -37,9 +37,9 @@ class LearnViewModel(
 
     override fun addFlashCard() = viewStateStore.dispatch(Trigger { copy(isShouldNavigateToAddFlashCard = true) })
 
-    fun startRevealingBackSide() = viewStateStore.dispatch(Trigger { copy(isShouldAnimateCardFlip = true) })
+    fun flipFlashCard() = viewStateStore.dispatch(Alter { copy(isRevealing = true) }, Trigger { copy(isShouldAnimateCardFlip = true) })
 
-    fun revealBackSide() = viewStateStore.dispatch(Alter { copy(isRevealed = true) })
+    fun setBackSideRevealed() = viewStateStore.dispatch(Alter { copy(isRevealed = true, isRevealing = false) })
 
     fun dismissWrongFlashCard() = viewStateStore.dispatch(dismissWrongFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
 
