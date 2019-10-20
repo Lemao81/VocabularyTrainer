@@ -1,4 +1,4 @@
-package com.jueggs.common.interfaces
+package com.jueggs.vocabularytrainer.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 

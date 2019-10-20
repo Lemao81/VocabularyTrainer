@@ -15,14 +15,7 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/flashCardBoxStats"
-            layout="@layout/flashcard_box_stats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            layout="@layout/include_flashcardbox_stats"
             app:viewModel="@{viewModel}" />
 
         <TextView
@@ -51,8 +44,8 @@
             app:srcCompat="@drawable/ic_exit_to_app_white_24dp" />
 
         <include
-            android:id="@+id/fabAddFlashCard"
-            layout="@layout/fab_add_flash_card"
-            android:onClick="@{() -> viewModel.addFlashCard()}" />
+            layout="@layout/include_fab_add_flashcard"
+            app:viewModel="@{viewModel}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
