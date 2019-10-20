@@ -53,7 +53,6 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             backSideText1?.let { viewModel.backSideTexts[0].postValue(it) }
             backSideText2?.let { viewModel.backSideTexts[1].postValue(it) }
             backSideText3?.let { viewModel.backSideTexts[2].postValue(it) }
-            backSideText4?.let { viewModel.backSideTexts[3].postValue(it) }
         }
     }
 
