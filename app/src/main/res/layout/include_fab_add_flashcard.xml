@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.jueggs.vocabularytrainer.viewmodels.IAddFlashCardViewModel" />
+            type="com.jueggs.vocabularytrainer.viewmodels.interfaces.IAddFlashCardViewModel" />
     </data>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

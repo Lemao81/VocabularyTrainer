@@ -12,79 +12,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
 
         <include
-            android:id="@+id/flashCardBoxStats"
-            layout="@layout/flashcard_box_stats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            layout="@layout/include_lin_flashcardbox_stats"
             app:viewModel="@{viewModel}" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidFlashCard"
+            android:id="@+id/guidFlashCardBottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.55" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardFlashCard"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:onClick="@{() -> viewModel.revealFlashCardBackSide()}"
-            app:cardBackgroundColor="@color/box1_background"
-            app:cardElevation="@dimen/flashcard_elevation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guidFlashCard"
-            app:layout_constraintWidth_percent="0.7">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/txtBoxNumber"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="end"
-                    android:background="@drawable/shape_flashcard_boxnumber"
-                    android:gravity="center"
-                    android:text="@={viewModel.boxNumber}"
-                    android:textSize="12sp"
-                    tools:text="2" />
-
-                <TextView
-                    android:id="@+id/txtFrontSideText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@={viewModel.frontSideText}"
-                    android:textSize="18sp"
-                    android:visibility="invisible"
-                    tools:text="to learn"
-                    tools:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/txtBackSideText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@={viewModel.backSideText}"
-                    android:textSize="18sp"
-                    android:visibility="invisible"
-                    tools:text="lernen"
-                    tools:visibility="visible" />
-            </FrameLayout>
-
-        </androidx.cardview.widget.CardView>
+        <include
+            layout="@layout/include_card_flashcard"
+            app:viewModel="@{viewModel}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabCorrect"
@@ -99,7 +43,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardFlashCard"
+            app:layout_constraintTop_toTopOf="@id/guidFlashCardBottom"
             app:srcCompat="@drawable/ic_check_green_24dp"
             tools:visibility="visible" />
 
@@ -145,8 +89,8 @@
             app:srcCompat="@drawable/ic_remove_white_24dp" />
 
         <include
-            android:id="@+id/fabAddFlashCard"
-            layout="@layout/fab_add_flash_card"
-            android:onClick="@{() -> viewModel.addFlashCard()}" />
+            layout="@layout/include_fab_add_flashcard"
+            app:viewModel="@{viewModel}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

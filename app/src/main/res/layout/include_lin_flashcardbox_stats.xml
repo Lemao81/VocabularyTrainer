@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.jueggs.vocabularytrainer.viewmodels.IStatsViewModel" />
+            type="com.jueggs.vocabularytrainer.viewmodels.interfaces.IStatsViewModel" />
     </data>
 
     <LinearLayout

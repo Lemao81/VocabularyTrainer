@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/include_flashcardbox_stats"
+            layout="@layout/include_lin_flashcardbox_stats"
             app:viewModel="@{viewModel}" />
 
         <TextView

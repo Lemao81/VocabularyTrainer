@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jueggs.vocabularytrainer.viewmodels.LearnViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFlashCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:onClick="@{() -> viewModel.flipFlashCard()}"
+        app:cardBackgroundColor="@color/box1_background"
+        app:cardElevation="@dimen/flashcard_elevation"
+        app:layout_constraintBottom_toTopOf="@id/guidFlashCardBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        tools:layout_height="match_parent"
+        tools:layout_width="match_parent">
+
+        <FrameLayout
+            android:id="@+id/frameFrontSide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/txtBoxNumber"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:background="@drawable/shape_flashcard_boxnumber"
+                android:gravity="center"
+                android:text="@={viewModel.boxNumber}"
+                android:textSize="12sp"
+                tools:text="2" />
+
+            <TextView
+                android:id="@+id/txtFrontSideText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@={viewModel.frontSideText}"
+                android:textSize="18sp"
+                tools:text="to learn" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameBackSide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:padding="8dp"
+            android:rotationX="-180">
+
+            <TextView
+                android:id="@+id/txtBackSideText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@={viewModel.backSideText}"
+                android:textSize="18sp"
+                tools:text="lernen" />
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
