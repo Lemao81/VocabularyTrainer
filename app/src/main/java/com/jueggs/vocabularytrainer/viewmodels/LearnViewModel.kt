@@ -13,6 +13,8 @@ import com.jueggs.domain.viewstates.LearnViewState
 import com.jueggs.jutils.usecase.Alter
 import com.jueggs.jutils.usecase.Trigger
 import com.jueggs.vocabularytrainer.R
+import com.jueggs.vocabularytrainer.viewmodels.interfaces.IAddFlashCardViewModel
+import com.jueggs.vocabularytrainer.viewmodels.interfaces.IStatsViewModel
 
 class LearnViewModel(
     private val showNextFlashCardUseCase: ShowNextFlashCardUseCase,
