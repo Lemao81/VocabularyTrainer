@@ -3,37 +3,28 @@ package com.jueggs.vocabularytrainer.helper
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.view.View
-import androidx.cardview.widget.CardView
 import androidx.core.animation.doOnEnd
+import com.jueggs.andutils.adapter._addListener
 import com.jueggs.jutils.extension.being
 import com.jueggs.vocabularytrainer.R
-import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
+import com.jueggs.vocabularytrainer.models.FlipFlashCardAnimationData
 
 object FlipFlashCardAnimation {
-    fun animate(rootView: View, viewModel: LearnViewModel) {
-        AnimatorInflater.loadAnimator(rootView.context, R.animator.flip_flashcard).apply {
-            val flashCardView = rootView.findViewById<CardView>(R.id.cardFlashCard)
-            val frontSideView = rootView.findViewById<View>(R.id.frameFrontSide)
-            val backSideView = rootView.findViewById<View>(R.id.frameBackSide)
-            val set = this as AnimatorSet
-            val flipAnimator = set.childAnimations[0].being<ObjectAnimator>()
-            val translationZAnimator = set.childAnimations[1].being<ObjectAnimator>()
-            val translationYAnimator = set.childAnimations[2].being<ObjectAnimator>()
-            var isHalfWayThrough = false
+    fun animate(data: FlipFlashCardAnimationData) {
+        AnimatorInflater.loadAnimator(data.context, R.animator.flip_flashcard).apply {
+            val translationZAnimator = being<AnimatorSet>().childAnimations[1].being<ObjectAnimator>()
+            val translationYAnimator = being<AnimatorSet>().childAnimations[2].being<ObjectAnimator>()
 
-            flipAnimator.addUpdateListener {
-                if (!isHalfWayThrough && it.animatedFraction > 0.5) {
-                    frontSideView.alpha = 0f
-                    backSideView.alpha = 1f
-                    isHalfWayThrough = true
+            translationZAnimator._addListener {
+                _onAnimationRepeat {
+                    data.frontSideView.alpha = 0f
+                    data.backSideView.alpha = 1f
                 }
             }
-
-            translationZAnimator.setFloatValues(0f, flashCardView.height.toFloat())
-            translationYAnimator.setFloatValues(0f, flashCardView.height / 4f)
-            doOnEnd { viewModel.setBackSideRevealed() }
-            setTarget(flashCardView)
+            translationZAnimator.setFloatValues(0f, data.flashCardView.height.toFloat())
+            translationYAnimator.setFloatValues(0f, data.flashCardView.height / 4f)
+            doOnEnd { data.viewModel.setBackSideRevealed() }
+            setTarget(data.flashCardView)
             start()
         }
     }

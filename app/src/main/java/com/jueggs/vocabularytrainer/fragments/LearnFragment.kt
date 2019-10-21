@@ -13,6 +13,7 @@ import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.helper.FlipFlashCardAnimation
+import com.jueggs.vocabularytrainer.models.FlipFlashCardAnimationData
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.android.synthetic.main.include_card_flashcard.*
@@ -65,7 +66,10 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
             viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
             if (isShouldAnimateCardFlip) {
-                view?.let { FlipFlashCardAnimation.animate(it, viewModel) }
+                context?.let {
+                    val data = FlipFlashCardAnimationData(it, viewModel, cardFlashCard, frameFrontSide, frameBackSide)
+                    FlipFlashCardAnimation.animate(data)
+                }
             }
         }
     }
