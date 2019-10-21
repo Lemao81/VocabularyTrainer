@@ -8,7 +8,7 @@ import com.jueggs.domain.services.interfaces.IAppInitializer
 import com.jueggs.jutils.logging.LogCategory
 import com.jueggs.jutils.logging.Logger
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
-import com.jueggs.vocabularytrainer.notifications.DailyLearnNotification
+import com.jueggs.vocabularytrainer.helper.DailyLearnNotification
 import kotlinx.serialization.ImplicitReflectionSerializer
 import org.jetbrains.anko.notificationManager
 import org.koin.android.ext.android.inject

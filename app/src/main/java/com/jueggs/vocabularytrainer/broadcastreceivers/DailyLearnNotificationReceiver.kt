@@ -7,7 +7,7 @@ import com.jueggs.andutils.extension.isInForeground
 import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
-import com.jueggs.vocabularytrainer.notifications.DailyLearnNotification
+import com.jueggs.vocabularytrainer.helper.DailyLearnNotification
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime

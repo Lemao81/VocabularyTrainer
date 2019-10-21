@@ -1,4 +1,4 @@
-package com.jueggs.vocabularytrainer.notifications
+package com.jueggs.vocabularytrainer.helper
 
 import android.app.Notification.DEFAULT_ALL
 import android.app.PendingIntent.FLAG_ONE_SHOT
