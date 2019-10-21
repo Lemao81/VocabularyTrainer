@@ -2,7 +2,6 @@ package com.jueggs.vocabularytrainer
 
 import com.jueggs.andutils.logging.AndroidLogManager
 import com.jueggs.andutils.logging.LogcatLogTarget
-import com.jueggs.andutils.logging.RoomLogTarget
 import com.jueggs.database.AppDatabase
 import com.jueggs.database.mapper.FlashCardMapper
 import com.jueggs.database.mapper.interfaces.IFlashCardMapper
@@ -47,11 +46,13 @@ val mainKoinModule = module {
     single { FlashCardRepository(AppDatabase.getInstance(get()).getFlashCardDao(), get()) as IFlashCardRepository }
     single { JsonSerializer(Json(JsonConfiguration.Default)) as ISerializer }
     single { FlashCardMapper(get()) as IFlashCardMapper }
-    single { AndroidLogManager(
-        listOf(LogcatLogTarget(), FirestoreLogTarget(get()), RoomLogTarget(AppDatabase.getInstance(get()).getLogDao())),
-        BuildConfig.DEBUG,
-        BuildConfig.FLAVOR
-    ) as ILogManager }
+    single {
+        AndroidLogManager(
+            listOf(LogcatLogTarget(), FirestoreLogTarget(get())),
+            BuildConfig.DEBUG,
+            BuildConfig.FLAVOR
+        ) as ILogManager
+    }
 
     single { AddFlashCardUseCase(get(), get()) }
     single { DismissCorrectFlashCardUseCase(get(), get()) }

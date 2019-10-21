@@ -7,11 +7,11 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.135"
+    const val andutils = "1.0.137"
     const val andtestutils = "1.0.11"
-    const val jutils = "1.0.34"
+    const val jutils = "1.0.35"
     const val jtestutils = "1.0.0"
-    const val firebaseutils = "1.0.9"
+    const val firebaseutils = "1.0.10"
     const val resutils = "1.0.9"
     const val customviewutils = "1.0.8"
     const val rxutils = "1.0.0"

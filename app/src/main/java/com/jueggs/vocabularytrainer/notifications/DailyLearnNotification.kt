@@ -8,6 +8,8 @@ import com.jueggs.andutils.extension.createSettingsIntent
 import com.jueggs.andutils.extension.pendingActivityIntent
 import com.jueggs.andutils.extension.pendingActivityIntentFor
 import com.jueggs.common.isEclairOrAbove
+import com.jueggs.jutils.logging.LogCategory
+import com.jueggs.jutils.logging.Logger
 import com.jueggs.vocabularytrainer.MainActivity
 import com.jueggs.vocabularytrainer.R
 import org.jetbrains.anko.notificationManager
@@ -32,6 +34,7 @@ object DailyLearnNotification {
 
         if (isEclairOrAbove()) {
             context.notificationManager.notify(TAG, 0, builder.build())
+            Logger.newEntry("daily notification sent").withCategory(LogCategory.NOTIFICATION).logInfo()
         }
     }
 
