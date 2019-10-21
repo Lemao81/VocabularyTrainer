@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import com.jueggs.andutils.base.BaseApplication
 import com.jueggs.common.isOreoOrAbove
+import com.jueggs.domain.services.interfaces.IAppInitializer
 import com.jueggs.jutils.logging.LogCategory
 import com.jueggs.jutils.logging.Logger
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
@@ -14,6 +15,7 @@ import org.koin.android.ext.android.inject
 
 class App : BaseApplication(isDebug = BuildConfig.DEBUG) {
     val alarmService by inject<IAlarmService>()
+    val appInitializer by inject<IAppInitializer>()
 
     @ImplicitReflectionSerializer
     override fun koinModules() = listOf(mainKoinModule, buildVariantKoinModule)
@@ -24,6 +26,7 @@ class App : BaseApplication(isDebug = BuildConfig.DEBUG) {
             notificationManager.createNotificationChannel(notificationChannel)
         }
         alarmService.scheduleDailyLearnAlarm(this)
+        appInitializer.initialize()
     }
 
     override fun onUncaughtException(exception: Throwable) {

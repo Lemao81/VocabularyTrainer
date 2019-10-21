@@ -5,8 +5,8 @@ import org.joda.time.DateTime
 
 class FlashCard(
     var id: Long? = null,
-    var frontSideText: String,
-    var backSideTexts: List<String>,
-    var lastLearnedDate: DateTime,
-    var box: com.jueggs.domain.enums.FlashCardBox
+    var frontSideText: String = "",
+    var backSideTexts: List<String> = mutableListOf(),
+    var lastLearnedDate: DateTime = DateTime.now(),
+    var box: FlashCardBox = FlashCardBox.ONE
 )

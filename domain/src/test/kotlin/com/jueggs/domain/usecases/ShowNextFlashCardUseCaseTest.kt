@@ -63,8 +63,8 @@ internal class ShowNextFlashCardUseCaseTest : AbstractUseCaseTest<ShowNextFlashC
         fun `test that cards are found in correct order`() {
             // Arrange
             val flashCardsBox3 = listOf(
-                FlashCard(1, "any", listOf(), DateTime.now(), FlashCardBox.THREE),
-                FlashCard(2, "any", listOf(), DateTime.now().minusDays(1), FlashCardBox.THREE)
+                FlashCard(1, "any", box = FlashCardBox.THREE),
+                FlashCard(2, "any", lastLearnedDate = DateTime.now().minusDays(1), box = FlashCardBox.THREE)
             )
             coEvery { flashCardRepositoryMock.readByBoxAndExpiryDate(FlashCardBox.ONE, any()) } returns emptyList()
             coEvery { flashCardRepositoryMock.readByBoxAndExpiryDate(FlashCardBox.TWO, any()) } returns emptyList()

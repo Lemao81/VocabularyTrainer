@@ -1,6 +1,11 @@
 package com.jueggs.database.daos
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import com.jueggs.database.entities.FlashCardEntity
 
 @Dao
@@ -16,6 +21,9 @@ interface IFlashCardDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(card: FlashCardEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(cards: List<FlashCardEntity>)
 
     @Update
     fun update(card: FlashCardEntity)
