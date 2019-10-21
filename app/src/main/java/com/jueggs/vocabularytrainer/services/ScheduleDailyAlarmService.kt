@@ -6,7 +6,7 @@ import android.os.IBinder
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAlarmService
 import org.koin.android.ext.android.inject
 
-class ScheduleDailyAlarmIntentService : Service() {
+class ScheduleDailyAlarmService : Service() {
     val alarmService by inject<IAlarmService>()
 
     override fun onBind(intent: Intent?): IBinder? = null

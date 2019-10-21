@@ -30,7 +30,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".services.ScheduleDailyAlarmIntentService" />
+        <service android:name=".services.ScheduleDailyAlarmService" />
     </application>
 
 </manifest>
