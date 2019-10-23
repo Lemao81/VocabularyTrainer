@@ -54,6 +54,11 @@ object BuildTypes {
     const val debug = "debug"
 }
 
+object GlobalProductFlavors {
+    const val dev = "dev"
+    const val prod = "prod"
+}
+
 object Paths {
     const val fromProjectBaseFiles = "../base/baseFiles/gradleBaseFiles/"
     const val baseProject = "$fromProjectBaseFiles/base/base-project.gradle"

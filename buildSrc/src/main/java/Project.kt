@@ -24,6 +24,4 @@ object Dimensions {
 }
 
 object Flavors {
-    const val dev = "dev"
-    const val prod = "prod"
 }

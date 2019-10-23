@@ -32,4 +32,11 @@ class App : BaseApplication(isDebug = BuildConfig.DEBUG) {
     override fun onUncaughtException(exception: Throwable) {
         Logger.newEntry().withCategory(LogCategory.UNHANDLEDEXCEPTION).withException(exception).logFatal()
     }
+
+    companion object {
+        val isDebug = BuildConfig.DEBUG
+        val isRelease = !BuildConfig.DEBUG
+        val isDev = BuildConfig.FLAVOR == "dev"
+        val isProd = BuildConfig.FLAVOR == "prod"
+    }
 }

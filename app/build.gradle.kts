@@ -11,7 +11,8 @@ android {
     configureAndroidAppExtension()
     minifyRelease()
     optimizeBuildTime(project)
-    addDebugBuildConfigField("ENABLE_NOTIFICATION", false)
+    addDevBuildConfigField("ENABLE_NOTIFICATION", false)
+    addDevBuildConfigField("ANIMATION_DECELERATION_FACTOR", 1)
 
     dataBinding.isEnabled = true
 }

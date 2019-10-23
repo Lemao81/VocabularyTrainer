@@ -9,13 +9,13 @@ fun BaseAppModuleExtension.configureAndroidAppExtension(isShouldConfigureDevProd
     if (isShouldConfigureDevProdFlavors) {
         configureDevProdFlavors(isWithMinifiedConfig)
 
-        val devFlavor = this.productFlavors.getByName(Flavors.dev)
-        devFlavor.applicationIdSuffix = ".dev"
+        val devFlavor = productFlavors.getByName(GlobalProductFlavors.dev)
+        devFlavor.applicationIdSuffix = ".${GlobalProductFlavors.dev}"
         devFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.devName)
-        val prodFlavor = this.productFlavors.getByName(Flavors.prod);
+        val prodFlavor = productFlavors.getByName(GlobalProductFlavors.prod);
         prodFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.prodName)
     }
-    this.defaultConfig.applicationId = App.applicationId
+    defaultConfig.applicationId = App.applicationId
 }
 
 fun BaseExtension.configureAndroidLibraryExtension(isShouldConfigureDevProdFlavors: Boolean = true, isWithMinifiedConfig: Boolean = true) {
@@ -26,8 +26,8 @@ fun BaseExtension.configureAndroidLibraryExtension(isShouldConfigureDevProdFlavo
 }
 
 fun BaseExtension.configureAndroidExtension() {
-    this.compileSdkVersion(Android.compileSdkVersion)
-    this.defaultConfig {
+    compileSdkVersion(Android.compileSdkVersion)
+    defaultConfig {
         versionCode = App.versionCode
         versionName = App.versionName
         minSdkVersion(Android.minSdkVersion)
@@ -38,24 +38,24 @@ fun BaseExtension.configureAndroidExtension() {
         javaCompileOptions { annotationProcessorOptions.includeCompileClasspath = true }
     }
 
-    this.dexOptions.preDexLibraries = true
-    this.packagingOptions.pickFirst("protobuf.meta")
+    dexOptions.preDexLibraries = true
+    packagingOptions.pickFirst("protobuf.meta")
 
-    this.compileOptions {
+    compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
 fun BaseExtension.configureDevProdFlavors(isWithMinifiedConfig: Boolean = true) {
-    this.flavorDimensions(Dimensions.main)
-    this.productFlavors {
-        create(Flavors.dev) {
+    flavorDimensions(Dimensions.main)
+    productFlavors {
+        create(GlobalProductFlavors.dev) {
             if (isWithMinifiedConfig) {
                 resConfigs(ResConfigConstants.EN, ResConfigConstants.XHDPI)
             }
         }
-        create(Flavors.prod)
+        create(GlobalProductFlavors.prod)
     }
 }
 
@@ -72,25 +72,25 @@ fun configureKotlinCompileTasks(project: Project) {
 
 fun disableLintTasks(project: Project) {
     project.tasks.whenTaskAdded {
-        if (this.name.startsWith("lint")) {
-            this.enabled = false
+        if (name.startsWith("lint")) {
+            enabled = false
         }
     }
 }
 
 fun ignoreReleaseBuild(project: Project) {
     project.afterEvaluate {
-        val android = this.extensions.findByName(Extensions.android) as? BaseExtension
+        val android = extensions.findByName(Extensions.android) as? BaseExtension
         android?.variantFilter {
-            if (this.buildType.name == BuildTypes.release) {
-                this.setIgnore(true)
+            if (buildType.name == BuildTypes.release) {
+                setIgnore(true)
             }
         }
     }
 }
 
 fun BaseExtension.minifyRelease() {
-    this.buildTypes {
+    buildTypes {
         getByName(BuildTypes.release) {
             isMinifyEnabled = true
             proguardFiles(this@minifyRelease.getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
@@ -100,14 +100,26 @@ fun BaseExtension.minifyRelease() {
 
 fun BaseExtension.optimizeBuildTime(project: Project) {
     if (project.hasProperty("devBuild")) {
-        this.splits {
+        splits {
             abi.isEnable = false
             density.isEnable = false
         }
-        this.aaptOptions.cruncherEnabled = false
+        aaptOptions.cruncherEnabled = false
     }
 }
 
 inline fun <reified T> BaseExtension.addDebugBuildConfigField(name: String, value: T) {
-    this.buildTypes.findByName(BuildTypes.debug)?.buildConfigField(T::class.simpleName, name, value.toString())
+    buildTypes.findByName(BuildTypes.debug)?.buildConfigField(getTypeName<T>(), name, value.toString())
+}
+
+inline fun <reified T> BaseExtension.addDevBuildConfigField(name: String, value: T) {
+    productFlavors.findByName(GlobalProductFlavors.dev)?.buildConfigField(getTypeName<T>(), name, value.toString())
+}
+
+inline fun <reified T> getTypeName(): String? {
+    return when {
+        T::class == Int::class -> "int"
+        T::class == Float::class -> "float"
+        else -> T::class.simpleName
+    }
 }
