@@ -66,7 +66,7 @@ class AnimationService(
         flashCardView.animate().apply {
             translationX(directionScalar * Charles.screenWidth.toFloat())
             translationY(-flashCardView.height.toFloat())
-            rotation(-directionScalar * context.getFloat(135))
+            rotation(-directionScalar * 135f)
             duration = context.getLong(R.integer.card_dismiss_duration)
             interpolator = AccelerateInterpolator()
             decelerateIfDev()
