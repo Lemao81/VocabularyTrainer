@@ -28,38 +28,40 @@
 
         <include
             layout="@layout/include_card_flashcard"
-            app:viewModel="@{viewModel}" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabCorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{() -> viewModel.dismissCorrectFlashCard()}"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/fabWrong"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/guidFlashCardBottom"
-            app:srcCompat="@drawable/ic_check_green_24dp"
-            tools:visibility="visible" />
+            app:viewModel="@{viewModel}"
+            tools:layout_height="wrap_content"
+            tools:layout_width="wrap_content" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabWrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> viewModel.dismissWrongFlashCard()}"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fabCorrect"
-            app:layout_constraintTop_toTopOf="@id/fabCorrect"
+            app:layout_constraintEnd_toStartOf="@id/fabCorrect"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidFlashCardBottom"
             app:srcCompat="@drawable/ic_clear_red_24dp"
+            tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.dismissCorrectFlashCard()}"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fabWrong"
+            app:layout_constraintTop_toTopOf="@id/fabWrong"
+            app:srcCompat="@drawable/ic_check_green_24dp"
             tools:visibility="visible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

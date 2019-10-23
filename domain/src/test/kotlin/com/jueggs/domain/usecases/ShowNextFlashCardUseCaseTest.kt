@@ -80,8 +80,8 @@ internal class ShowNextFlashCardUseCaseTest : AbstractUseCaseTest<ShowNextFlashC
             assertThat(capturedStateEvents.size).isEqualTo(1)
             assertThat(capturedStateEvents[0]).isInstanceOf(Alter::class.java)
             val viewState = capturedStateEvents[0].action(LearnViewState())
-            assertThat(viewState.nextShownFlashCardBox).isNotNull
-            assertThat(viewState.nextShownFlashCardBox!!.number).isEqualTo(FlashCardBox.THREE.number)
+            assertThat(viewState.nextFlashCardBox).isNotNull
+            assertThat(viewState.nextFlashCardBox!!.number).isEqualTo(FlashCardBox.THREE.number)
             assertThat(viewState.currentFlashCardId).isEqualTo(2)
         }
 
