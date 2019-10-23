@@ -1,6 +1,5 @@
 package com.jueggs.vocabularytrainer.fragments
 
-import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.colorResToInt
@@ -12,15 +11,17 @@ import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
-import com.jueggs.vocabularytrainer.helper.FlipFlashCardAnimation
-import com.jueggs.vocabularytrainer.models.FlipFlashCardAnimationData
+import com.jueggs.vocabularytrainer.domainservices.interfaces.IAnimationService
+import com.jueggs.vocabularytrainer.models.FlashCardFlipAnimationData
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.android.synthetic.main.include_card_flashcard.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     val viewModel by viewModel<LearnViewModel>()
+    val animationService by inject<IAnimationService>()
 
     override fun layout() = R.layout.fragment_learn
     override fun bindingItems() = mapOf(BR.viewModel to viewModel)
@@ -54,9 +55,9 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             longMessage?.let { longToast(it) }
             frontSideText?.let { viewModel.frontSideText.postValue(it) }
             backSideText?.let { viewModel.backSideText.postValue(it) }
-            nextShownFlashCardBox?.let { box ->
+            nextFlashCardBox?.let { box ->
                 viewModel.boxNumber.postValue(box.number.toString())
-                context?.let { cardFlashCard.setCardBackgroundColor(mapFlashCardBoxToColorInt(box, it)) }
+                mapFlashCardBoxToColorInt(box)?.let { cardFlashCard.setCardBackgroundColor(it) }
             }
             viewModel.currentFlashCardId = currentFlashCardId
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
@@ -65,11 +66,18 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             viewModel.stats[FlashCardBox.FOUR.index].postValue(stats4.toString())
             viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
             viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
+            if (isShouldAnimateCardDisplay) {
+                animationService.animateFlashCardDisplay(cardFlashCard)
+            }
             if (isShouldAnimateCardFlip) {
-                context?.let {
-                    val data = FlipFlashCardAnimationData(it, viewModel, cardFlashCard, frameFrontSide, frameBackSide)
-                    FlipFlashCardAnimation.animate(data)
-                }
+                val data = FlashCardFlipAnimationData(cardFlashCard, frameFrontSide, frameBackSide, Runnable { viewModel.setBackSideRevealed() })
+                animationService.animateFlashCardFlip(data)
+            }
+            if (isShouldAnimateDismissCorrect) {
+                animationService.animateDismissFlashCardCorrect(cardFlashCard, Runnable { viewModel.showNextFlashCard() })
+            }
+            if (isShouldAnimateDismissWrong) {
+                animationService.animateDismissFlashCardWrong(cardFlashCard, Runnable { viewModel.showNextFlashCard() })
             }
         }
     }
@@ -78,7 +86,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
         viewModel.updateStats()
     }
 
-    private fun mapFlashCardBoxToColorInt(box: FlashCardBox, context: Context): Int {
+    private fun mapFlashCardBoxToColorInt(box: FlashCardBox): Int? {
         val colorId = when (box) {
             FlashCardBox.TWO -> R.color.box2_background
             FlashCardBox.THREE -> R.color.box3_background
@@ -88,6 +96,6 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             else -> R.color.box1_background
         }
 
-        return context.colorResToInt(colorId)
+        return context?.colorResToInt(colorId)
     }
 }

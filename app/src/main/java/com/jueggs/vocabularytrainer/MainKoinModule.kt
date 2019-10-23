@@ -25,6 +25,8 @@ import com.jueggs.jutils.logging.ILogManager
 import com.jueggs.jutils.service.ISerializer
 import com.jueggs.jutils.service.JsonSerializer
 import com.jueggs.jutils.validation.IValidator
+import com.jueggs.vocabularytrainer.domainservices.AnimationService
+import com.jueggs.vocabularytrainer.domainservices.interfaces.IAnimationService
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
@@ -53,6 +55,7 @@ val mainKoinModule = module {
             BuildConfig.FLAVOR
         ) as ILogManager
     }
+    single { AnimationService(get()) as IAnimationService }
 
     single { AddFlashCardUseCase(get(), get()) }
     single { DismissCorrectFlashCardUseCase(get(), get()) }

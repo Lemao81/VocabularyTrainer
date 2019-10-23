@@ -18,8 +18,8 @@ import com.jueggs.vocabularytrainer.viewmodels.interfaces.IStatsViewModel
 
 class LearnViewModel(
     private val showNextFlashCardUseCase: ShowNextFlashCardUseCase,
-    private val dismissWrongFlashCardUseCase: DismissWrongFlashCardUseCase,
     private val dismissCorrectFlashCardUseCase: DismissCorrectFlashCardUseCase,
+    private val dismissWrongFlashCardUseCase: DismissWrongFlashCardUseCase,
     private val removeFlashCardUseCase: RemoveFlashCardUseCase,
     private val updateLearnViewStatsUseCase: UpdateLearnViewStatsUseCase,
     private val context: Context
@@ -41,12 +41,14 @@ class LearnViewModel(
 
     fun setBackSideRevealed() = viewStateStore.dispatch(Alter { copy(isRevealed = true, isRevealing = false) })
 
-    fun dismissWrongFlashCard() = viewStateStore.dispatch(dismissWrongFlashCardUseCase(currentFlashCardId), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
-
     fun dismissCorrectFlashCard() {
         val data = DismissCorrectFlashCardData(currentFlashCardId, context.getString(R.string.message_card_learned))
-        viewStateStore.dispatch(dismissCorrectFlashCardUseCase(data), showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
+        viewStateStore.dispatch(dismissCorrectFlashCardUseCase(data))
     }
+
+    fun dismissWrongFlashCard() = viewStateStore.dispatch(dismissWrongFlashCardUseCase(currentFlashCardId))
+
+    fun showNextFlashCard() = viewStateStore.dispatch(showNextFlashCardUseCase(), updateLearnViewStatsUseCase())
 
     fun showRemoveFlashCardConfirmation() = viewStateStore.dispatch(Alter { copy(isShouldShowRemoveFlashCardConfirmation = true) })
 

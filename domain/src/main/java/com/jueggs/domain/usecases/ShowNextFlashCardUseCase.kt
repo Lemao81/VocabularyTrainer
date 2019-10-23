@@ -1,9 +1,9 @@
 package com.jueggs.domain.usecases
 
 import com.jueggs.domain.enums.FlashCardBox
+import com.jueggs.domain.models.FlashCard
 import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
-import com.jueggs.domain.models.FlashCard
 import com.jueggs.domain.viewstates.LearnViewState
 import com.jueggs.jutils.Util
 import com.jueggs.jutils.extension.join
@@ -45,9 +45,10 @@ class ShowNextFlashCardUseCase(
                     backSideText = backSideText,
                     currentFlashCardId = card.id,
                     isRevealed = false,
-                    nextShownFlashCardBox = card.box
+                    nextFlashCardBox = card.box
                 )
             }
+            triggerViewState { copy(isShouldAnimateCardDisplay = true) }
         }
     }
 }

@@ -16,6 +16,7 @@ class DismissWrongFlashCardUseCase(
             flashCard.box = FlashCardBox.ONE
             flashCard.lastLearnedDate = DateTime.now()
             flashCardRepository.update(flashCard)
+            triggerViewState { copy(isShouldAnimateDismissWrong = true) }
             alterViewState { copy(currentFlashCardId = null) }
         }
     }
