@@ -1,11 +1,15 @@
 package com.jueggs.vocabularytrainer.domainservices
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import androidx.annotation.IntegerRes
+import androidx.core.animation.doOnEnd
+import com.jueggs.andutils.extension.doOnHalfTime
+import com.jueggs.andutils.extension.getLong
 import com.jueggs.vocabularytrainer.Charles
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAnimationService
@@ -25,35 +29,19 @@ class AnimationService(
     }
 
     override fun animateFlashCardFlip(data: FlashCardFlipAnimationData) {
-        val animationDuration = context.getLong(R.integer.card_flip_duration)
-        val halfAnimationDuration = animationDuration / 2
+        val rotationValueHolder = PropertyValuesHolder.ofFloat(View.ROTATION_X, 180f)
+        val translationYValueHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, data.flashCardView.height / 4f, 0f)
+        val translationZValueHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Z, 0f, data.flashCardView.height.toFloat() * 1.1f, 0f)
 
-        data.flashCardView.animate().apply {
-            rotationX(180f)
-            duration = animationDuration
+        ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, rotationValueHolder, translationYValueHolder, translationZValueHolder).apply {
+            duration = context.getLong(R.integer.card_flip_duration)
             interpolator = AccelerateDecelerateInterpolator()
             decelerateIfDev()
-            start()
-        }
-        data.flashCardView.animate().apply {
-            translationY(data.flashCardView.height / 4f)
-            translationZ(data.flashCardView.height.toFloat() * 1.1f)
-            duration = halfAnimationDuration
-            interpolator = AccelerateDecelerateInterpolator()
-            decelerateIfDev()
-            withEndAction {
+            doOnHalfTime {
                 data.frontSideView.alpha = 0f
                 data.backSideView.alpha = 1f
-                data.flashCardView.animate().apply {
-                    translationY(0f)
-                    translationZ(0f)
-                    duration = halfAnimationDuration
-                    interpolator = AccelerateDecelerateInterpolator()
-                    decelerateIfDev()
-                    withEndAction(data.endAction)
-                    start()
-                }
             }
+            doOnEnd { data.endAction.run() }
             start()
         }
     }
@@ -88,10 +76,3 @@ class AnimationService(
         const val DIRECTION_RIGHT = 1
     }
 }
-
-// TODO lib
-fun Context.getInteger(@IntegerRes resId: Int) = resources.getInteger(resId)
-
-fun Context.getLong(@IntegerRes resId: Int) = (resources.getInteger(resId)).toLong()
-
-fun Context.getFloat(@IntegerRes resId: Int) = (resources.getInteger(resId)).toFloat()

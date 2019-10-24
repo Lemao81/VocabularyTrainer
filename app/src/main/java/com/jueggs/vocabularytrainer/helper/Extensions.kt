@@ -1,13 +1,10 @@
 package com.jueggs.vocabularytrainer.helper
 
+import android.animation.ValueAnimator
 import android.view.ViewPropertyAnimator
 import com.jueggs.vocabularytrainer.App
 import com.jueggs.vocabularytrainer.BuildConfig
 
-fun ViewPropertyAnimator.decelerateIfDev(): ViewPropertyAnimator {
-    if (App.isDev) {
-        duration *= BuildConfig.ANIMATION_DECELERATION_FACTOR
-    }
+fun ViewPropertyAnimator.decelerateIfDev() = if (App.isDev) also { duration *= BuildConfig.ANIMATION_DECELERATION_FACTOR } else this
 
-    return this
-}
+fun ValueAnimator.decelerateIfDev() = if (App.isDev) also { duration *= BuildConfig.ANIMATION_DECELERATION_FACTOR } else this

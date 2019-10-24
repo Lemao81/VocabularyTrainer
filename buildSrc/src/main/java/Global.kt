@@ -108,6 +108,10 @@ fun BaseExtension.optimizeBuildTime(project: Project) {
     }
 }
 
+inline fun <reified T> BaseExtension.addBuildConfigField(name: String, value: T) {
+    buildTypes.forEach { it.buildConfigField(getTypeName<T>(), name, value.toString()) }
+}
+
 inline fun <reified T> BaseExtension.addDebugBuildConfigField(name: String, value: T) {
     buildTypes.findByName(BuildTypes.debug)?.buildConfigField(getTypeName<T>(), name, value.toString())
 }
