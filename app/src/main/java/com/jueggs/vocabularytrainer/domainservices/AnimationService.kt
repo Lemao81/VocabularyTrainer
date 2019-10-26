@@ -1,5 +1,6 @@
 package com.jueggs.vocabularytrainer.domainservices
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
@@ -8,7 +9,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.core.animation.doOnEnd
-import com.jueggs.andutils.extension.doOnHalfTime
 import com.jueggs.andutils.extension.getLong
 import com.jueggs.vocabularytrainer.Charles
 import com.jueggs.vocabularytrainer.R
@@ -19,6 +19,7 @@ import com.jueggs.vocabularytrainer.models.FlashCardFlipAnimationData
 class AnimationService(
     private val context: Context
 ) : IAnimationService {
+
     override fun animateFlashCardDisplay(flashCardView: View) {
         flashCardView.animate().apply {
             alpha(1f)
@@ -29,21 +30,36 @@ class AnimationService(
     }
 
     override fun animateFlashCardFlip(data: FlashCardFlipAnimationData) {
-        val rotationValueHolder = PropertyValuesHolder.ofFloat(View.ROTATION_X, 180f)
-        val translationYValueHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, data.flashCardView.height / 4f, 0f)
-        val translationZValueHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Z, 0f, data.flashCardView.height.toFloat() * 1.1f, 0f)
+        val yAmplitude = data.flashCardView.height / 4f
+        val zAmplitude = data.flashCardView.height * 1.1f
+        val rotationHolder = PropertyValuesHolder.ofFloat(View.ROTATION_X, 180f)
+        val yTranslationOutHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, 0f, yAmplitude)
+        val yTranslationInHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, yAmplitude, 0f)
+        val zTranslationOutHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Z, 0f, zAmplitude)
+        val zTranslationInHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Z, zAmplitude, 0f)
 
-        ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, rotationValueHolder, translationYValueHolder, translationZValueHolder).apply {
+        ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, rotationHolder).apply {
             duration = context.getLong(R.integer.card_flip_duration)
             interpolator = AccelerateDecelerateInterpolator()
             decelerateIfDev()
-            doOnHalfTime {
-                data.frontSideView.alpha = 0f
-                data.backSideView.alpha = 1f
-            }
             doOnEnd { data.endAction.run() }
             start()
         }
+        val translationOutAnimation = ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, yTranslationOutHolder, zTranslationOutHolder).apply {
+            duration = context.getLong(R.integer.card_flip_duration) / 2
+            interpolator = AccelerateDecelerateInterpolator()
+            decelerateIfDev()
+            doOnEnd {
+                data.frontSideView.alpha = 0f
+                data.backSideView.alpha = 1f
+            }
+        }
+        val translationInAnimation = ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, yTranslationInHolder, zTranslationInHolder).apply {
+            duration = context.getLong(R.integer.card_flip_duration) / 2
+            interpolator = AccelerateDecelerateInterpolator()
+            decelerateIfDev()
+        }
+        AnimatorSet().apply { play(translationOutAnimation).before(translationInAnimation) }.start()
     }
 
     override fun animateDismissFlashCardCorrect(flashCardView: View, endAction: Runnable) = animateDismissFlashCard(flashCardView, endAction, DIRECTION_RIGHT)
