@@ -6,10 +6,14 @@ import com.jueggs.andutils.base.BaseFragment
 import com.jueggs.andutils.extension.goneOrVisible
 import com.jueggs.andutils.extension.hideKeyboard
 import com.jueggs.andutils.extension.invisibleOrVisible
+import com.jueggs.andutils.extension.longToast
 import com.jueggs.andutils.extension.onEditDone
 import com.jueggs.andutils.extension.shortToast
 import com.jueggs.andutils.extension.showKeyboard
 import com.jueggs.andutils.extension.visibleOrInvisible
+import com.jueggs.domain.models.BlankBackSide
+import com.jueggs.domain.models.BlankFrontSide
+import com.jueggs.domain.models.Valid
 import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
@@ -29,6 +33,11 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
             if (isShouldPopFragment) {
                 navController?.popBackStack()
             }
+            when (inputValidationResult) {
+                BlankFrontSide -> R.string.message_enter_front_side
+                BlankBackSide -> R.string.message_enter_back_side
+                Valid -> null
+            }?.let { longToast(it) }
             if (isShouldEmptyInputs) {
                 viewModel.frontSideText.postValue("")
                 viewModel.backSideTexts.forEach { it.postValue("") }
@@ -57,7 +66,11 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     }
 
     override fun setListeners() = edtBackSide3.onEditDone {
-        viewModel.addFlashCard()
+        if (navArgs.flashCardId != INVALIDL) {
+            viewModel.updateFlashCard()
+        } else {
+            viewModel.addFlashCard()
+        }
         activity?.hideKeyboard()
     }
 

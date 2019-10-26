@@ -1,9 +1,10 @@
 package com.jueggs.domain.viewstates
 
 import com.jueggs.domain.models.FlashCardInputValidationResult
+import com.jueggs.domain.models.Valid
 
 data class AddFlashCardViewState(
-    val inputValidationResult: FlashCardInputValidationResult? = null,
+    val inputValidationResult: FlashCardInputValidationResult = Valid,
     val isShouldPopFragment: Boolean = false,
     val isShouldEmptyInputs: Boolean = false,
     val isShouldFocusFrontSideEdit: Boolean = false,
