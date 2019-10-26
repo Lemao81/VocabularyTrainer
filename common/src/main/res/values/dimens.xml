@@ -5,6 +5,5 @@
     <dimen name="stats_border_width_negative">-2dp</dimen>
     <dimen name="stats_text_size">16sp</dimen>
     <dimen name="flashcard_elevation">16dp</dimen>
-    <dimen name="add_flashcard_edit_padding">6dp</dimen>
     <dimen name="margin_add_card_inputs">24dp</dimen>
 </resources>
