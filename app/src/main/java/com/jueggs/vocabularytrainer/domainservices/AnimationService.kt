@@ -9,8 +9,8 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.core.animation.doOnEnd
+import com.jueggs.andutils.AppManager
 import com.jueggs.andutils.extension.getLong
-import com.jueggs.vocabularytrainer.Charles
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAnimationService
 import com.jueggs.vocabularytrainer.helper.decelerateIfDev
@@ -68,7 +68,7 @@ class AnimationService(
 
     private fun animateDismissFlashCard(flashCardView: View, endAction: Runnable, directionScalar: Int) {
         flashCardView.animate().apply {
-            translationX(directionScalar * Charles.screenWidth.toFloat())
+            translationX(directionScalar * AppManager.screenWidth.toFloat())
             translationY(-flashCardView.height.toFloat())
             rotation(-directionScalar * 135f)
             duration = context.getLong(R.integer.card_dismiss_duration)

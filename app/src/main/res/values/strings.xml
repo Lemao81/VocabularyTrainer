@@ -1,5 +1,7 @@
 <resources>
     <string name="toolbar_app_title">Vocabulary Trainer</string>
+    <string name="toolbar_add_card_title">Add Card</string>
+    <string name="toolbar_edit_card_title">Edit Card</string>
     <string name="nothing_to_learn">Nothing to learn at the moment</string>
     <string name="reveal">Reveal</string>
     <string name="wrong">Wrong</string>

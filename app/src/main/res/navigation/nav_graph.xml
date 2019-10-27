@@ -6,8 +6,7 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.jueggs.vocabularytrainer.fragments.SplashScreenFragment"
-        android:label="SplashScreenFragment">
+        android:name="com.jueggs.vocabularytrainer.fragments.SplashScreenFragment">
         <action
             android:id="@+id/action_splashScreenFragment_to_nothingToLearnFragment"
             app:destination="@id/nothingToLearnFragment" />
@@ -18,7 +17,7 @@
     <fragment
         android:id="@+id/nothingToLearnFragment"
         android:name="com.jueggs.vocabularytrainer.fragments.NothingToLearnFragment"
-        android:label="NothingToLearnFragment">
+        android:label="@string/toolbar_app_title">
         <action
             android:id="@+id/action_nothingToLearnFragment_to_addFlashCardFragment"
             app:destination="@id/addFlashCardFragment" />
@@ -26,7 +25,7 @@
     <fragment
         android:id="@+id/learnFragment"
         android:name="com.jueggs.vocabularytrainer.fragments.LearnFragment"
-        android:label="LearnFragment">
+        android:label="@string/toolbar_app_title">
         <action
             android:id="@+id/action_learnFragment_to_nothingToLearnFragment"
             app:destination="@id/nothingToLearnFragment" />
@@ -37,10 +36,10 @@
     <fragment
         android:id="@+id/addFlashCardFragment"
         android:name="com.jueggs.vocabularytrainer.fragments.AddFlashCardFragment"
-        android:label="AddFlashCardFragment" >
+        android:label="@string/toolbar_add_card_title">
         <argument
             android:name="flashCardId"
-            app:argType="long"
-            android:defaultValue="-1L" />
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 </navigation>

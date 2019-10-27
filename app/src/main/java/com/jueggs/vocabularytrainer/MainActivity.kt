@@ -1,11 +1,13 @@
 package com.jueggs.vocabularytrainer
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import androidx.navigation.ui.AppBarConfiguration
+import com.jueggs.andutils.base.BaseMainActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+class MainActivity : BaseMainActivity() {
+    override fun layout() = R.layout.activity_main
+    override fun navHostFragment() = R.id.nav_host_fragment
+    override fun appBarConfiguration() = AppBarConfiguration(setOf(R.id.splashScreenFragment, R.id.nothingToLearnFragment, R.id.learnFragment))
+    override fun toolbar(): View? = toolbar
 }
