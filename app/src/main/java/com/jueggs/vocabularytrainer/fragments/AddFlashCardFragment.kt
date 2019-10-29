@@ -19,6 +19,7 @@ import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
 import kotlinx.android.synthetic.main.fragment_add_flash_card.*
+import kotlinx.android.synthetic.main.include_merge_flashcard_input.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {

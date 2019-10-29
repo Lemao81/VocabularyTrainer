@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/fragment_add_flash_card">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel" />
+    </data>
+
+    <merge>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFrontSide"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="@dimen/flashcard_elevation"
+            app:cardBackgroundColor="@color/box1_background"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="16:11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidTop"
+            app:layout_constraintWidth_percent="0.8">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/edtFrontSide"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_add_card_inputs"
+                    android:layout_marginEnd="@dimen/margin_add_card_inputs"
+                    android:ems="10"
+                    android:hint="@string/frontside"
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.frontSideText}" />
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBackSide"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:elevation="@dimen/flashcard_elevation"
+            app:cardBackgroundColor="@color/box1_background"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="16:11"
+            app:layout_constraintEnd_toEndOf="@id/cardFrontSide"
+            app:layout_constraintStart_toStartOf="@id/cardFrontSide"
+            app:layout_constraintTop_toBottomOf="@id/cardFrontSide"
+            app:layout_constraintWidth_percent="0.8">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false">
+
+                <EditText
+                    android:id="@+id/edtBackSide1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_add_card_inputs"
+                    android:layout_marginEnd="@dimen/margin_add_card_inputs"
+                    android:ems="10"
+                    android:hint="@string/backside"
+                    android:inputType="text"
+                    android:text="@={viewModel.backSideTexts[0]}"
+                    app:layout_constraintBottom_toTopOf="@+id/edtBackSide2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <EditText
+                    android:id="@+id/edtBackSide2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:text="@={viewModel.backSideTexts[1]}"
+                    app:layout_constraintBottom_toTopOf="@+id/edtBackSide3"
+                    app:layout_constraintEnd_toEndOf="@id/edtBackSide1"
+                    app:layout_constraintStart_toStartOf="@id/edtBackSide1"
+                    app:layout_constraintTop_toBottomOf="@+id/edtBackSide1" />
+
+                <EditText
+                    android:id="@+id/edtBackSide3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:text="@={viewModel.backSideTexts[2]}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/edtBackSide1"
+                    app:layout_constraintStart_toStartOf="@id/edtBackSide1"
+                    app:layout_constraintTop_toBottomOf="@+id/edtBackSide2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </merge>
+</layout>
