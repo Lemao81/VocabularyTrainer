@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel" />
+            type="com.jueggs.vocabularytrainer.viewmodels.interfaces.IFlashCardInputViewModel" />
     </data>
 
     <merge>
@@ -38,7 +38,7 @@
                     android:layout_marginStart="@dimen/margin_add_card_inputs"
                     android:layout_marginEnd="@dimen/margin_add_card_inputs"
                     android:ems="10"
-                    android:hint="@string/frontside"
+                    android:hint="@string/frontside_hint"
                     android:inputType="textPersonName"
                     android:text="@={viewModel.frontSideText}" />
             </FrameLayout>
@@ -70,7 +70,7 @@
                     android:layout_marginStart="@dimen/margin_add_card_inputs"
                     android:layout_marginEnd="@dimen/margin_add_card_inputs"
                     android:ems="10"
-                    android:hint="@string/backside"
+                    android:hint="@string/backside_hint"
                     android:inputType="text"
                     android:text="@={viewModel.backSideTexts[0]}"
                     app:layout_constraintBottom_toTopOf="@+id/edtBackSide2"

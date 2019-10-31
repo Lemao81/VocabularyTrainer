@@ -32,11 +32,18 @@
         <action
             android:id="@+id/action_learnFragment_to_addFlashCardFragment"
             app:destination="@id/addFlashCardFragment" />
+        <action
+            android:id="@+id/action_learnFragment_to_editFlashCardFragment"
+            app:destination="@id/editFlashCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFlashCardFragment"
         android:name="com.jueggs.vocabularytrainer.fragments.AddFlashCardFragment"
-        android:label="@string/toolbar_add_card_title">
+        android:label="@string/toolbar_add_card_title" />
+    <fragment
+        android:id="@+id/editFlashCardFragment"
+        android:name="com.jueggs.vocabularytrainer.fragments.EditFlashCardFragment"
+        android:label="@string/toolbar_edit_card_title">
         <argument
             android:name="flashCardId"
             android:defaultValue="-1L"

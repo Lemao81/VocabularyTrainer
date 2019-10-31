@@ -28,6 +28,7 @@ import com.jueggs.jutils.validation.IValidator
 import com.jueggs.vocabularytrainer.domainservices.AnimationService
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAnimationService
 import com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel
+import com.jueggs.vocabularytrainer.viewmodels.EditFlashCardViewModel
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
 import com.jueggs.vocabularytrainer.viewmodels.SplashScreenViewModel
@@ -39,7 +40,8 @@ import org.koin.dsl.module
 
 @ImplicitReflectionSerializer
 val mainKoinModule = module {
-    viewModel { AddFlashCardViewModel(get(), get(), get()) }
+    viewModel { AddFlashCardViewModel(get()) }
+    viewModel { EditFlashCardViewModel(get(), get()) }
     viewModel { LearnViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { NothingToLearnViewModel(get()) }
     viewModel { SplashScreenViewModel(get()) }

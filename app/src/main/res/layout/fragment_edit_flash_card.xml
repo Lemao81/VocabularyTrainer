@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.jueggs.vocabularytrainer.viewmodels.AddFlashCardViewModel" />
+            type="com.jueggs.vocabularytrainer.viewmodels.EditFlashCardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@id/btnAddCard"
+            app:layout_constraintBottom_toTopOf="@id/btnSaveCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -33,25 +33,12 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp">
 
-                <Switch
-                    android:id="@+id/swtKeepAdding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:checked="@={viewModel.isKeepAdding}"
-                    android:switchPadding="16dp"
-                    android:text="@string/keep_adding"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@id/guidTop"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guidTop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.15" />
+                    app:layout_constraintGuide_percent="0.1" />
 
                 <include
                     layout="@layout/include_merge_flashcard_input"
@@ -61,13 +48,13 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/btnAddCard"
+            android:id="@+id/btnSaveCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.addFlashCard()}"
-            android:text="@string/add_card"
+            android:onClick="@{() -> viewModel.updateFlashCard()}"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnCancel"
+            app:layout_constraintEnd_toStartOf="@id/btnCancel"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
@@ -77,8 +64,8 @@
             android:onClick="@{() -> viewModel.cancel()}"
             android:text="@string/cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnAddCard"
-            app:layout_constraintTop_toTopOf="@id/btnAddCard" />
+            app:layout_constraintStart_toEndOf="@+id/btnSaveCard"
+            app:layout_constraintTop_toTopOf="@id/btnSaveCard" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

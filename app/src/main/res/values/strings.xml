@@ -7,10 +7,8 @@
     <string name="wrong">Wrong</string>
     <string name="correct">Correct</string>
     <string name="close_app">Close App</string>
-    <string name="frontside">Frontside</string>
-    <string name="frontside_hint">Frontside</string>
-    <string name="backside">Backside</string>
-    <string name="backside_hint">Backside</string>
+    <string name="frontside_hint">front side</string>
+    <string name="backside_hint">back side</string>
     <string name="add_card">Add Card</string>
     <string name="cancel">Cancel</string>
     <string name="message_enter_front_side">Please enter a front side text</string>

@@ -1,17 +1,16 @@
 package com.jueggs.domain.usecases
 
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
-import com.jueggs.domain.viewstates.AddFlashCardViewState
+import com.jueggs.domain.viewstates.EditFlashCardViewState
 import com.jueggs.jutils.usecase.MultipleViewStatesUseCaseWithParameter
 
 class LoadFlashCardForEditingUseCase(
     private val flashCardRepository: IFlashCardRepository
-) : MultipleViewStatesUseCaseWithParameter<AddFlashCardViewState, Long>() {
+) : MultipleViewStatesUseCaseWithParameter<EditFlashCardViewState, Long>() {
 
     override suspend fun execute(param: Long) {
         val flashCard = flashCardRepository.readById(param)
         val backsideTextCount = flashCard.backSideTexts.size
-        alterViewState { copy(isEditing = true) }
         triggerViewState {
             copy(
                 frontSideText = flashCard.frontSideText,
