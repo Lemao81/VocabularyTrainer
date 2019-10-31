@@ -27,7 +27,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun bindingItems() = mapOf(BR.viewModel to viewModel)
 
     override fun observeLiveData(owner: LifecycleOwner) {
-        viewModel.viewStateStore.observe(this) {
+        viewModel.viewStateStore.observe(owner) {
             if (isShouldNavigateToNothingToLearn) {
                 navController?.navigate(R.id.action_learnFragment_to_nothingToLearnFragment)
             }
@@ -35,7 +35,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
                 navController?.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
             }
             if (isShouldNavigateToEditFlashCard) {
-                val navDirection = LearnFragmentDirections.actionLearnFragmentToAddFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
+                val navDirection = LearnFragmentDirections.actionLearnFragmentToEditFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
                 navController?.navigate(navDirection)
             }
             if (isShouldMessageCardRemoved) {

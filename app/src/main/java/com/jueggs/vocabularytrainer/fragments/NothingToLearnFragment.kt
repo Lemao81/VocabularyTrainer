@@ -15,7 +15,7 @@ class NothingToLearnFragment : BaseFragment(isShouldSearchNavController = true) 
     override fun bindingItems() = mapOf(BR.viewModel to viewModel)
 
     override fun observeLiveData(owner: LifecycleOwner) {
-        viewModel.viewStateStore.observe(this) {
+        viewModel.viewStateStore.observe(owner) {
             if (isShouldNavigateToAddFlashCard) {
                 navController?.navigate(R.id.action_nothingToLearnFragment_to_addFlashCardFragment)
             }
