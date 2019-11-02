@@ -7,7 +7,6 @@ import android.content.Context
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import androidx.core.animation.doOnEnd
 import com.jueggs.andutils.AppManager
 import com.jueggs.andutils.extension.getLong
@@ -19,15 +18,6 @@ import com.jueggs.vocabularytrainer.models.FlashCardFlipAnimationData
 class AnimationService(
     private val context: Context
 ) : IAnimationService {
-
-    override fun animateFlashCardDisplay(flashCardView: View) {
-        flashCardView.animate().apply {
-            alpha(1f)
-            duration = 1000
-            interpolator = DecelerateInterpolator()
-            start()
-        }
-    }
 
     override fun animateFlashCardFlip(data: FlashCardFlipAnimationData) {
         val yAmplitude = data.flashCardView.height / 4f

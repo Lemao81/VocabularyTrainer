@@ -67,7 +67,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
             viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
             if (isShouldAnimateCardDisplay) {
-                animationService.animateFlashCardDisplay(cardFlashCard)
+                cardFlashCard.fadeIn()
             }
             if (isShouldAnimateCardFlip) {
                 val data = FlashCardFlipAnimationData(cardFlashCard, frameFrontSide, frameBackSide, Runnable { viewModel.setBackSideRevealed() })
