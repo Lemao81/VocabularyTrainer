@@ -24,6 +24,7 @@ dependencies {
     implementation(Libs.resutils)
     implementation(Libs.firebaseutils)
     implementation(Libs.androidxAppcompat)
+    implementation(Libs.androidxActivityKtx)
     implementation(Libs.androidxConstraintLayout)
     implementation(Libs.androidxNavigationFragment)
     implementation(Libs.androidxNavigationUi)

@@ -17,7 +17,6 @@ import com.jueggs.domain.usecases.LoadFlashCardForEditingUseCase
 import com.jueggs.domain.usecases.RemoveFlashCardUseCase
 import com.jueggs.domain.usecases.ShowNextFlashCardUseCase
 import com.jueggs.domain.usecases.UpdateFlashCardUseCase
-import com.jueggs.domain.usecases.UpdateLearnViewStatsUseCase
 import com.jueggs.domain.usecases.UpdateNothingToLearnViewStatsUseCase
 import com.jueggs.domain.validators.FlashCardInputValidator
 import com.jueggs.firebaseutils.logging.FirestoreLogTarget
@@ -42,7 +41,7 @@ import org.koin.dsl.module
 val mainKoinModule = module {
     viewModel { AddFlashCardViewModel(get()) }
     viewModel { EditFlashCardViewModel(get(), get()) }
-    viewModel { LearnViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { LearnViewModel(get(), get(), get(), get(), get()) }
     viewModel { NothingToLearnViewModel(get()) }
     viewModel { SplashScreenViewModel(get()) }
 
@@ -64,7 +63,6 @@ val mainKoinModule = module {
     single { DismissWrongFlashCardUseCase(get()) }
     single { RemoveFlashCardUseCase(get()) }
     single { ShowNextFlashCardUseCase(get(), get()) }
-    single { UpdateLearnViewStatsUseCase(get()) }
     single { UpdateNothingToLearnViewStatsUseCase(get()) }
     single { CheckSomethingToLearnUseCase(get(), get()) }
     single { LoadFlashCardForEditingUseCase(get()) }
