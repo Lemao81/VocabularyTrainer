@@ -1,7 +1,7 @@
 package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
-import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.andutils.extension.hideKeyboard
 import com.jueggs.andutils.extension.longToast
 import com.jueggs.andutils.extension.onEditDone
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_add_flash_card.*
 import kotlinx.android.synthetic.main.include_merge_flashcard_input.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
+class AddFlashCardFragment : BaseNavigationFragment() {
     val viewModel by viewModel<AddFlashCardViewModel>()
 
     override fun layout() = R.layout.fragment_add_flash_card
@@ -26,7 +26,7 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(owner) {
             if (isShouldPopFragment) {
-                navController?.popBackStack()
+                navController.popBackStack()
             }
             when (inputValidationResult) {
                 BlankFrontSide -> R.string.message_enter_front_side
@@ -56,7 +56,7 @@ class AddFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
 
     override fun setListeners() = edtBackSide3.onEditDone {
         viewModel.addFlashCard()
-        activity?.hideKeyboard()
+        hideKeyboard()
     }
 
     override fun onStandby() = viewModel.focusFrontSideEdit()

@@ -7,7 +7,7 @@ object Versions {
     const val hugoPlugin = "1.2.1"
 
     // utils
-    const val andutils = "1.0.141"
+    const val andutils = "1.0.144"
     const val andtestutils = "1.0.11"
     const val jutils = "1.0.36"
     const val jtestutils = "1.0.0"
@@ -29,6 +29,7 @@ object Versions {
     const val androidxCore = "1.0.0"
     const val androidxCoreKtx = "1.0.1"
     const val androidxAppcompat = "1.1.0-rc01"
+    const val androidxActivityKtx = "1.1.0-rc01"
     const val androidxAnnotation = "1.0.0"
     const val androidxConstraintLayout = "1.1.2"
     const val androidxGridLayout = "1.0.0"
@@ -147,6 +148,7 @@ object Libs {
     const val androidxCore = "androidx.core:core:${Versions.androidxCore}"
     const val androidxCoreKtx = "androidx.core:core-ktx:${Versions.androidxCoreKtx}"
     const val androidxAppcompat = "androidx.appcompat:appcompat:${Versions.androidxAppcompat}"
+    const val androidxActivityKtx = "androidx.activity:activity-ktx:${Versions.androidxActivityKtx}"
     const val androidxAnnotation = "androidx.annotation:annotation:${Versions.androidxAnnotation}"
     const val androidxConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidxConstraintLayout}"
     const val androidxGridLayout = "androidx.gridlayout:gridlayout:${Versions.androidxGridLayout}"

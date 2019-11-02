@@ -1,13 +1,13 @@
 package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
-import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.SplashScreenViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SplashScreenFragment : BaseFragment(isShouldSearchNavController = true) {
+class SplashScreenFragment : BaseNavigationFragment() {
     val viewModel by viewModel<SplashScreenViewModel>()
 
     override fun layout() = R.layout.fragment_splash_screen
@@ -16,10 +16,10 @@ class SplashScreenFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(owner) {
             if (isShouldNavigateToLearnFragment) {
-                navController?.navigate(R.id.action_splashScreenFragment_to_learnFragment)
+                navController.navigate(R.id.action_splashScreenFragment_to_learnFragment)
             }
             if (isShouldNavigateToNothingToLearnFragment) {
-                navController?.navigate(R.id.action_splashScreenFragment_to_nothingToLearnFragment)
+                navController.navigate(R.id.action_splashScreenFragment_to_nothingToLearnFragment)
             }
         }
     }

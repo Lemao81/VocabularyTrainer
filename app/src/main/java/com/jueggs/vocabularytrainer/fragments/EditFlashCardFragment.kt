@@ -2,7 +2,7 @@ package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.navArgs
-import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.andutils.extension.hideKeyboard
 import com.jueggs.andutils.extension.longToast
 import com.jueggs.andutils.extension.onEditDone
@@ -16,7 +16,7 @@ import com.jueggs.vocabularytrainer.viewmodels.EditFlashCardViewModel
 import kotlinx.android.synthetic.main.include_merge_flashcard_input.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class EditFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
+class EditFlashCardFragment : BaseNavigationFragment() {
     val viewModel by viewModel<EditFlashCardViewModel>()
     val navArgs: EditFlashCardFragmentArgs by navArgs()
 
@@ -26,7 +26,7 @@ class EditFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(owner) {
             if (isShouldPopFragment) {
-                navController?.popBackStack()
+                navController.popBackStack()
             }
             when (inputValidationResult) {
                 BlankFrontSide -> R.string.message_enter_front_side
@@ -45,7 +45,7 @@ class EditFlashCardFragment : BaseFragment(isShouldSearchNavController = true) {
 
     override fun setListeners() = edtBackSide3.onEditDone {
         viewModel.updateFlashCard()
-        activity?.hideKeyboard()
+        hideKeyboard()
     }
 
     override fun onStandby() = viewModel.loadFlashCardForEditing(navArgs.flashCardId)

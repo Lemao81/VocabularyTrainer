@@ -1,8 +1,9 @@
 package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
-import com.jueggs.andutils.base.BaseFragment
+import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.andutils.extension.colorResToInt
+import com.jueggs.andutils.extension.fadeIn
 import com.jueggs.andutils.extension.longToast
 import com.jueggs.andutils.extension.shortToast
 import com.jueggs.andutils.extension.showConfirmDialog
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.include_card_flashcard.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
+class LearnFragment : BaseNavigationFragment() {
     val viewModel by viewModel<LearnViewModel>()
     val animationService by inject<IAnimationService>()
 
@@ -29,14 +30,14 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(owner) {
             if (isShouldNavigateToNothingToLearn) {
-                navController?.navigate(R.id.action_learnFragment_to_nothingToLearnFragment)
+                navController.navigate(R.id.action_learnFragment_to_nothingToLearnFragment)
             }
             if (isShouldNavigateToAddFlashCard) {
-                navController?.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
+                navController.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
             }
             if (isShouldNavigateToEditFlashCard) {
                 val navDirection = LearnFragmentDirections.actionLearnFragmentToEditFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
-                navController?.navigate(navDirection)
+                navController.navigate(navDirection)
             }
             if (isShouldMessageCardRemoved) {
                 shortToast(R.string.message_card_removed)
@@ -57,7 +58,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             backSideText?.let { viewModel.backSideText.postValue(it) }
             nextFlashCardBox?.let { box ->
                 viewModel.boxNumber.postValue(box.number.toString())
-                mapFlashCardBoxToColorInt(box)?.let { cardFlashCard.setCardBackgroundColor(it) }
+                cardFlashCard.setCardBackgroundColor(mapFlashCardBoxToColorInt(box))
             }
             viewModel.currentFlashCardId = currentFlashCardId
             viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
@@ -82,11 +83,7 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
         }
     }
 
-    override fun onStandby() {
-        viewModel.updateStats()
-    }
-
-    private fun mapFlashCardBoxToColorInt(box: FlashCardBox): Int? {
+    private fun mapFlashCardBoxToColorInt(box: FlashCardBox): Int {
         val colorId = when (box) {
             FlashCardBox.TWO -> R.color.box2_background
             FlashCardBox.THREE -> R.color.box3_background
@@ -96,6 +93,6 @@ class LearnFragment : BaseFragment(isShouldSearchNavController = true) {
             else -> R.color.box1_background
         }
 
-        return context?.colorResToInt(colorId)
+        return requireContext().colorResToInt(colorId)
     }
 }
