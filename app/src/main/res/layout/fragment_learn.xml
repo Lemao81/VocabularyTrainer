@@ -62,35 +62,44 @@
             app:srcCompat="@drawable/ic_check_green_24dp"
             tools:visibility="visible" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabEditFlashCard"
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fabMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{() -> viewModel.editFlashCard()}"
-            app:layout_constraintBottom_toTopOf="@id/fabRemoveFlashCard"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_edit_white_24dp" />
+            app:menu_colorNormal="@color/fab_menu_normal"
+            app:menu_colorPressed="@color/fab_menu_pressed"
+            app:menu_fab_size="mini"
+            app:menu_icon="@drawable/ic_more_vert_white_24dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabRemoveFlashCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{() -> viewModel.showRemoveFlashCardConfirmation()}"
-            app:layout_constraintBottom_toTopOf="@id/fabAddFlashCard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_remove_white_24dp" />
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabEditFlashCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.editFlashCard()}"
+                android:src="@drawable/ic_edit_white_24dp"
+                app:fab_colorNormal="@color/fab_normal"
+                app:fab_colorPressed="@color/fab_pressed"
+                app:fab_size="normal" />
 
-        <include
-            layout="@layout/include_fab_add_flashcard"
-            app:viewModel="@{viewModel}" />
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabRemoveFlashCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.showRemoveFlashCardConfirmation()}"
+                android:src="@drawable/ic_remove_white_24dp"
+                app:fab_colorNormal="@color/fab_normal"
+                app:fab_colorPressed="@color/fab_pressed"
+                app:fab_size="normal" />
+
+            <include
+                layout="@layout/include_fab_add_flashcard"
+                app:viewModel="@{viewModel}" />
+
+        </com.github.clans.fab.FloatingActionMenu>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

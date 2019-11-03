@@ -37,22 +37,34 @@
             app:layout_constraintVertical_bias="0.4"
             app:layout_constraintWidth_percent="0.6" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabCloseApp"
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fabMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="@{() -> viewModel.closeApp()}"
-            app:layout_constraintBottom_toTopOf="@id/fabAddFlashCard"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_exit_to_app_white_24dp" />
+            app:menu_colorNormal="@color/fab_menu_normal"
+            app:menu_colorPressed="@color/fab_menu_pressed"
+            app:menu_fab_size="mini"
+            app:menu_icon="@drawable/ic_more_vert_white_24dp">
 
-        <include
-            layout="@layout/include_fab_add_flashcard"
-            app:viewModel="@{viewModel}" />
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabCloseApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.closeApp()}"
+                android:src="@drawable/ic_exit_to_app_white_24dp"
+                app:fab_colorNormal="@color/fab_normal"
+                app:fab_colorPressed="@color/fab_pressed"
+                app:fab_size="normal" />
+
+            <include
+                layout="@layout/include_fab_add_flashcard"
+                app:viewModel="@{viewModel}" />
+
+        </com.github.clans.fab.FloatingActionMenu>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

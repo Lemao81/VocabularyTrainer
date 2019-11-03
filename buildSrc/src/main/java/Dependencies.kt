@@ -121,6 +121,7 @@ object Versions {
     const val jacksonKotlin = "2.9.7"
     const val androidJUnit5Plugin = "1.5.1.0"
     const val workManager = "2.2.0"
+    const val clansFabMenu = "1.6.4"
 }
 
 object Libs {
@@ -267,6 +268,7 @@ object Libs {
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
     const val blurry = "jp.wasabeef:blurry:${Versions.blurry}"
     const val jacksonKotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jacksonKotlin}"
+    const val clansFabMenu = "com.github.clans:fab:${Versions.clansFabMenu}"
 
     // testing
     const val jUnit4 = "junit:junit:${Versions.jUnit4}"

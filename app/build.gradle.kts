@@ -33,6 +33,7 @@ dependencies {
     implementation(Libs.joda)
     implementation(Libs.kotlinSerialization)
     implementation(Libs.ankoCommons)
+    implementation(Libs.clansFabMenu)
 
     implementation(project(Modules.common))
     implementation(project(Modules.commonj))

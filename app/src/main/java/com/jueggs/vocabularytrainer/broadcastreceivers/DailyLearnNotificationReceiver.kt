@@ -7,6 +7,8 @@ import com.jueggs.andutils.extension.isInForeground
 import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
+import com.jueggs.jutils.logging.LogCategory
+import com.jueggs.jutils.logging.Logger
 import com.jueggs.vocabularytrainer.helper.DailyLearnNotification
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,6 +26,7 @@ class DailyLearnNotificationReceiver : BroadcastReceiver(), KoinComponent {
             val isSomethingToLearn = FlashCardBox.values().any {
                 flashCardRepository.readByBoxAndExpiryDate(it, flashCardBoxService.getBoxExpiryDate(it, now)).any()
             }
+            Logger.newEntry(if (isSomethingToLearn) "something is to learn" else "nothing is to learn").withCategory(LogCategory.NOTIFICATION).logInfo()
             if (isSomethingToLearn && !context.isInForeground) {
                 DailyLearnNotification.notify(context)
             }
