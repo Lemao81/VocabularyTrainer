@@ -1,5 +1,8 @@
 package com.jueggs.vocabularytrainer.fragments
 
+import android.graphics.Typeface
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.andutils.extension.colorResToInt
@@ -9,6 +12,7 @@ import com.jueggs.andutils.extension.shortToast
 import com.jueggs.andutils.extension.showConfirmDialog
 import com.jueggs.andutils.extension.visibleOrInvisible
 import com.jueggs.domain.enums.FlashCardBox
+import com.jueggs.domain.models.StatsData
 import com.jueggs.jutils.INVALIDL
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
@@ -69,12 +73,12 @@ class LearnFragment : BaseNavigationFragment() {
                 cardFlashCard.setCardBackgroundColor(mapFlashCardBoxToColorInt(box))
             }
             viewModel.currentFlashCardId = currentFlashCardId
-            viewModel.stats[FlashCardBox.ONE.index].postValue(stats1.toString())
-            viewModel.stats[FlashCardBox.TWO.index].postValue(stats2.toString())
-            viewModel.stats[FlashCardBox.THREE.index].postValue(stats3.toString())
-            viewModel.stats[FlashCardBox.FOUR.index].postValue(stats4.toString())
-            viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
-            viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
+            postStats(FlashCardBox.ONE, stats1)
+            postStats(FlashCardBox.TWO, stats2)
+            postStats(FlashCardBox.THREE, stats3)
+            postStats(FlashCardBox.FOUR, stats4)
+            postStats(FlashCardBox.FIVE, stats5)
+            postStats(FlashCardBox.SIX, stats6)
             if (isShouldAnimateCardDisplay) {
                 cardFlashCard.fadeIn()
             }
@@ -117,4 +121,17 @@ class LearnFragment : BaseNavigationFragment() {
 
         return requireContext().colorResToInt(colorId)
     }
+
+    private fun postStats(box: FlashCardBox, data: StatsData) {
+        viewModel.stats[box.index].apply {
+            count.postValue(data.count.toString())
+            isBold.postValue(data.isHasDueCards)
+        }
+    }
+}
+
+// TODO lib
+@BindingAdapter("isBold")
+fun TextView.setBold(isBold: Boolean) {
+    typeface = if (isBold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
 }

@@ -29,8 +29,9 @@
             android:layout_weight="1"
             android:background="@drawable/shape_stats1"
             android:gravity="center"
-            android:text="@={viewModel.stats[0]}"
+            android:text="@{viewModel.stats[0].count}"
             android:textSize="@dimen/stats_text_size"
+            app:isBold="@{viewModel.stats[0].isBold}"
             tools:text="55" />
 
         <TextView
@@ -40,8 +41,9 @@
             android:layout_weight="1"
             android:background="@drawable/shape_stats2"
             android:gravity="center"
-            android:text="@={viewModel.stats[1]}"
+            android:text="@{viewModel.stats[1].count}"
             android:textSize="@dimen/stats_text_size"
+            app:isBold="@{viewModel.stats[1].isBold}"
             tools:text="55" />
 
         <TextView
@@ -51,8 +53,9 @@
             android:layout_weight="1"
             android:background="@drawable/shape_stats3"
             android:gravity="center"
-            android:text="@={viewModel.stats[2]}"
+            android:text="@{viewModel.stats[2].count}"
             android:textSize="@dimen/stats_text_size"
+            app:isBold="@{viewModel.stats[2].isBold}"
             tools:text="55" />
 
         <TextView
@@ -62,8 +65,9 @@
             android:layout_weight="1"
             android:background="@drawable/shape_stats4"
             android:gravity="center"
-            android:text="@={viewModel.stats[3]}"
+            android:text="@{viewModel.stats[3].count}"
             android:textSize="@dimen/stats_text_size"
+            app:isBold="@{viewModel.stats[3].isBold}"
             tools:text="55" />
 
         <TextView
@@ -73,8 +77,9 @@
             android:layout_weight="1"
             android:background="@drawable/shape_stats5"
             android:gravity="center"
-            android:text="@={viewModel.stats[4]}"
+            android:text="@{viewModel.stats[4].count}"
             android:textSize="@dimen/stats_text_size"
+            app:isBold="@{viewModel.stats[4].isBold}"
             tools:text="55" />
 
         <TextView
@@ -84,8 +89,9 @@
             android:layout_weight="1"
             android:background="@drawable/shape_stats6"
             android:gravity="center"
-            android:text="@={viewModel.stats[5]}"
+            android:text="@{viewModel.stats[5].count}"
             android:textSize="@dimen/stats_text_size"
+            app:isBold="@{viewModel.stats[5].isBold}"
             tools:text="55" />
     </LinearLayout>
 </layout>

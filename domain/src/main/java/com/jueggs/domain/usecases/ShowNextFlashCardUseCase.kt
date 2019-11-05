@@ -4,6 +4,7 @@ import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.models.FlashCard
 import com.jueggs.domain.services.interfaces.IFlashCardBoxService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IStatsService
 import com.jueggs.domain.viewstates.LearnViewState
 import com.jueggs.jutils.Util
 import com.jueggs.jutils.extension.join
@@ -13,7 +14,8 @@ import org.joda.time.DateTime
 
 class ShowNextFlashCardUseCase(
     private val flashCardRepository: IFlashCardRepository,
-    private val flashCardBoxService: IFlashCardBoxService
+    private val flashCardBoxService: IFlashCardBoxService,
+    private val statsService: IStatsService
 ) : MultipleViewStatesUseCase<LearnViewState>() {
 
     override suspend fun execute() {
@@ -37,12 +39,12 @@ class ShowNextFlashCardUseCase(
                 currentFlashCardId = nextCard.id,
                 isRevealed = false,
                 nextFlashCardBox = nextCard.box,
-                stats1 = groups[FlashCardBox.ONE]?.size ?: 0,
-                stats2 = groups[FlashCardBox.TWO]?.size ?: 0,
-                stats3 = groups[FlashCardBox.THREE]?.size ?: 0,
-                stats4 = groups[FlashCardBox.FOUR]?.size ?: 0,
-                stats5 = groups[FlashCardBox.FIVE]?.size ?: 0,
-                stats6 = groups[FlashCardBox.SIX]?.size ?: 0
+                stats1 = statsService.createStatsData(groups[FlashCardBox.ONE]),
+                stats2 = statsService.createStatsData(groups[FlashCardBox.TWO]),
+                stats3 = statsService.createStatsData(groups[FlashCardBox.THREE]),
+                stats4 = statsService.createStatsData(groups[FlashCardBox.FOUR]),
+                stats5 = statsService.createStatsData(groups[FlashCardBox.FIVE]),
+                stats6 = statsService.createStatsData(groups[FlashCardBox.SIX])
             )
         }
         triggerViewState { copy(isShouldAnimateCardDisplay = true) }
@@ -51,7 +53,7 @@ class ShowNextFlashCardUseCase(
     private suspend fun findNextDueFlashCard(): FlashCard? {
         val now = DateTime.now()
         FlashCardBox.values().forEach { box ->
-            val dueFlashCards = flashCardRepository.readByBoxAndExpiryDate(box, flashCardBoxService.getBoxExpiryDate(box, now))
+            val dueFlashCards = flashCardRepository.readByBoxAndExpiryDate(box, flashCardBoxService.getBoxExpiryDate(box, now).millis)
             if (dueFlashCards.any()) {
                 return dueFlashCards.random()
             }

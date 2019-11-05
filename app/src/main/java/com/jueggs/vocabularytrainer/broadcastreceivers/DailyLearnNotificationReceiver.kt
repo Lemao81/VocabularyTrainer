@@ -24,7 +24,7 @@ class DailyLearnNotificationReceiver : BroadcastReceiver(), KoinComponent {
         val now = DateTime.now()
         GlobalScope.launch {
             val isSomethingToLearn = FlashCardBox.values().any {
-                flashCardRepository.readByBoxAndExpiryDate(it, flashCardBoxService.getBoxExpiryDate(it, now)).any()
+                flashCardRepository.readByBoxAndExpiryDate(it, flashCardBoxService.getBoxExpiryDate(it, now).millis).any()
             }
             Logger.newEntry(if (isSomethingToLearn) "something is to learn" else "nothing is to learn").withCategory(LogCategory.NOTIFICATION).logInfo()
             if (isSomethingToLearn && !context.isInForeground) {

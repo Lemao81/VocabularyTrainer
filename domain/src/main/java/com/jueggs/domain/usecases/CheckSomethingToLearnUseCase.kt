@@ -15,7 +15,7 @@ class CheckSomethingToLearnUseCase(
     override suspend fun execute() {
         val now = DateTime.now()
         val isSomethingToLearn = FlashCardBox.values().any {
-            flashCardRepository.readByBoxAndExpiryDate(it, flashCardBoxService.getBoxExpiryDate(it, now)).any()
+            flashCardRepository.readByBoxAndExpiryDate(it, flashCardBoxService.getBoxExpiryDate(it, now).millis).any()
         }
         triggerViewState {
             copy(

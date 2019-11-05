@@ -8,7 +8,11 @@ import com.jueggs.database.mapper.interfaces.IFlashCardMapper
 import com.jueggs.database.repositories.FlashCardRepository
 import com.jueggs.domain.models.FlashCardInputData
 import com.jueggs.domain.models.FlashCardInputValidationResult
+import com.jueggs.domain.services.FlashCardService
+import com.jueggs.domain.services.StatsService
 import com.jueggs.domain.services.interfaces.IFlashCardRepository
+import com.jueggs.domain.services.interfaces.IFlashCardService
+import com.jueggs.domain.services.interfaces.IStatsService
 import com.jueggs.domain.usecases.AddFlashCardUseCase
 import com.jueggs.domain.usecases.CheckSomethingToLearnUseCase
 import com.jueggs.domain.usecases.DismissCorrectFlashCardUseCase
@@ -57,13 +61,15 @@ val mainKoinModule = module {
         ) as ILogManager
     }
     single { AnimationService(get()) as IAnimationService }
+    single { FlashCardService(get()) as IFlashCardService }
+    single { StatsService(get()) as IStatsService }
 
     single { AddFlashCardUseCase(get(), get()) }
     single { DismissCorrectFlashCardUseCase(get(), get()) }
     single { DismissWrongFlashCardUseCase(get()) }
     single { RemoveFlashCardUseCase(get()) }
-    single { ShowNextFlashCardUseCase(get(), get()) }
-    single { UpdateNothingToLearnViewStatsUseCase(get()) }
+    single { ShowNextFlashCardUseCase(get(), get(), get()) }
+    single { UpdateNothingToLearnViewStatsUseCase(get(), get()) }
     single { CheckSomethingToLearnUseCase(get(), get()) }
     single { LoadFlashCardForEditingUseCase(get()) }
     single { UpdateFlashCardUseCase(get(), get()) }

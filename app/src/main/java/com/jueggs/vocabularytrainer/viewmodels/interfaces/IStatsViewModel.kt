@@ -1,7 +1,7 @@
 package com.jueggs.vocabularytrainer.viewmodels.interfaces
 
-import androidx.lifecycle.MutableLiveData
+import com.jueggs.vocabularytrainer.models.StatsViewModelData
 
 interface IStatsViewModel {
-    val stats: MutableList<MutableLiveData<String>>
+    val stats: MutableList<StatsViewModelData>
 }

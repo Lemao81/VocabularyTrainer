@@ -1,6 +1,7 @@
 package com.jueggs.domain.viewstates
 
 import com.jueggs.domain.enums.FlashCardBox
+import com.jueggs.domain.models.StatsData
 
 data class LearnViewState(
     val longMessage: String? = null,
@@ -19,10 +20,10 @@ data class LearnViewState(
     val isShouldNavigateToNothingToLearn: Boolean = false,
     val isShouldNavigateToAddFlashCard: Boolean = false,
     val isShouldMessageCardRemoved: Boolean = false,
-    val stats1: Int = 0,
-    val stats2: Int = 0,
-    val stats3: Int = 0,
-    val stats4: Int = 0,
-    val stats5: Int = 0,
-    val stats6: Int = 0
+    val stats1: StatsData = StatsData(),
+    val stats2: StatsData = StatsData(),
+    val stats3: StatsData = StatsData(),
+    val stats4: StatsData = StatsData(),
+    val stats5: StatsData = StatsData(),
+    val stats6: StatsData = StatsData()
 )
