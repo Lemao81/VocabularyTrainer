@@ -6,6 +6,7 @@ import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.vocabularytrainer.BR
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.viewmodels.NothingToLearnViewModel
+import kotlinx.android.synthetic.main.fragment_nothing_to_learn.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NothingToLearnFragment : BaseNavigationFragment() {
@@ -28,6 +29,7 @@ class NothingToLearnFragment : BaseNavigationFragment() {
             viewModel.stats[FlashCardBox.FOUR.index].postValue(stats4.toString())
             viewModel.stats[FlashCardBox.FIVE.index].postValue(stats5.toString())
             viewModel.stats[FlashCardBox.SIX.index].postValue(stats6.toString())
+            fabMenu.open(true)
         }
     }
 

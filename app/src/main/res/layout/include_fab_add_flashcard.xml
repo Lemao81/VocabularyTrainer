@@ -13,9 +13,10 @@
         android:id="@+id/fabAddFlashCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:onClick="@{() -> viewModel.addFlashCard()}"
         android:src="@drawable/ic_add_white_24dp"
         app:fab_colorNormal="@color/fab_normal"
         app:fab_colorPressed="@color/fab_pressed"
-        app:fab_size="normal" />
+        app:fab_size="mini" />
 </layout>

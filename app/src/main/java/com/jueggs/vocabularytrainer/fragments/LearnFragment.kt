@@ -1,6 +1,5 @@
 package com.jueggs.vocabularytrainer.fragments
 
-import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.andutils.extension.colorResToInt
@@ -18,7 +17,6 @@ import com.jueggs.vocabularytrainer.models.FlashCardFlipAnimationData
 import com.jueggs.vocabularytrainer.viewmodels.LearnViewModel
 import kotlinx.android.synthetic.main.fragment_learn.*
 import kotlinx.android.synthetic.main.include_card_flashcard.*
-import org.jetbrains.anko.dip
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,14 +36,22 @@ class LearnFragment : BaseNavigationFragment() {
                 navController.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
             }
             if (isShouldNavigateToEditFlashCard) {
-                val navDirection = LearnFragmentDirections.actionLearnFragmentToEditFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
+                val navDirection =
+                    LearnFragmentDirections.actionLearnFragmentToEditFlashCardFragment(
+                        viewModel.currentFlashCardId ?: INVALIDL
+                    )
                 navController.navigate(navDirection)
             }
             if (isShouldMessageCardRemoved) {
                 shortToast(R.string.message_card_removed)
             }
             if (isShouldShowRemoveFlashCardConfirmation) {
-                showConfirmDialog(R.string.dialog_remove_flashcard_title, R.string.dialog_remove_flashcard_message, viewModel::removeFlashCard, viewModel::cancelFlashCardRemoval)
+                showConfirmDialog(
+                    R.string.dialog_remove_flashcard_title,
+                    R.string.dialog_remove_flashcard_message,
+                    viewModel::removeFlashCard,
+                    viewModel::cancelFlashCardRemoval
+                )
             }
             if (!isRevealing) {
                 cardFlashCard.rotationX = if (isRevealed) 180f else 0f
@@ -73,28 +79,30 @@ class LearnFragment : BaseNavigationFragment() {
                 cardFlashCard.fadeIn()
             }
             if (isShouldAnimateCardFlip) {
-                val data = FlashCardFlipAnimationData(cardFlashCard, frameFrontSide, frameBackSide, Runnable { viewModel.setBackSideRevealed() })
+                val data = FlashCardFlipAnimationData(
+                    cardFlashCard,
+                    frameFrontSide,
+                    frameBackSide,
+                    Runnable { viewModel.setBackSideRevealed() })
                 animationService.animateFlashCardFlip(data)
             }
             if (isShouldAnimateDismissCorrect) {
-                animationService.animateDismissFlashCardCorrect(cardFlashCard, Runnable { viewModel.showNextFlashCard() })
+                animationService.animateDismissFlashCardCorrect(
+                    cardFlashCard,
+                    Runnable { viewModel.showNextFlashCard() })
             }
             if (isShouldAnimateDismissWrong) {
-                animationService.animateDismissFlashCardWrong(cardFlashCard, Runnable { viewModel.showNextFlashCard() })
+                animationService.animateDismissFlashCardWrong(
+                    cardFlashCard,
+                    Runnable { viewModel.showNextFlashCard() })
             }
             fabMenu.close(true)
         }
     }
 
-    override fun setListeners() {
-        val cardFabElevationDiff = cardFlashCard.elevation - requireContext().dip2px(5)
-        fabMenu.setOnMenuToggleListener { opened ->
-            if (opened) {
-                cardFlashCard.translationZ = -(cardFabElevationDiff + requireActivity().dip(2))
-            } else {
-                cardFlashCard.translationZ = 0f
-            }
-        }
+    override fun onDestroyView() {
+        fabMenu.setOnMenuToggleListener(null)
+        super.onDestroyView()
     }
 
     private fun mapFlashCardBoxToColorInt(box: FlashCardBox): Int {
@@ -110,6 +118,3 @@ class LearnFragment : BaseNavigationFragment() {
         return requireContext().colorResToInt(colorId)
     }
 }
-
-fun Context.dip2px(dip: Int): Int = (dip * resources.displayMetrics.density).toInt()
-fun Context.dip2px(dip: Float): Int = (dip * resources.displayMetrics.density).toInt()

@@ -58,7 +58,7 @@
                 android:src="@drawable/ic_exit_to_app_white_24dp"
                 app:fab_colorNormal="@color/fab_normal"
                 app:fab_colorPressed="@color/fab_pressed"
-                app:fab_size="normal" />
+                app:fab_size="mini" />
 
             <include
                 layout="@layout/include_fab_add_flashcard"

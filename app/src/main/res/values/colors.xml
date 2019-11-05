@@ -11,6 +11,6 @@
 
     <color name="fab_normal">@color/accent</color>
     <color name="fab_pressed">#a7a7a7</color>
-    <color name="fab_menu_normal">#1a1a1a</color>
-    <color name="fab_menu_pressed">#303030</color>
+    <color name="fab_menu_normal">#474747</color>
+    <color name="fab_menu_pressed">#595959</color>
 </resources>
