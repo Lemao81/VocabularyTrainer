@@ -15,6 +15,7 @@ class BootCompletedReceiver : AbstractBootCompletedReceiver() {
     override fun onBootCompleted(context: Context, intent: Intent) {
         if (isOreoOrAbove()) {
             val jobInfoBuilder = JobInfo.Builder(0, ComponentName(context, ScheduleDailyAlarmJobService::class.java))
+                .setOverrideDeadline(0)
             context.jobScheduler.schedule(jobInfoBuilder.build())
         } else {
             context.startService(context.intentFor<ScheduleDailyAlarmService>())
