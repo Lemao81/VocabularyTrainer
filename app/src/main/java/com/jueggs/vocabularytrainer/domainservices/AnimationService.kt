@@ -12,7 +12,6 @@ import com.jueggs.andutils.AppManager
 import com.jueggs.andutils.extension.getLong
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.domainservices.interfaces.IAnimationService
-import com.jueggs.vocabularytrainer.helper.decelerateIfDev
 import com.jueggs.vocabularytrainer.models.FlashCardFlipAnimationData
 
 class AnimationService(
@@ -31,14 +30,12 @@ class AnimationService(
         ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, rotationHolder).apply {
             duration = context.getLong(R.integer.card_flip_duration)
             interpolator = AccelerateDecelerateInterpolator()
-            decelerateIfDev()
             doOnEnd { data.endAction.run() }
             start()
         }
         val translationOutAnimation = ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, yTranslationOutHolder, zTranslationOutHolder).apply {
             duration = context.getLong(R.integer.card_flip_duration) / 2
             interpolator = AccelerateDecelerateInterpolator()
-            decelerateIfDev()
             doOnEnd {
                 data.frontSideView.alpha = 0f
                 data.backSideView.alpha = 1f
@@ -47,7 +44,6 @@ class AnimationService(
         val translationInAnimation = ObjectAnimator.ofPropertyValuesHolder(data.flashCardView, yTranslationInHolder, zTranslationInHolder).apply {
             duration = context.getLong(R.integer.card_flip_duration) / 2
             interpolator = AccelerateDecelerateInterpolator()
-            decelerateIfDev()
         }
         AnimatorSet().apply { play(translationOutAnimation).before(translationInAnimation) }.start()
     }
@@ -57,22 +53,28 @@ class AnimationService(
     override fun animateDismissFlashCardWrong(flashCardView: View, endAction: Runnable) = animateDismissFlashCard(flashCardView, endAction, DIRECTION_LEFT)
 
     private fun animateDismissFlashCard(flashCardView: View, endAction: Runnable, directionScalar: Int) {
-        flashCardView.animate().apply {
-            translationX(directionScalar * AppManager.screenWidth.toFloat())
-            translationY(-flashCardView.height.toFloat())
-            rotation(-directionScalar * 135f)
+        val rotationHolder = PropertyValuesHolder.ofFloat(View.ROTATION, -directionScalar * 135f)
+        val xTranslationHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, directionScalar * AppManager.screenWidth.toFloat())
+        val yTranslationHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, -flashCardView.height.toFloat())
+        val alphaHolder = PropertyValuesHolder.ofFloat(View.ALPHA, 0f)
+
+        ObjectAnimator.ofPropertyValuesHolder(flashCardView, rotationHolder, xTranslationHolder, yTranslationHolder).apply {
             duration = context.getLong(R.integer.card_dismiss_duration)
             interpolator = AccelerateInterpolator()
-            decelerateIfDev()
-            withEndAction {
+            doOnEnd {
                 flashCardView.apply {
-                    alpha = 0f
                     rotation = 0f
                     translationX = 0f
                     translationY = 0f
                 }
                 endAction.run()
             }
+            start()
+        }
+        ObjectAnimator.ofPropertyValuesHolder(flashCardView, alphaHolder).apply {
+            startDelay = context.getLong(R.integer.card_dismiss_duration) / 2
+            duration = context.getLong(R.integer.card_dismiss_duration)
+            interpolator = AccelerateInterpolator()
             start()
         }
     }

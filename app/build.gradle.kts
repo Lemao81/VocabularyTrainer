@@ -12,7 +12,7 @@ android {
     minifyRelease()
     optimizeBuildTime(project)
     addBuildConfigField("ENABLE_NOTIFICATION", false)
-    addBuildConfigField("ANIMATION_DECELERATION_FACTOR", 1)
+    addBuildConfigField("ANIMATION_DECELERATION_FACTOR", 10)
 
     dataBinding.isEnabled = true
 }
