@@ -1,13 +1,15 @@
 package com.jueggs.vocabularytrainer.helper
 
 import android.app.Notification.DEFAULT_ALL
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.jueggs.andutils.extension.createSettingsIntent
 import com.jueggs.andutils.extension.pendingActivityIntent
 import com.jueggs.andutils.extension.pendingActivityIntentFor
-import com.jueggs.common.isEclairOrAbove
+import com.jueggs.common.isOreoOrAbove
 import com.jueggs.jutils.logging.LogCategory
 import com.jueggs.jutils.logging.Logger
 import com.jueggs.vocabularytrainer.MainActivity
@@ -15,8 +17,18 @@ import com.jueggs.vocabularytrainer.R
 import org.jetbrains.anko.notificationManager
 
 object DailyLearnNotification {
-    private const val TAG = "DailyLearnNotification"
-    const val CHANNEL_ID = "DailyLearnNotificationChannel"
+    private const val CHANNEL_ID = "DailyLearnNotificationChannel"
+
+    fun createChannelIfNeeded(context: Context) {
+        if (isOreoOrAbove() && context.notificationManager.notificationChannels.none { it.id == CHANNEL_ID }) {
+            val notificationChannel = NotificationChannel(
+                CHANNEL_ID,
+                context.getString(R.string.daily_notification_channel_name),
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            context.notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
 
     fun notify(context: Context) {
         val title = context.getString(R.string.daily_learn_check_notification_title)
@@ -32,17 +44,11 @@ object DailyLearnNotification {
             .addAction(createDisableNotificationsAction(context))
             .setAutoCancel(true)
 
-        if (isEclairOrAbove()) {
-            context.notificationManager.notify(TAG, 0, builder.build())
-            Logger.newEntry("daily notification sent").withCategory(LogCategory.NOTIFICATION).logInfo()
-        }
+        context.notificationManager.notify(0, builder.build())
+        Logger.newEntry("daily notification sent").withCategory(LogCategory.NOTIFICATION).logInfo()
     }
 
-    fun cancel(context: Context) {
-        if (isEclairOrAbove()) {
-            context.notificationManager.cancel(TAG, 0)
-        }
-    }
+    fun cancel(context: Context) = context.notificationManager.cancel(0)
 
     private fun createDisableNotificationsAction(context: Context): NotificationCompat.Action {
         val builder = NotificationCompat.Action.Builder(
