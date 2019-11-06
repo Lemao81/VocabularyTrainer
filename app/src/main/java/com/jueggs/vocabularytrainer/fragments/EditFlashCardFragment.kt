@@ -52,5 +52,5 @@ class EditFlashCardFragment : BaseNavigationFragment() {
         navController.navigateUp()
     }
 
-    override fun onStandby() = viewModel.loadFlashCardForEditing(navArgs.flashCardId)
+    override fun onStandby() = viewModel.loadFlashCard(navArgs.flashCardId)
 }

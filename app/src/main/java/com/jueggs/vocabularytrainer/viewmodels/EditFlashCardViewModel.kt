@@ -18,18 +18,18 @@ class EditFlashCardViewModel(
 ) : BaseViewModel<EditFlashCardViewState>(EditFlashCardViewState(), App.isDev), IFlashCardInputViewModel {
     override val frontSideText = MutableLiveData<String>()
     override val backSideTexts = (0 until Constant.BACKSIDEINPUT_COUNT).map { MutableLiveData<String>() }
-    private var flashCardInEditingId: Long? = null
+    private var flashCardId: Long? = null
 
     fun updateFlashCard() {
-        val data = EditFlashCardData(flashCardInEditingId, getInputData())
+        val data = EditFlashCardData(flashCardId, getInputData())
         viewStateStore.dispatch(updateFlashCardUseCase(data))
     }
 
     fun cancel() = viewStateStore.dispatch(Trigger { copy(isShouldPopFragment = true) })
 
-    fun loadFlashCardForEditing(flashCardId: Long) {
-        flashCardInEditingId = flashCardId
-        viewStateStore.dispatch(loadFlashCardForEditingUseCase(flashCardId))
+    fun loadFlashCard(id: Long) {
+        flashCardId = id
+        viewStateStore.dispatch(loadFlashCardForEditingUseCase(id))
     }
 
     private fun getInputData() = FlashCardInputData(frontSideText.value.orEmpty(), backSideTexts.map { it.value.orEmpty() })
