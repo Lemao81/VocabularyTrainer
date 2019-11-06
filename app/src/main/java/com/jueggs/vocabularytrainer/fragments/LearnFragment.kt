@@ -1,8 +1,5 @@
 package com.jueggs.vocabularytrainer.fragments
 
-import android.graphics.Typeface
-import android.widget.TextView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseNavigationFragment
 import com.jueggs.andutils.extension.colorResToInt
@@ -128,10 +125,4 @@ class LearnFragment : BaseNavigationFragment() {
             isBold.postValue(data.isHasDueCards)
         }
     }
-}
-
-// TODO lib
-@BindingAdapter("isBold")
-fun TextView.setBold(isBold: Boolean) {
-    typeface = if (isBold) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
 }
