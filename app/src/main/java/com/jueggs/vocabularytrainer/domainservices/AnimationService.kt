@@ -57,9 +57,10 @@ class AnimationService(
         val xTranslationHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, directionScalar * AppManager.screenWidth.toFloat())
         val yTranslationHolder = PropertyValuesHolder.ofFloat(View.TRANSLATION_Y, -flashCardView.height.toFloat())
         val alphaHolder = PropertyValuesHolder.ofFloat(View.ALPHA, 0f)
+        val totalDuration = context.getLong(R.integer.card_dismiss_duration)
 
         ObjectAnimator.ofPropertyValuesHolder(flashCardView, rotationHolder, xTranslationHolder, yTranslationHolder).apply {
-            duration = context.getLong(R.integer.card_dismiss_duration)
+            duration = totalDuration
             interpolator = AccelerateInterpolator()
             doOnEnd {
                 flashCardView.apply {
@@ -72,8 +73,8 @@ class AnimationService(
             start()
         }
         ObjectAnimator.ofPropertyValuesHolder(flashCardView, alphaHolder).apply {
-            startDelay = context.getLong(R.integer.card_dismiss_duration) / 2
-            duration = context.getLong(R.integer.card_dismiss_duration)
+            startDelay = totalDuration / 2
+            duration = totalDuration / 2
             interpolator = AccelerateInterpolator()
             start()
         }
