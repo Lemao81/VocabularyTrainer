@@ -37,10 +37,7 @@ class LearnFragment : BaseNavigationFragment() {
                 navController.navigate(R.id.action_learnFragment_to_addFlashCardFragment)
             }
             if (isShouldNavigateToEditFlashCard) {
-                val navDirection =
-                    LearnFragmentDirections.actionLearnFragmentToEditFlashCardFragment(
-                        viewModel.currentFlashCardId ?: INVALIDL
-                    )
+                val navDirection = LearnFragmentDirections.actionLearnFragmentToEditFlashCardFragment(viewModel.currentFlashCardId ?: INVALIDL)
                 navController.navigate(navDirection)
             }
             if (isShouldMessageCardRemoved) {
@@ -80,30 +77,17 @@ class LearnFragment : BaseNavigationFragment() {
                 cardFlashCard.fadeIn()
             }
             if (isShouldAnimateCardFlip) {
-                val data = FlashCardFlipAnimationData(
-                    cardFlashCard,
-                    frameFrontSide,
-                    frameBackSide,
-                    Runnable { viewModel.setBackSideRevealed() })
+                val data = FlashCardFlipAnimationData(cardFlashCard, frameFrontSide, frameBackSide, Runnable { viewModel.setBackSideRevealed() })
                 animationService.animateFlashCardFlip(data)
             }
             if (isShouldAnimateDismissCorrect) {
-                animationService.animateDismissFlashCardCorrect(
-                    cardFlashCard,
-                    Runnable { viewModel.showNextFlashCard() })
+                animationService.animateDismissFlashCardCorrect(cardFlashCard, Runnable { viewModel.showNextFlashCard() })
             }
             if (isShouldAnimateDismissWrong) {
-                animationService.animateDismissFlashCardWrong(
-                    cardFlashCard,
-                    Runnable { viewModel.showNextFlashCard() })
+                animationService.animateDismissFlashCardWrong(cardFlashCard, Runnable { viewModel.showNextFlashCard() })
             }
             fabMenu.close(true)
         }
-    }
-
-    override fun onDestroyView() {
-        fabMenu.setOnMenuToggleListener(null)
-        super.onDestroyView()
     }
 
     private fun mapFlashCardBoxToColorInt(box: FlashCardBox): Int {

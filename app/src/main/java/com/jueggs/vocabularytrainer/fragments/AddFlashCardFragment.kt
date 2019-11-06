@@ -59,5 +59,9 @@ class AddFlashCardFragment : BaseNavigationFragment() {
         hideKeyboard()
     }
 
+    override fun onBackPressed() {
+        navController.navigateUp()
+    }
+
     override fun onStandby() = viewModel.focusFrontSideEdit()
 }
