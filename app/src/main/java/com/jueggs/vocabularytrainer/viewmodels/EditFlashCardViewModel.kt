@@ -9,12 +9,13 @@ import com.jueggs.domain.usecases.LoadFlashCardForEditingUseCase
 import com.jueggs.domain.usecases.UpdateFlashCardUseCase
 import com.jueggs.domain.viewstates.EditFlashCardViewState
 import com.jueggs.jutils.usecase.Trigger
+import com.jueggs.vocabularytrainer.App
 import com.jueggs.vocabularytrainer.viewmodels.interfaces.IFlashCardInputViewModel
 
 class EditFlashCardViewModel(
     private val loadFlashCardForEditingUseCase: LoadFlashCardForEditingUseCase,
     private val updateFlashCardUseCase: UpdateFlashCardUseCase
-) : BaseViewModel<EditFlashCardViewState>(EditFlashCardViewState()), IFlashCardInputViewModel {
+) : BaseViewModel<EditFlashCardViewState>(EditFlashCardViewState(), App.isDev), IFlashCardInputViewModel {
     override val frontSideText = MutableLiveData<String>()
     override val backSideTexts = (0 until Constant.BACKSIDEINPUT_COUNT).map { MutableLiveData<String>() }
     private var flashCardInEditingId: Long? = null

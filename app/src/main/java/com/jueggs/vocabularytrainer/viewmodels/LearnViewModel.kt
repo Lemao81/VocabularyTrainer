@@ -11,6 +11,7 @@ import com.jueggs.domain.usecases.ShowNextFlashCardUseCase
 import com.jueggs.domain.viewstates.LearnViewState
 import com.jueggs.jutils.usecase.Alter
 import com.jueggs.jutils.usecase.Trigger
+import com.jueggs.vocabularytrainer.App
 import com.jueggs.vocabularytrainer.R
 import com.jueggs.vocabularytrainer.models.StatsViewModelData
 import com.jueggs.vocabularytrainer.viewmodels.interfaces.IAddFlashCardViewModel
@@ -22,7 +23,7 @@ class LearnViewModel(
     private val dismissWrongFlashCardUseCase: DismissWrongFlashCardUseCase,
     private val removeFlashCardUseCase: RemoveFlashCardUseCase,
     private val context: Context
-) : BaseViewModel<LearnViewState>(LearnViewState()), IStatsViewModel, IAddFlashCardViewModel {
+) : BaseViewModel<LearnViewState>(LearnViewState(), App.isDev), IStatsViewModel, IAddFlashCardViewModel {
     override val stats: MutableList<StatsViewModelData> = mutableListOf()
     val frontSideText = MutableLiveData<String>()
     val backSideText = MutableLiveData<String>()
