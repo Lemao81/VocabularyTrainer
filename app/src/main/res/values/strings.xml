@@ -3,14 +3,10 @@
     <string name="toolbar_add_card_title">Add Card</string>
     <string name="toolbar_edit_card_title">Edit Card</string>
     <string name="nothing_to_learn">Nothing to learn at the moment</string>
-    <string name="reveal">Reveal</string>
-    <string name="wrong">Wrong</string>
-    <string name="correct">Correct</string>
-    <string name="close_app">Close App</string>
     <string name="frontside_hint">front side</string>
     <string name="backside_hint">back side</string>
-    <string name="add_card">Add Card</string>
-    <string name="cancel">Cancel</string>
+    <string name="button_add_card">Add Card</string>
+    <string name="button_cancel">Cancel</string>
     <string name="message_enter_front_side">Please enter a front side text</string>
     <string name="message_enter_back_side">Please enter a back side text</string>
     <string name="message_card_added">Card added</string>
