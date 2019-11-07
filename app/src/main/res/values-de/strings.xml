@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vokabel Trainer</string>
+    <string name="action_disable_daily_notification">Benachrichtigungen deaktivieren</string>
+    <string name="button_add_card">Zufügen</string>
+    <string name="backside_hint">Rückseite</string>
+    <string name="button_cancel">Abbrechen</string>
+    <string name="daily_learn_check_notification_text">Einige Karteikarten brauchen deine Aufmerksamkeit</string>
+    <string name="daily_learn_check_notification_title">Vokebeln lernen</string>
+    <string name="daily_notification_channel_name">Tägliche Lern-Erinnerung</string>
+    <string name="dialog_remove_flashcard_message">Soll die Karte wirklich entfernt werden?</string>
+    <string name="dialog_remove_flashcard_title">Karte entfernen</string>
+    <string name="frontside_hint">Vorderseite</string>
+    <string name="keep_adding">Weiter zufügen</string>
+    <string name="message_card_added">Karte hinzugefügt</string>
+    <string name="message_card_learned">Du hast \'%s\' erfolgreich gelernt! Karte wurde entfernt</string>
+    <string name="message_card_removed">Karte entfernt</string>
+    <string name="message_card_updated">Karte aktualisiert</string>
+    <string name="message_enter_back_side">Bitte einen Text für die Rückseite eingeben</string>
+    <string name="message_enter_front_side">Bitte einen Text für die Vorderseite eingeben</string>
+    <string name="nothing_to_learn">Im Moment gibt es nichts zu lernen</string>
+    <string name="button_update">Aktualisieren</string>
+    <string name="toolbar_add_card_title">Karte zufügen</string>
+    <string name="toolbar_app_title">Vokabel Trainer</string>
+    <string name="toolbar_edit_card_title">Karte bearbeiten</string>
+</resources>

@@ -23,7 +23,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@id/btnSaveCard"
+            app:layout_constraintBottom_toTopOf="@id/btnUpdateCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -48,11 +48,11 @@
         </ScrollView>
 
         <Button
-            android:id="@+id/btnSaveCard"
+            android:id="@+id/btnUpdateCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.updateFlashCard()}"
-            android:text="@string/save"
+            android:text="@string/button_update"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnCancel"
             app:layout_constraintStart_toStartOf="parent" />
@@ -64,8 +64,8 @@
             android:onClick="@{() -> viewModel.cancel()}"
             android:text="@string/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnSaveCard"
-            app:layout_constraintTop_toTopOf="@id/btnSaveCard" />
+            app:layout_constraintStart_toEndOf="@+id/btnUpdateCard"
+            app:layout_constraintTop_toTopOf="@id/btnUpdateCard" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
