@@ -42,6 +42,7 @@ object ResValueConstants {
 
 object ResConfigConstants {
     const val EN = "en"
+    const val DE = "de"
     const val XHDPI = "xhdpi"
 }
 

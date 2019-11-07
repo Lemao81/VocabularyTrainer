@@ -8,12 +8,8 @@ fun BaseAppModuleExtension.configureAndroidAppExtension(isShouldConfigureDevProd
     configureAndroidExtension()
     if (isShouldConfigureDevProdFlavors) {
         configureDevProdFlavors(isWithMinifiedConfig)
-
         val devFlavor = productFlavors.getByName(GlobalProductFlavors.dev)
         devFlavor.applicationIdSuffix = ".${GlobalProductFlavors.dev}"
-        devFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.devName)
-        val prodFlavor = productFlavors.getByName(GlobalProductFlavors.prod);
-        prodFlavor.resValue(ResValueConstants.Type.STRING, ResValueConstants.Name.APP_NAME, App.prodName)
     }
     defaultConfig.applicationId = App.applicationId
 }
@@ -52,7 +48,7 @@ fun BaseExtension.configureDevProdFlavors(isWithMinifiedConfig: Boolean = true) 
     productFlavors {
         create(GlobalProductFlavors.dev) {
             if (isWithMinifiedConfig) {
-                resConfigs(ResConfigConstants.EN, ResConfigConstants.XHDPI)
+                resConfigs(ResConfigConstants.EN, ResConfigConstants.DE, ResConfigConstants.XHDPI)
             }
         }
         create(GlobalProductFlavors.prod)

@@ -2,8 +2,6 @@ object App {
     const val applicationId = "com.jueggs.vocabularytrainer"
     const val versionCode = 1
     const val versionName = "1.0"
-    const val prodName = "VocabularyTrainer"
-    const val devName = "VocabularyTrainer Dev"
 }
 
 object Android {
