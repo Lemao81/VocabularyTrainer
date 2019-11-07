@@ -3,7 +3,6 @@ package com.jueggs.vocabularytrainer
 import android.view.View
 import androidx.navigation.ui.AppBarConfiguration
 import com.jueggs.andutils.base.BaseMainActivity
-import com.jueggs.andutils.extension.hideKeyboard
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMainActivity() {
@@ -11,10 +10,4 @@ class MainActivity : BaseMainActivity() {
     override fun navHostFragment() = R.id.nav_host_fragment
     override fun appBarConfiguration() = AppBarConfiguration(setOf(R.id.splashScreenFragment, R.id.nothingToLearnFragment, R.id.learnFragment))
     override fun toolbar(): View? = toolbar
-
-    override fun setListeners() {
-        navController.addOnDestinationChangedListener { _, _, _ ->
-            hideKeyboard()
-        }
-    }
 }

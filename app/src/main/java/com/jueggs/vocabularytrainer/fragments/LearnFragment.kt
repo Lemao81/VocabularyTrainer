@@ -2,12 +2,7 @@ package com.jueggs.vocabularytrainer.fragments
 
 import androidx.lifecycle.LifecycleOwner
 import com.jueggs.andutils.base.BaseNavigationFragment
-import com.jueggs.andutils.extension.colorResToInt
-import com.jueggs.andutils.extension.fadeIn
-import com.jueggs.andutils.extension.longToast
-import com.jueggs.andutils.extension.shortToast
-import com.jueggs.andutils.extension.showConfirmDialog
-import com.jueggs.andutils.extension.visibleOrInvisible
+import com.jueggs.andutils.extension.*
 import com.jueggs.domain.enums.FlashCardBox
 import com.jueggs.domain.models.StatsData
 import com.jueggs.jutils.INVALIDL
@@ -89,6 +84,8 @@ class LearnFragment : BaseNavigationFragment() {
             fabMenu.close(true)
         }
     }
+
+    override fun onStandby() = hideKeyboard()
 
     private fun mapFlashCardBoxToColorInt(box: FlashCardBox): Int {
         val colorId = when (box) {

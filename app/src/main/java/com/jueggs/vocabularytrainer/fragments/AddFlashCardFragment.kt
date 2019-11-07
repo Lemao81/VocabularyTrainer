@@ -26,6 +26,7 @@ class AddFlashCardFragment : BaseNavigationFragment() {
     override fun observeLiveData(owner: LifecycleOwner) {
         viewModel.viewStateStore.observe(owner) {
             if (isShouldPopFragment) {
+                hideKeyboard()
                 navController.popBackStack()
             }
             when (inputValidationResult) {
@@ -54,14 +55,9 @@ class AddFlashCardFragment : BaseNavigationFragment() {
         }
     }
 
-    override fun setListeners() = edtBackSide3.onEditDone {
-        viewModel.addFlashCard()
-        hideKeyboard()
-    }
+    override fun setListeners() = edtBackSide3.onEditDone { viewModel.addFlashCard() }
 
-    override fun onBackPressed() {
-        navController.navigateUp()
-    }
+    override fun onBackPressed() = viewModel.onBackPressed()
 
     override fun onStandby() = viewModel.focusFrontSideEdit()
 }

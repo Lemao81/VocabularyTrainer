@@ -32,5 +32,7 @@ class EditFlashCardViewModel(
         viewStateStore.dispatch(loadFlashCardForEditingUseCase(id))
     }
 
+    fun onBackPressed() = viewStateStore.dispatch(Trigger { copy(isShouldPopFragment = true) })
+
     private fun getInputData() = FlashCardInputData(frontSideText.value.orEmpty(), backSideTexts.map { it.value.orEmpty() })
 }
